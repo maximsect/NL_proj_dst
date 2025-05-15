@@ -9,6 +9,7 @@ TagManager:
   - object
   - attack
   - Enemy
+  - arrow
   layers:
   - Default
   - TransparentFX

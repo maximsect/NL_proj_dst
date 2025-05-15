@@ -19,11 +19,18 @@ public class enemy_main : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collider){
         if (collider.gameObject.CompareTag("attack") && 8<=this.player_sc.attackkeyholdtime && !this.hitflag){
-            this.hitflag=true;
-            this.life--;
-            if(this.life<=0){
-                Destroy(this.gameObject);
-            }
+            damage();
+        }
+        else if(collider.gameObject.CompareTag("arrow")){
+            damage();
+        }
+    }
+
+    void damage(){
+        this.hitflag=true;
+        this.life--;
+        if(this.life<=0){
+            Destroy(this.gameObject);
         }
     }
 }

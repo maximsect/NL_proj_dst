@@ -13,7 +13,9 @@ public class player_main : MonoBehaviour
     readonly float maxspeedX=5.0f;
     public GameObject enemy;
     public GameObject attackobj;
+    public arrowmaker arrowmaker;
     [System.NonSerialized]public int attackkeyholdtime=0;
+    bool arrowkeyhold=false;
     readonly Vector3 hide=new Vector3(0f, 10000f, 0f);
     bool isgrapping=false;
     Vector3 pos_tomove;
@@ -62,6 +64,14 @@ public class player_main : MonoBehaviour
             if(this.attackkeyholdtime==0){
                 this.attackkeyholdtime=20;
             }
+        }
+
+        if(Input.GetKey(KeyCode.S) && !this.arrowkeyhold){
+            this.arrowmaker.arrowmaking=true;
+            this.arrowkeyhold=true;
+        }
+        if(!Input.GetKey(KeyCode.S)){
+            this.arrowkeyhold=false;
         }
 
         if(this.attackkeyholdtime<8){

@@ -412,7 +412,7 @@ GameObject:
   - component: {fileID: 976304309}
   m_Layer: 11
   m_Name: enemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -590,7 +590,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -661,7 +661,7 @@ Rigidbody2D:
     m_Bits: 256
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 3831
+    m_Bits: 1783
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
@@ -686,10 +686,10 @@ BoxCollider2D:
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 2039
   m_ForceReceiveLayers:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 2039
   m_ContactCaptureLayers:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -779,7 +779,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1250180629}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1058000616
@@ -798,6 +799,9 @@ MonoBehaviour:
   enemy: {fileID: 976304303}
   attackobj: {fileID: 1250180626}
   arrowmaker: {fileID: 360923827}
+  ground:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!1 &1250180626
 GameObject:
   m_ObjectHideFlags: 0
@@ -925,12 +929,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1250180626}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.75, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1058000615}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &3852485126628747049
 PrefabInstance:
@@ -1017,6 +1021,5 @@ SceneRoots:
   - {fileID: 1058000615}
   - {fileID: 468878710}
   - {fileID: 976304306}
-  - {fileID: 1250180629}
   - {fileID: 3852485126628747049}
   - {fileID: 360923826}

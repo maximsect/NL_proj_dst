@@ -9,7 +9,7 @@ public class enemy_main : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if(this.player_sc.attackkeyholdtime==0 && this.hitflag){
+        if(this.hitflag){
             this.hitflag=false;
         }
         if(this.life<=0){
@@ -18,13 +18,17 @@ public class enemy_main : MonoBehaviour
     }
 
     void OnTriggerEnter2D(Collider2D collider){
-        if (collider.gameObject.CompareTag("attack") && 8<=this.player_sc.attackkeyholdtime && !this.hitflag){
+        if (collider.gameObject.CompareTag("attack") && !this.hitflag){
             damage();
+            Debug.Log("attack");
         }
-        else if(collider.gameObject.CompareTag("arrow")){
+        else if(collider.gameObject.CompareTag("arrow") && !this.hitflag){
             damage();
+            Debug.Log("arrow");
         }
     }
+    // && 8<=this.player_sc.attackkeyholdtime
+    //this.player_sc.attackkeyholdtime==0 && 
 
     void damage(){
         this.hitflag=true;

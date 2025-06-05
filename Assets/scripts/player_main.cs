@@ -13,7 +13,11 @@ public class player_main : MonoBehaviour
     readonly float maxspeedX=5.0f;
     public GameObject enemy;
     public GameObject attackobj;
+    public GameObject skill;
     public arrowmaker arrowmaker;
+    public SpriteRenderer spr;
+    public Sprite in_cooldown;
+    public Sprite ready;
     [System.NonSerialized]public int attackkeyholdtime=0;
     bool arrowkeyhold=false;
     readonly Vector3 hide=new Vector3(0f, 10000f, 0f);
@@ -28,14 +32,19 @@ public class player_main : MonoBehaviour
     public LayerMask ground;
     bool istwicejumpused=false;
     short keyputting=0;
+    [System.NonSerialized] public int skillcooldown=0;
+    int invincibletime=0;
+    int kb_time=0;
+    public int xp=0;
 
+    readonly Vector2 KBVEC=new Vector2(-3f, -3f);
     readonly Vector2 DASHSPEED=new Vector2(12f, 0f);
 
     void FixedUpdate(){
         this.hor_input=Input.GetAxisRaw("Horizontal");
         this.ver_input=Input.GetAxisRaw("Vertical");
         
-        if(!this.isgrapping){
+        if(!this.isgrapping && !this.iskbing()){
 
             if(this.rigid.IsTouchingLayers(this.ground) && this.rigid.linearVelocity.y<0.01f && this.rigid.linearVelocity.y>-0.01f){
                 this.isground=true;
@@ -93,11 +102,15 @@ public class player_main : MonoBehaviour
             this.keyputting=0;
         }
 
-        if(Input.GetKey(KeyCode.D) && !this.isgrapping){
+        if(Input.GetKey(KeyCode.A) && !this.isgrapping){
             //引き寄せ
             this.isgrapping=true;
             this.grapvelocity = (enemy.transform.position-this.rigid.transform.position) * 2.7f;
             this.pos_tomove = enemy.transform.position-this.grapvelocity.normalized;
+        }
+
+        if(Input.GetKey(KeyCode.D) && !this.iskbing() && this.skillcooldown<=0){
+            this.skillcooldown=100;
         }
 
         if(Input.GetKey(KeyCode.X)){
@@ -121,7 +134,17 @@ public class player_main : MonoBehaviour
             this.attackobj.transform.position=new Vector3(this.transform.position.x+0.75f*this.direction, this.transform.position.y, 0f);
         }
 
+        if(65<this.skillcooldown && this.skillcooldown<85){
+            this.skill.transform.position=new Vector3(this.transform.position.x+1.5f*this.direction, this.transform.position.y, 0f);
+        }
+        else{
+            this.skill.transform.position=this.hide;
+        }
+
         if(this.attackkeyholdtime>0){this.attackkeyholdtime--;}
+        if(this.skillcooldown>0){this.skillcooldown--;this.spr.sprite=this.in_cooldown;}else{this.spr.sprite=this.ready;}
+        if(this.kb_time>0){this.kb_time--;}
+        if(this.invincibletime>0){this.invincibletime--;}
 
         if(this.isgrapping){
             this.grap(this.enemy);
@@ -139,11 +162,15 @@ public class player_main : MonoBehaviour
         }
     }
 
-    void OnCollisionEnter2D(Collision2D collision){
-        if(collision.gameObject.CompareTag("Enemy") && !this.hitflag){
+    void OnCollisionStay2D(Collision2D collision){
+        if(collision.gameObject.CompareTag("Enemy") && !this.hitflag && this.invincibletime<=0){
             Debug.Log("damage");
             this.life--;
             this.hitflag=true;
+            this.rigid.linearVelocity=Vector3.zero;
+            this.rigid.AddForce(this.KBVEC, ForceMode2D.Impulse);
+            this.kb_time=20;
+            this.invincibletime=60;
             if(this.life<=0){
                 Debug.Log("dead");
             }
@@ -156,5 +183,9 @@ public class player_main : MonoBehaviour
                 this.rigid.linearVelocity=this.DASHSPEED*this.direction;
             this.dashtime--;
         }
+    }
+
+    bool iskbing(){
+        return this.kb_time > 0 ? true:false;
     }
 }

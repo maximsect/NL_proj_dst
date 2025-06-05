@@ -10,6 +10,7 @@ TagManager:
   - attack
   - Enemy
   - arrow
+  - skillattack
   layers:
   - Default
   - TransparentFX

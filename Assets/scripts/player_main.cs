@@ -18,7 +18,7 @@ public class player_main : MonoBehaviour
     [System.NonSerialized]public int attackkeyholdtime=0;
     bool arrowkeyhold=false;
     readonly Vector3 hide=new Vector3(0f, 10000f, 0f);
-    bool isgrapping=false;
+    //bool isgrapping=false;
     Vector3 pos_tomove;
     Vector3 grapvelocity;
     int dashtime=0;
@@ -33,15 +33,24 @@ public class player_main : MonoBehaviour
     int invincibletime=0;
     int kb_time=0;
     public int xp=0;
+    int kbtimer=0;
 
-    readonly Vector2 KBVEC=new Vector2(-3f, -3f);
+    readonly Vector2 KBVEC=new Vector2(-7f, 7f);
     readonly Vector2 DASHSPEED=new Vector2(12f, 0f);
+
+    /*void Update(){
+        if(this.kbtimer>0)
+            this.kbtimer--;
+        else
+            Time.timeScale=1f;
+    }*/
 
     void FixedUpdate(){
         this.hor_input=Input.GetAxisRaw("Horizontal");
         this.ver_input=Input.GetAxisRaw("Vertical");
         
-        if(!this.isgrapping && !this.iskbing()){
+        if(!this.iskbing()){
+            //!this.isgrapping && 
 
             if(this.rigid.IsTouchingLayers(this.ground) && this.rigid.linearVelocity.y<0.01f && this.rigid.linearVelocity.y>-0.01f){
                 //接地判定
@@ -142,6 +151,9 @@ public class player_main : MonoBehaviour
             this.skill.transform.position=this.hide;
         }
 
+        if(this.iskbing())
+            this.rigid.linearVelocity=this.rigid.linearVelocity*(this.kb_time-1)/this.kb_time;
+
         if(this.attackkeyholdtime>0){this.attackkeyholdtime--;}
         if(this.skillcooldown>0){this.skillcooldown--;}
         if(this.kb_time>0){this.kb_time--;}
@@ -168,13 +180,15 @@ public class player_main : MonoBehaviour
             Debug.Log("damage");
             this.life--;
             this.hitflag=true;
-            this.rigid.linearVelocity=Vector3.zero;
-            this.rigid.AddForce(this.KBVEC, ForceMode2D.Impulse);
+            this.rigid.linearVelocity=Vector2.zero;
+            this.rigid.AddForce(this.transform.position.x<=collision.transform.position.x ? this.KBVEC : Vector2.Reflect(this.KBVEC, Vector2.right), ForceMode2D.Impulse);
             this.kb_time=20;
             this.invincibletime=60;
             if(this.life<=0){
                 Debug.Log("dead");
             }
+            //this.kbtimer=50;
+            //Time.timeScale=0;
         }
     }
 

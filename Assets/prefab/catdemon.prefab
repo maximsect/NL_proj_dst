@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 6254124332544627443}
   - component: {fileID: 4643516500968956341}
   - component: {fileID: 3623654207399372413}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: catdemon
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

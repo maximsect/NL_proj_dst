@@ -6,6 +6,8 @@ public class catdemon : MonoBehaviour
 {
 
     public GameObject taregtObject;
+    public int catdemon_hp = 10;
+
     public float speed = 5f;
     public float jumppower = 8f;
     public float checkDistance = 0.1f;

@@ -15,9 +15,6 @@ public class player_main : MonoBehaviour
     public GameObject attackobj;
     public GameObject skill;
     public arrowmaker arrowmaker;
-    public SpriteRenderer spr;
-    public Sprite in_cooldown;
-    public Sprite ready;
     [System.NonSerialized]public int attackkeyholdtime=0;
     bool arrowkeyhold=false;
     readonly Vector3 hide=new Vector3(0f, 10000f, 0f);
@@ -47,6 +44,7 @@ public class player_main : MonoBehaviour
         if(!this.isgrapping && !this.iskbing()){
 
             if(this.rigid.IsTouchingLayers(this.ground) && this.rigid.linearVelocity.y<0.01f && this.rigid.linearVelocity.y>-0.01f){
+                //接地判定
                 this.isground=true;
                 this.istwicejumpused=false;
             }
@@ -59,17 +57,20 @@ public class player_main : MonoBehaviour
                 this.velcopy_x=this.rigid.linearVelocity;
                 this.velcopy_x.x=this.maxspeedX;
                 this.rigid.linearVelocity=this.velcopy_x;
-                this.direction=1;
+                if(this.attackkeyholdtime<8 && this.skillcooldown<=65)
+                    this.direction=1;
             }
             if(this.hor_input<-0.1f){
                 //左移動
                 this.velcopy_x=this.rigid.linearVelocity;
                 this.velcopy_x.x=-this.maxspeedX;
                 this.rigid.linearVelocity=this.velcopy_x;
-                this.direction=-1;
+                if(this.attackkeyholdtime<8 && this.skillcooldown<=65)
+                    this.direction=-1;
             }
 
             if(this.hor_input<=0.1f && this.hor_input>=-0.1f){
+                //停止
                 this.velcopy_x=this.rigid.linearVelocity;
                 this.velcopy_x.x=0f;
                 this.rigid.linearVelocity=this.velcopy_x;
@@ -102,12 +103,12 @@ public class player_main : MonoBehaviour
             this.keyputting=0;
         }
 
-        if(Input.GetKey(KeyCode.A) && !this.isgrapping){
+        /*if(Input.GetKey(KeyCode.A) && !this.isgrapping){
             //引き寄せ
             this.isgrapping=true;
             this.grapvelocity = (enemy.transform.position-this.rigid.transform.position) * 2.7f;
             this.pos_tomove = enemy.transform.position-this.grapvelocity.normalized;
-        }
+        }*/
 
         if(Input.GetKey(KeyCode.D) && !this.iskbing() && this.skillcooldown<=0){
             this.skillcooldown=100;
@@ -119,13 +120,13 @@ public class player_main : MonoBehaviour
             }
         }
 
-        if(Input.GetKey(KeyCode.S) && !this.arrowkeyhold){
+        /*if(Input.GetKey(KeyCode.S) && !this.arrowkeyhold){
             this.arrowmaker.arrowmaking=true;
             this.arrowkeyhold=true;
         }
         if(!Input.GetKey(KeyCode.S)){
             this.arrowkeyhold=false;
-        }
+        }*/
 
         if(this.attackkeyholdtime<8){
             this.attackobj.transform.position=this.hide;
@@ -142,25 +143,25 @@ public class player_main : MonoBehaviour
         }
 
         if(this.attackkeyholdtime>0){this.attackkeyholdtime--;}
-        if(this.skillcooldown>0){this.skillcooldown--;this.spr.sprite=this.in_cooldown;}else{this.spr.sprite=this.ready;}
+        if(this.skillcooldown>0){this.skillcooldown--;}
         if(this.kb_time>0){this.kb_time--;}
         if(this.invincibletime>0){this.invincibletime--;}
 
-        if(this.isgrapping){
+        /*if(this.isgrapping){
             this.grap(this.enemy);
-        }
+        }*/
 
         if(this.hitflag)
             this.hitflag=false;
     }
 
-    void grap(GameObject enemy){
+    /*void grap(GameObject enemy){
         this.rigid.linearVelocity=this.grapvelocity;
         if((enemy.transform.position-this.transform.position).magnitude<=1.5f){
             this.rigid.linearVelocity=Vector3.zero;
             this.isgrapping=false;
         }
-    }
+    }*/
 
     void OnCollisionStay2D(Collision2D collision){
         if(collision.gameObject.CompareTag("Enemy") && !this.hitflag && this.invincibletime<=0){

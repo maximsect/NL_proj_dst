@@ -541,6 +541,7 @@ GameObject:
   m_Component:
   - component: {fileID: 694278627}
   - component: {fileID: 694278628}
+  - component: {fileID: 694278629}
   m_Layer: 0
   m_Name: skillcooldown
   m_TagString: Untagged
@@ -618,6 +619,22 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &694278629
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 694278626}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f45949a2487079045aa70991f265f257, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1058000616}
+  sprite: {fileID: 694278628}
+  in_cooldown: {fileID: 7411545433185839210, guid: 126fb29cf11f7534c8ce4465b0283411, type: 3}
+  ready: {fileID: -5326716593727950486, guid: ec428c0738246654fac75a8afa95d2dd, type: 3}
 --- !u!1 &917563301
 GameObject:
   m_ObjectHideFlags: 0
@@ -1246,9 +1263,6 @@ MonoBehaviour:
   attackobj: {fileID: 1250180626}
   skill: {fileID: 438362039}
   arrowmaker: {fileID: 360923827}
-  spr: {fileID: 694278628}
-  in_cooldown: {fileID: 7411545433185839210, guid: 126fb29cf11f7534c8ce4465b0283411, type: 3}
-  ready: {fileID: -5326716593727950486, guid: ec428c0738246654fac75a8afa95d2dd, type: 3}
   ground:
     serializedVersion: 2
     m_Bits: 256

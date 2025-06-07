@@ -11,6 +11,9 @@ TagManager:
   - Enemy
   - arrow
   - skillattack
+  - HealItem
+  - Ground
+  - Lava
   layers:
   - Default
   - TransparentFX

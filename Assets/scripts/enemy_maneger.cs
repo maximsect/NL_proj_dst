@@ -29,7 +29,7 @@ public class enemy_maneger : MonoBehaviour
 
         Vector3 newPos = transform.position;
         newPos.x = UnityEngine.Random.Range(-area_x / 2, area_x / 2);
-        newPos.y = UnityEngine.Random.Range(-area_y / 2, area_y / 2);
+        newPos.y = UnityEngine.Random.Range(-area_y / 2 + 2, area_y / 2 + 2);
         newPos.z = newZ;
 
         GameObject newGameObject = Instantiate(newPrefab) as GameObject;

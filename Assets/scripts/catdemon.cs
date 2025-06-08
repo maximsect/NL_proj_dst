@@ -13,28 +13,77 @@ public class catdemon : MonoBehaviour
     public float checkDistance = 0.1f;
     public float footOffset = 0.01f;
 
+    public float tpPower = 24f;
+
+    int tpCount = 300;//ï¿½eï¿½ï¿½ï¿½|ï¿½[ï¿½gï¿½ï¿½ï¿½Ç—ï¿½ï¿½ï¿½ï¿½ï¿½Jï¿½Eï¿½ï¿½ï¿½^ï¿½[ï¿½@
 
     Rigidbody2D rbody;
     bool isGrounded;
     bool isJumping = false;
+
+    float re_x;
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         rbody = GetComponent<Rigidbody2D>();
         rbody.constraints = RigidbodyConstraints2D.FreezeRotation; // Prevent rotation
+
+        // "Player"ï¿½^ï¿½Oï¿½ï¿½ï¿½tï¿½ï¿½ï¿½ï¿½GameObjectï¿½ï¿½ï¿½æ“¾
+        taregtObject = GameObject.Find("player");
     }
 
     // Update is called once per frame
     void Update()
     {
 
-        //©•ª‚©‚çŒ©‚½ƒvƒŒƒCƒ„[‚Ì•ûŒüƒxƒNƒgƒ‹‚ğæ“¾
+        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½çŒ©ï¿½ï¿½ï¿½vï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½[ï¿½Ì•ï¿½ï¿½ï¿½ï¿½xï¿½Nï¿½gï¿½ï¿½ï¿½ï¿½ï¿½æ“¾
         Vector3 dir = (taregtObject.transform.position - transform.position).normalized;
 
-        //x•ûŒü‚ÌˆÚ“®
+        //xï¿½ï¿½ï¿½ï¿½ï¿½ÌˆÚ“ï¿½
+
+        re_x = dir.x;
         float vx = dir.x * speed;
+        float vy = dir.y * speed;
         rbody.linearVelocity = new Vector2(vx, rbody.linearVelocity.y);
         GetComponent<SpriteRenderer>().flipX = vx < 0;
+
+
+        // ï¿½nï¿½Ê‚ÉÚGï¿½ï¿½ï¿½Ä‚ï¿½ï¿½é‚©ï¿½ï¿½ï¿½mï¿½F
+        isGrounded = Physics2D.Raycast(transform.position, Vector2.down, checkDistance + footOffset, LayerMask.GetMask("Ground"));
+        // ï¿½Wï¿½ï¿½ï¿½ï¿½ï¿½vï¿½ï¿½ï¿½ï¿½
+        if (isGrounded && !isJumping)
+            if (vy < 0)
+            {
+                isJumping = true;
+                rbody.AddForce(Vector2.up * jumppower, ForceMode2D.Impulse);
+            }
+        
+    }
+
+    private void FixedUpdate()
+    {
+        // ï¿½eï¿½ï¿½ï¿½|ï¿½[ï¿½gï¿½Jï¿½Eï¿½ï¿½ï¿½^ï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½ç‚·
+        if (tpCount > 0)
+        {
+            tpCount--;
+        }
+        else
+        {
+            gameObject.SetActive(false); // ï¿½eï¿½ï¿½ï¿½|ï¿½[ï¿½gï¿½Jï¿½Eï¿½ï¿½ï¿½^ï¿½[ï¿½ï¿½0ï¿½É‚È‚ï¿½ï¿½ï¿½ï¿½ï¿½Iï¿½uï¿½Wï¿½Fï¿½Nï¿½gï¿½ï¿½ï¿½\ï¿½ï¿½ï¿½É‚ï¿½ï¿½ï¿½
+            if (re_x < 0)
+            { // ï¿½vï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É‚ï¿½ï¿½ï¿½ê‡
+                rbody.AddForce(Vector2.right * tpPower, ForceMode2D.Impulse);
+            }
+            else // ï¿½vï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½Eï¿½ï¿½ï¿½É‚ï¿½ï¿½ï¿½ê‡
+            {
+                rbody.AddForce(Vector2.left * tpPower, ForceMode2D.Impulse);
+
+                tpCount = UnityEngine.Random.Range(300, 600); // ï¿½ï¿½ï¿½ï¿½ï¿½_ï¿½ï¿½ï¿½ÈƒJï¿½Eï¿½ï¿½ï¿½gï¿½ï¿½İ’ï¿½
+            }
+        }
     }
 }
+
+

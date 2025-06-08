@@ -34,6 +34,8 @@ public class player_main : MonoBehaviour
     int kb_time=0;
     public int xp=0;
     int kbtimer=0;
+    float last_velocity=0f;
+    bool dashflag=false;
 
     readonly Vector2 KBVEC=new Vector2(-7f, 7f);
     readonly Vector2 DASHSPEED=new Vector2(12f, 0f);
@@ -52,10 +54,11 @@ public class player_main : MonoBehaviour
         if(!this.iskbing()){
             //!this.isgrapping && 
 
-            if(this.rigid.IsTouchingLayers(this.ground) && this.rigid.linearVelocity.y<0.01f && this.rigid.linearVelocity.y>-0.01f){
+            if(this.rigid.IsTouchingLayers(this.ground) && this.rigid.linearVelocity.y<0.01f && this.rigid.linearVelocity.y>-0.01f && this.last_velocity<0.01f && this.last_velocity>-0.01f){
                 //接地判定
                 this.isground=true;
                 this.istwicejumpused=false;
+                this.dashflag=false;
             }
             else{
                 this.isground=false;
@@ -88,7 +91,7 @@ public class player_main : MonoBehaviour
             if(Input.GetKey(KeyCode.C) && this.isground && this.keyputting%2==0){
                 //ジャンプ
                 this.velcopy_y=this.rigid.linearVelocity;
-                this.velcopy_y.y=10.0f;
+                this.velcopy_y.y=12.0f;
                 this.rigid.linearVelocity=this.velcopy_y;
                 this.keyputting=1;
             }
@@ -96,14 +99,16 @@ public class player_main : MonoBehaviour
             if(Input.GetKey(KeyCode.C) && !this.isground && !this.istwicejumpused && this.keyputting%2==0){
                 //空中ジャンプ
                 this.velcopy_y=this.rigid.linearVelocity;
-                this.velcopy_y.y=8.0f;
+                this.velcopy_y.y=10.0f;
                 this.rigid.linearVelocity=this.velcopy_y;
                 this.istwicejumpused=true;
                 this.keyputting=1;
             }
 
-            if(Input.GetKey(KeyCode.Z) && this.dashtime<=0)
+            if(Input.GetKey(KeyCode.Z) && this.dashtime<=0 && !this.dashflag){
                 this.dashtime=20;
+                this.dashflag=true;
+            }
 
             this.dash();
         }
@@ -165,6 +170,8 @@ public class player_main : MonoBehaviour
 
         if(this.hitflag)
             this.hitflag=false;
+
+        this.last_velocity=this.rigid.linearVelocity.y;
     }
 
     /*void grap(GameObject enemy){

@@ -197,7 +197,7 @@ public class SyllabusEditor : Editor
                 bool checker = syllabus.player.CheckTheTypes(item.variableName);
                 if (!checker)
                 {
-                    Debug.LogError("NoMatches!");
+                    Debug.LogError(item.variableName +"は存在しないのでCyllabusScriptのインフォメーションボックスから変数を選んでください。");
                 }
                 else
                 {
@@ -206,8 +206,8 @@ public class SyllabusEditor : Editor
             }
 
         }
-        EditorGUILayout.HelpBox("string weaponName\nfloat attackInterval\nint attackPower", MessageType.Info);
-        EditorGUILayout.HelpBox("int health\nint maxHealth\nint autoHealAmount\nfloat autoHealInterval\nint itemHealAmount\nfloat attackRate\nfloat attackInterval\nint defense\nfloat movementSpeed\nfloat dashSpeed\nfloat jumpForce\nfloat luck", MessageType.Info);
+        EditorGUILayout.HelpBox("string weaponIndex\nfloat attackInterval\nfloat attackPower", MessageType.Info);
+        EditorGUILayout.HelpBox("float health\nfliat maxHealth\nfloat autoHealAmount\nfloat autoHealInterval\nfloat itemHealAmount\nfloat attackRate\nfloat attackInterval\nfloat defense\nfloat movementSpeed\nfloat dashSpeed\nfloat jumpForce\nfloat luck", MessageType.Info);
         EditorGUILayout.HelpBox("int numberOfJump\nint numberOfDash\nbool chargedDash\nbool chargedJump\nfloat airHover\nbool aerialPull\nbool drillJump\nbool stompAttack\nint orbitingOrbNumber\nfloat critChance\nfloat criticalDamage\nfloat autoRecovery\nbool piercingArrow\nbool splittingArrow\nfloat chanceOfInstantKill\nbool wallStick", MessageType.Info);
 
     }

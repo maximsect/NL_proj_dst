@@ -103,10 +103,10 @@ TextureImporter:
       name: oni_default_0
       rect:
         serializedVersion: 2
-        x: 16
+        x: 0
         y: 0
-        width: 36
-        height: 61
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -125,7 +125,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 0f31f4cf07a072e47b1a7225e190da84
     internalID: 0
     vertices: []
     indices: 

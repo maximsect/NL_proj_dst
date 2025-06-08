@@ -103,10 +103,10 @@ TextureImporter:
       name: oni_jump_0
       rect:
         serializedVersion: 2
-        x: 13
+        x: 0
         y: 0
-        width: 40
-        height: 61
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -125,7 +125,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 8b891c0087a000a4094267d542d18375
     internalID: 0
     vertices: []
     indices: 

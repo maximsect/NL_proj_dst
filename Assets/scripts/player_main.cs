@@ -36,6 +36,8 @@ public class player_main : MonoBehaviour
     int kbtimer=0;
     float last_velocity=0f;
     bool dashflag=false;
+    public Animator animator;
+    int behavior=0;
 
     readonly Vector2 KBVEC=new Vector2(-7f, 7f);
     readonly Vector2 DASHSPEED=new Vector2(12f, 0f);
@@ -71,6 +73,7 @@ public class player_main : MonoBehaviour
                 this.rigid.linearVelocity=this.velcopy_x;
                 if(this.attackkeyholdtime<8 && this.skillcooldown<=65)
                     this.direction=1;
+                this.behavior=1;
             }
             if(this.hor_input<-0.1f){
                 //左移動
@@ -79,6 +82,7 @@ public class player_main : MonoBehaviour
                 this.rigid.linearVelocity=this.velcopy_x;
                 if(this.attackkeyholdtime<8 && this.skillcooldown<=65)
                     this.direction=-1;
+                this.behavior=1;
             }
 
             if(this.hor_input<=0.1f && this.hor_input>=-0.1f){
@@ -86,6 +90,7 @@ public class player_main : MonoBehaviour
                 this.velcopy_x=this.rigid.linearVelocity;
                 this.velcopy_x.x=0f;
                 this.rigid.linearVelocity=this.velcopy_x;
+                this.behavior=0;
             }
 
             if(Input.GetKey(KeyCode.C) && this.isground && this.keyputting%2==0){
@@ -104,6 +109,8 @@ public class player_main : MonoBehaviour
                 this.istwicejumpused=true;
                 this.keyputting=1;
             }
+
+            if(!this.isground){this.behavior=2;}
 
             if(Input.GetKey(KeyCode.Z) && this.dashtime<=0 && !this.dashflag){
                 this.dashtime=20;
@@ -172,6 +179,12 @@ public class player_main : MonoBehaviour
             this.hitflag=false;
 
         this.last_velocity=this.rigid.linearVelocity.y;
+
+        this.transform.localScale=new Vector3(-this.direction, this.transform.localScale.y, 1);
+
+        if(8<=this.attackkeyholdtime){this.behavior=3;}
+        if(65<this.skillcooldown){this.behavior=4;}
+        animator.SetInteger("behave", this.behavior);
     }
 
     /*void grap(GameObject enemy){

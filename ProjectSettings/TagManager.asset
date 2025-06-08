@@ -12,6 +12,8 @@ TagManager:
   - arrow
   - skillattack
   - present
+  - healItem
+  - lava
   layers:
   - Default
   - TransparentFX

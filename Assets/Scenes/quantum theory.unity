@@ -152,8 +152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 964ad8e0b2607fc4e95ec3dc2d3a4510, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rigid: {fileID: 253477772}
-  enemy: {fileID: 0}
+  enemyManager: {fileID: 1875600550}
   attackobj: {fileID: 1620335143}
   skill: {fileID: 893315253}
   arrowmaker: {fileID: 0}
@@ -4809,8 +4808,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -451.7364, y: -459.82666}
-  m_SizeDelta: {x: 1016.5272, y: 160.3467}
+  m_AnchoredPosition: {x: -612.35223, y: -459.82666}
+  m_SizeDelta: {x: 695.2955, y: 160.3467}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1688056184
 MonoBehaviour:
@@ -5182,6 +5181,10 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 253477771}
+    - target: {fileID: 3297756504600914396, guid: cfb29f6b50307e541aa37b88677bd4c5, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: eef1a9af706b4d2438d62f7390b84e4b, type: 3}
     - target: {fileID: 4643930929970510519, guid: cfb29f6b50307e541aa37b88677bd4c5, type: 3}
       propertyPath: m_Name
       value: present
@@ -5205,6 +5208,14 @@ PrefabInstance:
     - target: {fileID: 5578281088126603216, guid: cfb29f6b50307e541aa37b88677bd4c5, type: 3}
       propertyPath: m_ForceSendLayers.m_Bits
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5578281088126603216, guid: cfb29f6b50307e541aa37b88677bd4c5, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 3.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5578281088126603216, guid: cfb29f6b50307e541aa37b88677bd4c5, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 3.2
       objectReference: {fileID: 0}
     - target: {fileID: 5657340487075492774, guid: cfb29f6b50307e541aa37b88677bd4c5, type: 3}
       propertyPath: m_LocalPosition.x

@@ -1,0 +1,51 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1cad404a68d98c34bb481cb2838789ed, type: 3}
+  m_Name: Test
+  m_EditorClassIdentifier: 
+  health: 5
+  maxHealth: 5
+  autoHealAmount: 1
+  autoHealInterval: 2.3
+  itemHealAmount: 30
+  defense: 0
+  movementSpeed: 5
+  dashSpeed: 14
+  jumpForce: 5
+  luck: 0
+  gravity:
+    radius: 10
+    angle: -90
+  numberOfJump: 1
+  chargedJump: 0
+  numberOfDash: 1
+  chargedDash: 0
+  airHover: 0
+  grapping: 0
+  grappingSpeed: 25
+  drillJump: 0
+  stompAttack: 0
+  orbitingOrbNumber: 0
+  critChance: 0
+  criticalDamageRate: 0
+  piercingArrow: 0
+  splittingArrow: 0
+  chanceOfInstantKill: 0
+  wallStick: 0
+  weaponIndex: 0
+  attackSetting:
+  - weaponName: sword
+    attackInterval: 0.2
+    attackPower: 5
+  xp: 0
+  copySource: {fileID: 11400000, guid: 2bdade9b60bc731489762b0b03b986bc, type: 2}
+  pasteTarget: {fileID: 0}

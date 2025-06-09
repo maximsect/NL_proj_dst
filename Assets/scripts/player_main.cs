@@ -1,24 +1,27 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
+using System.Collections.Generic;
+using System.Collections;
+using UnityEngine.UI;
+using TMPro;
 public class player_main : MonoBehaviour
 {
+    public EnemyManager enemyManager;
 
-    public Rigidbody2D rigid;
+    Rigidbody2D rigid;
     float hor_input=0f;
     float ver_input=0f;
     Vector2 velcopy_x;
     Vector2 velcopy_y;
     readonly float maxspeedX=5.0f;
-    public GameObject enemy;
+
+    GameObject enemy;
     public GameObject attackobj;
     public GameObject skill;
     public arrowmaker arrowmaker;
     [System.NonSerialized]public int attackkeyholdtime=0;
     bool arrowkeyhold=false;
     readonly Vector3 hide=new Vector3(0f, 10000f, 0f);
-    //bool isgrapping=false;
+    bool isgrapping=false;
     Vector3 pos_tomove;
     Vector3 grapvelocity;
     int dashtime=0;
@@ -36,12 +39,16 @@ public class player_main : MonoBehaviour
     int kbtimer=0;
     float last_velocity=0f;
     bool dashflag=false;
+    public float grappingSpeed = 25;
     public Animator animator;
     int behavior=0;
 
     readonly Vector2 KBVEC=new Vector2(-7f, 7f);
     readonly Vector2 DASHSPEED=new Vector2(12f, 0f);
-
+    void Start()
+    {
+        rigid = GetComponent<Rigidbody2D>();
+    }
     /*void Update(){
         if(this.kbtimer>0)
             this.kbtimer--;
@@ -53,7 +60,8 @@ public class player_main : MonoBehaviour
         this.hor_input=Input.GetAxisRaw("Horizontal");
         this.ver_input=Input.GetAxisRaw("Vertical");
         
-        if(!this.iskbing()){
+        if(!this.iskbing() && !this.isgrapping)
+        {
             //!this.isgrapping && 
 
             if(this.rigid.IsTouchingLayers(this.ground) && this.rigid.linearVelocity.y<0.01f && this.rigid.linearVelocity.y>-0.01f && this.last_velocity<0.01f && this.last_velocity>-0.01f){
@@ -126,12 +134,21 @@ public class player_main : MonoBehaviour
 
         /*if(Input.GetKey(KeyCode.A) && !this.isgrapping){
             //引き寄せ
-            this.isgrapping=true;
-            this.grapvelocity = (enemy.transform.position-this.rigid.transform.position) * 2.7f;
-            this.pos_tomove = enemy.transform.position-this.grapvelocity.normalized;
-        }*/
+            enemy = enemyManager.TheMostDistantObjectOnScreen();
+            if (enemy != null)
+            {
+                this.isgrapping = true;
+                this.grapvelocity = (enemy.transform.position - this.rigid.transform.position) * 2.7f;
+                this.pos_tomove = enemy.transform.position - this.grapvelocity.normalized;
+            }
+        }/**/
+        //引き寄せ
+        if ((Input.GetKeyDown(KeyCode.A)) && !this.iskbing())
+        {
+            StartCoroutine(GrappingCoroutine(enemyManager.TheMostDistantObjectOnScreen()));
+        }
 
-        if(Input.GetKey(KeyCode.D) && !this.iskbing() && this.skillcooldown<=0){
+        if (Input.GetKey(KeyCode.D) && !this.iskbing() && this.skillcooldown<=0){
             this.skillcooldown=100;
         }
 
@@ -173,7 +190,7 @@ public class player_main : MonoBehaviour
 
         /*if(this.isgrapping){
             this.grap(this.enemy);
-        }*/
+        }/**/
 
         if(this.hitflag)
             this.hitflag=false;
@@ -193,7 +210,34 @@ public class player_main : MonoBehaviour
             this.rigid.linearVelocity=Vector3.zero;
             this.isgrapping=false;
         }
-    }*/
+    }/**/
+
+    IEnumerator GrappingCoroutine(GameObject enemyObj)
+    {
+
+        yield return new WaitForSeconds(0.4f);
+        if (isgrapping) { yield break; }
+        isgrapping = true;
+        Vector3 playerBasePosition = transform.position;
+        if (enemyObj == null) { isgrapping = false; yield break; }
+        Vector3 enemyBasePosition = enemyObj.transform.position;
+        Vector3 relativePos = (enemyBasePosition - playerBasePosition);
+        if (relativePos.x != 0)
+        {
+            relativePos -= 2 * new Vector3(relativePos.x / Mathf.Abs(relativePos.x), 0, 0);
+        }
+        for (float _timer = 0; _timer < relativePos.magnitude / grappingSpeed; _timer += Time.deltaTime)
+        {
+            float t = _timer * grappingSpeed / relativePos.magnitude;
+            if (enemyObj == null) { rigid.linearVelocity = Vector2.zero; isgrapping = false; yield break; }
+            enemyObj.transform.position = enemyBasePosition;
+            transform.position = playerBasePosition + t * relativePos;
+            yield return null;
+        }
+        rigid.linearVelocity = Vector2.zero;
+        isgrapping = false;
+        yield break;
+    }
 
     void OnCollisionStay2D(Collision2D collision){
         if(collision.gameObject.CompareTag("Enemy") && !this.hitflag && this.invincibletime<=0){

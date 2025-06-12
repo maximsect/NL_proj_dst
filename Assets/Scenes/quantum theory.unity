@@ -160,6 +160,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   xp: 0
+  grappingSpeed: 25
   animator: {fileID: 253477776}
 --- !u!50 &253477772
 Rigidbody2D:

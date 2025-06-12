@@ -6,11 +6,11 @@ using TMPro;
 
 public interface EnemyStatus //敵のスクリプトの中に必ず仕込んで！
 {
-    float enemyHP { get; }
-    float attackPower { get; }
-    float colAttackPower { get; }
-    float attackXP { get; }
-    float destroyXP { get; }
+    int enemyHP { get; }
+    int attackPower { get; }
+    int colAttackPower { get; }
+    int attackXP { get; }
+    int destroyXP { get; }
 }
 
 public class PlayerScript : MonoBehaviour
@@ -243,7 +243,7 @@ public class PlayerScript : MonoBehaviour
             if (es != null)
             {
 
-                float colDamage = es.colAttackPower;
+                int colDamage = es.colAttackPower;
                 playerSetting.health = Mathf.Clamp(playerSetting.health - Mathf.Clamp(colDamage - playerSetting.defense, 0, colDamage), 0, playerSetting.maxHealth);
             }
             if (playerSetting.health == 0)
@@ -274,12 +274,12 @@ public class PlayerScript : MonoBehaviour
         if (inputVal > 0.1) mainSprite.transform.localScale = new Vector3(-1, 1, 1);
         else if (inputVal < -0.1) mainSprite.transform.localScale = new Vector3(1, 1, 1);
     }
-    public void RecoveryItem(float amount)
+    public void RecoveryItem(int amount)
     {
         playerSetting.health = Mathf.Clamp(playerSetting.health + amount, 0, playerSetting.maxHealth);
 
     }
-    public void ScoreChange(float delta)
+    public void ScoreChange(int delta)
     {
         playerSetting.playerScore += delta;
     }

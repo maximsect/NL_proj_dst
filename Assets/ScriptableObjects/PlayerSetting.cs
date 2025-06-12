@@ -25,12 +25,12 @@ public class AttackSetting
 public class PlayerSetting : ScriptableObject
 {
     [Header("NormalAbility")]
-    public float health = 100; //体力
-    public float maxHealth = 100;//体力最大値
-    public float autoHealAmount = 1;//自然回復量
+    public int health = 100; //体力
+    public int maxHealth = 100;//体力最大値
+    public int autoHealAmount = 1;//自然回復量
     public float autoHealInterval = 5;//自然回復間隔
-    public float itemHealAmount = 30;//アイテム回復量
-    public float defense = 0;//防御量
+    public int itemHealAmount = 30;//アイテム回復量
+    public int defense = 0;//防御量
     public float movementSpeed = 5;//移動速度
     public float dashSpeed = 14;//ダッシュ速度
     public float jumpForce = 5;//ジャンプ力
@@ -58,7 +58,7 @@ public class PlayerSetting : ScriptableObject
 
     [Space(10)]
     [Header("WeaponSetting")]
-    public int weaponIndex = 0; //attackSetting[weaponIndex]の形で用いる
+    public int weaponIndex = 0; //attackSetting[weaponIndex]の形で用いる//武器の値を色々セットできる。
     public AttackSetting[] attackSetting;
     public float playerScore = 0;
     public PlayerSetting copySource, pasteTarget;//値をリセットすることができる
@@ -207,7 +207,7 @@ public class SyllabusEditor : Editor
 
         }
         EditorGUILayout.HelpBox("string weaponIndex\nfloat attackInterval\nfloat attackPower", MessageType.Info);
-        EditorGUILayout.HelpBox("float health\nfliat maxHealth\nfloat autoHealAmount\nfloat autoHealInterval\nfloat itemHealAmount\nfloat attackRate\nfloat attackInterval\nfloat defense\nfloat movementSpeed\nfloat dashSpeed\nfloat jumpForce\nfloat luck", MessageType.Info);
+        EditorGUILayout.HelpBox("int health\nint maxHealth\nint autoHealAmount\nfloat autoHealInterval\nint itemHealAmount\nfloat defense\nfloat movementSpeed\nfloat dashSpeed\nfloat jumpForce\nfloat luck", MessageType.Info);
         EditorGUILayout.HelpBox("int numberOfJump\nint numberOfDash\nbool chargedDash\nbool chargedJump\nfloat airHover\nbool aerialPull\nbool drillJump\nbool stompAttack\nint orbitingOrbNumber\nfloat critChance\nfloat criticalDamage\nfloat autoRecovery\nbool piercingArrow\nbool splittingArrow\nfloat chanceOfInstantKill\nbool wallStick", MessageType.Info);
 
     }

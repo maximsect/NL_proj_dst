@@ -182,8 +182,8 @@ public class PlayerSetting : ScriptableObject
         }
     }
 }
-[CustomEditor(typeof(SyllabusScript))]
-public class SyllabusEditor : Editor
+[CustomEditor(typeof(SkillSelectScript))]
+public class SkillSelectScriptEditor : Editor
 {
     public override void OnInspectorGUI()
     {
@@ -191,10 +191,10 @@ public class SyllabusEditor : Editor
         //EditorGUILayout.HelpBox("adf");
         if (GUILayout.Button("CheckTheTypes"))
         {
-            SyllabusScript syllabus = target as SyllabusScript;
-            foreach (var item in syllabus.syllabusClasses)
+            SkillSelectScript skillSelect = target as SkillSelectScript;
+            foreach (var item in skillSelect.skillSelectClasses)
             {
-                bool checker = syllabus.player.CheckTheTypes(item.variableName);
+                bool checker = skillSelect.player.CheckTheTypes(item.variableName);
                 if (!checker)
                 {
                     Debug.LogError(item.variableName +"は存在しないのでCyllabusScriptのインフォメーションボックスから変数を選んでください。");

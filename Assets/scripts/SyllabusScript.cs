@@ -4,39 +4,42 @@ using UnityEditor;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
+[System.Serializable]
+public class SceneClass
+{
+    public string SceneName;
+    public string difficultyLevel = "Normal";
+    public float possibility = 1;
+}
 [System.Serializable]
 public class SyllabusClass
 {
-    public string DisplayText;
-    public string variableName;
-
-    public VariableMode variableMode;
-    public int intVal = 0;
-    public float floatVal = 0;
-    public bool booleanVal = false;
-    public float possibility = 0;
-}
-public enum VariableMode
-{
-    ChangeInt, ChangeFloat, ChangeBool, AddInt, AddFloat, MultipleFloat, MultipleInt
+    public string sceneMode;
+    public Color imageColor = Color.green;
+    public SceneClass[] sceneClasses;
 }
 public class SyllabusScript : MonoBehaviour
 {
     public PlayerSetting player;
-    public SyllabusClass[] syllabusClasses;
-    public GameObject[] textObjs = new GameObject[3];
+    public SyllabusClass[] syllabusClasses = new SyllabusClass[3];
+    private SceneClass[] sceneClasses = new SceneClass[3];
+    public TextMeshProUGUI[] difficultyText = new TextMeshProUGUI[3];
+    public TextMeshProUGUI[] displayText = new TextMeshProUGUI[3];
+    public Image[] sceneSelectImage = new Image[3];
     List<int> getList = new List<int>();
-    public void ButtonSelect(int k)
+    public void ChangeScene(int index)
     {
-        ChangeValueManager(getList[k]);
+        SceneManager.LoadScene(syllabusClasses[index].sceneClasses[getList[index]].SceneName);
     }
-    public void Restart()
+    public void ReselectTheCources()
     {
         SelectRandomThree();
         for (int i = 0; i < 3; i++)
         {
-            textObjs[i].GetComponent<TextMeshProUGUI>().text = syllabusClasses[getList[i]].DisplayText;
+            difficultyText[i].text = syllabusClasses[i].sceneClasses[getList[i]].difficultyLevel;
+            displayText[i].text = syllabusClasses[i].sceneClasses[getList[i]].SceneName;
         }
     }
     void Start()
@@ -44,97 +47,39 @@ public class SyllabusScript : MonoBehaviour
         SelectRandomThree();
         for (int i = 0; i < 3; i++)
         {
-            textObjs[i].GetComponent<TextMeshProUGUI>().text = syllabusClasses[getList[i]].DisplayText;
+            difficultyText[i].text = syllabusClasses[i].sceneClasses[getList[i]].difficultyLevel;
+            displayText[i].text = syllabusClasses[i].sceneClasses[getList[i]].SceneName;
+            //sceneSelectImage.color = syllabusClasses[i].imageColor;
         }
     }
     public void SelectRandomThree()
     {
         getList.Clear();
-        if (syllabusClasses.Length < 3) return;
-        float possibilitySum = 0;
-        List<int> numlist = new List<int>();
-        for (int i = 0; i < syllabusClasses.Length; i++)
+        for (int w = 0; w < 3; w++)
         {
-            numlist.Add(i);
-            possibilitySum += syllabusClasses[i].possibility;
+            if (syllabusClasses[w].sceneClasses.Length == 0) return;
+        }
+        float[] possibilitySum = new float[3];
+        for (int i = 0; i < 3; i++)
+        {
+            for (int j = 0; j < syllabusClasses[i].sceneClasses.Length; j++)
+            {
+                possibilitySum[i] += syllabusClasses[i].sceneClasses[j].possibility;
+            }
         }
         for (int k = 0; k < 3; k++)
         {
-            float rand = UnityEngine.Random.Range(0, possibilitySum);
+            float rand = UnityEngine.Random.Range(0, possibilitySum[k]);
             float check = 0;
-            for (int j = 0; j < numlist.Count; j++)
+            for (int l = 0; l < syllabusClasses[k].sceneClasses.Length; l++)
             {
-                check += syllabusClasses[numlist[j]].possibility;
-                if (check > rand)
+                check += syllabusClasses[k].sceneClasses[l].possibility;
+                if(check > rand)
                 {
-                    getList.Add(numlist[j]);
-                    possibilitySum -= syllabusClasses[numlist[j]].possibility;
-                    numlist.RemoveAt(j);
+                    getList.Add(l);
                     break;
                 }
             }
         }
-    }
-
-    public void ChangeValueManager(int index)
-    {
-
-        switch (syllabusClasses[index].variableMode)
-        {
-            case VariableMode.ChangeInt:
-                ChangeValue(syllabusClasses[index].intVal, syllabusClasses[index].variableName);
-                break;
-            case VariableMode.ChangeFloat:
-                ChangeValue(syllabusClasses[index].floatVal, syllabusClasses[index].variableName);
-                break;
-            case VariableMode.ChangeBool:
-                ChangeValue(syllabusClasses[index].booleanVal, syllabusClasses[index].variableName);
-                break;
-            case VariableMode.AddInt:
-                AddValue(syllabusClasses[index].intVal, syllabusClasses[index].variableName);
-                break;
-            case VariableMode.AddFloat:
-                AddValue(syllabusClasses[index].floatVal, syllabusClasses[index].variableName);
-                break;
-            case VariableMode.MultipleFloat:
-                MultipleValueFloat(syllabusClasses[index].floatVal, syllabusClasses[index].variableName);
-                break;
-            case VariableMode.MultipleInt:
-                if (syllabusClasses[index].floatVal != 0) { MultipleValueInt(syllabusClasses[index].floatVal, syllabusClasses[index].variableName); }
-                else if (syllabusClasses[index].intVal != 0) { MultipleValueInt((float)syllabusClasses[index].intVal, syllabusClasses[index].variableName); }
-                else { Debug.LogError("Multiple By 0 is prohibited"); }
-                break;
-            default:
-                break;
-        }
-        player.HealthUnderMax();
-    }
-    public void ChangeValue(int newVal, string varName)
-    {
-        player.ChangeValue<int>(newVal, varName);
-    }
-    public void ChangeValue(float newVal, string varName)
-    {
-        player.ChangeValue<float>(newVal, varName);
-    }
-    public void ChangeValue(bool newVal, string varName)
-    {
-        player.ChangeValue<bool>(newVal, varName);
-    }
-    public void AddValue(int newVal, string varName)
-    {
-        player.AddValue(newVal, varName);
-    }
-    public void AddValue(float newVal, string varName)
-    {
-        player.AddValue(newVal, varName);
-    }
-    public void MultipleValueFloat(float newVal, string varName)
-    {
-        player.MultipleValueFloat(newVal, varName);
-    }
-    public void MultipleValueInt(float newVal, string varName)
-    {
-        player.MultipleValueInt(newVal, varName);
     }
 }

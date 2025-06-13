@@ -49,7 +49,7 @@ public class SyllabusScript : MonoBehaviour
         {
             difficultyText[i].text = syllabusClasses[i].sceneClasses[getList[i]].difficultyLevel;
             displayText[i].text = syllabusClasses[i].sceneClasses[getList[i]].SceneName;
-            //sceneSelectImage.color = syllabusClasses[i].imageColor;
+            sceneSelectImage[i].color = syllabusClasses[i].imageColor;
         }
     }
     public void SelectRandomThree()

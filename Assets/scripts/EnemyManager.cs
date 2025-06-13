@@ -27,7 +27,7 @@ public class EnemyManager : MonoBehaviour
 
     public GameObject TheMostDistantObjectOnScreen()
     {
-        List<GameObject> objOnScreenList = enemyList.Where(item => item.GetComponent<SpriteRenderer>().isVisible).ToList();
+        List<GameObject> objOnScreenList = enemyList.Where(item => (item.GetComponent<SpriteRenderer>() != null && item.GetComponent<SpriteRenderer>().isVisible)).ToList();
         if (objOnScreenList.Count == 0) return null;
         if (objOnScreenList.Count == 1) return objOnScreenList[0];
         GameObject obj = null;

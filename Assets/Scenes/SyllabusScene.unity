@@ -1126,13 +1126,13 @@ MonoBehaviour:
     imageColor: {r: 0, g: 1, b: 0, a: 1}
     sceneClasses:
     - SceneName: GetFlags
-      difficultyLevel: easy
+      difficultyLevel: Easy
       possibility: 1
     - SceneName: GetFlags2
       difficultyLevel: Hard
       possibility: 1
   - sceneMode: DefeatEnemy
-    imageColor: {r: 0, g: 1, b: 0, a: 1}
+    imageColor: {r: 0.7553129, g: 1, b: 0, a: 1}
     sceneClasses:
     - SceneName: DefeatEnemy
       difficultyLevel: hard
@@ -1144,7 +1144,7 @@ MonoBehaviour:
       difficultyLevel: impossible
       possibility: 1
   - sceneMode: PassTheExamination
-    imageColor: {r: 0, g: 1, b: 0, a: 1}
+    imageColor: {r: 1, g: 0.15905747, b: 0, a: 1}
     sceneClasses:
     - SceneName: midiumExam
       difficultyLevel: normal

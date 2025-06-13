@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 public class EyeObjectRandomMovement : MonoBehaviour
 {
-    public GameObject player;
+    public GameObject player, oniProfessor;
     public Vector2 basePoint = new Vector2(0, 0);
     public Vector2 boxSize = new Vector2(10, 10);
     public float movementSpeed = 5f, waitingDuration = 3f;
@@ -16,10 +16,12 @@ public class EyeObjectRandomMovement : MonoBehaviour
     public float returnEnemyInterval = 10f;
     private float enemyCounter = 0;
     public SpriteRenderer outliner;
+    public GameObject observer;
+    Coroutine coroutine;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        StartCoroutine(RandomMovement());
+        coroutine = StartCoroutine(RandomMovement());
     }
 
     // Update is called once per frame
@@ -33,9 +35,15 @@ public class EyeObjectRandomMovement : MonoBehaviour
             {
                 enemyCounter = 0;
                 isEnemy = true;
+                if (coroutine != null)
+                {
+                    StopCoroutine(coroutine);
+                }
+                coroutine = StartCoroutine(RandomMovement());
                 outliner.color = Color.red;
             }
         }
+        observer.SetActive(!isEnemy);
     }
     private void OnDrawGizmos()
     {
@@ -73,11 +81,36 @@ public class EyeObjectRandomMovement : MonoBehaviour
         }
         
     }
+    float someDeg = 0;
+    IEnumerator AllyMovement()
+    {
+        while (true)
+        {
+            Vector3 relativePos;
+            if (oniProfessor != null)
+            {
+                relativePos = oniProfessor.transform.position - transform.position;
+                someDeg = Mathf.Lerp(someDeg, Mathf.Atan2(relativePos.y, relativePos.x) * Mathf.Rad2Deg, 0.05f);
+            }
+            else
+            {
+                someDeg += 0.02f;
+            }
+            
+            observer.transform.rotation = Quaternion.Euler(0, 0, someDeg);
+            yield return null;
+        }
+    }
     void OnTriggerEnter2D(Collider2D other)
     {
         if(other.gameObject.tag == "attack")
         {
             isEnemy = false;
+            if (coroutine != null)
+            {
+                StopCoroutine(coroutine);
+            }
+            coroutine = StartCoroutine(AllyMovement());
             enemyCounter = 0;
         }
     }

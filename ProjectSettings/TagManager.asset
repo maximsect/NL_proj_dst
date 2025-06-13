@@ -14,6 +14,7 @@ TagManager:
   - present
   - healItem
   - lava
+  - observer
   layers:
   - Default
   - TransparentFX

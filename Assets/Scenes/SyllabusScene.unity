@@ -1125,32 +1125,38 @@ MonoBehaviour:
   - sceneMode: Attendance
     imageColor: {r: 0, g: 1, b: 0, a: 1}
     sceneClasses:
-    - SceneName: GetFlags
-      difficultyLevel: Easy
+    - SceneName: Get\nFlags
+      difficultyLevel: easy
       possibility: 1
-    - SceneName: GetFlags2
-      difficultyLevel: Hard
+    - SceneName: Get\nFlags2
+      difficultyLevel: hard
+      possibility: 1
+    - SceneName: Get\nFlags3
+      difficultyLevel: impossible
       possibility: 1
   - sceneMode: DefeatEnemy
     imageColor: {r: 0.7553129, g: 1, b: 0, a: 1}
     sceneClasses:
-    - SceneName: DefeatEnemy
-      difficultyLevel: hard
-      possibility: 1
-    - SceneName: DefeatEnemy2
+    - SceneName: Defeat\nEnemy
       difficultyLevel: easy
       possibility: 1
-    - SceneName: DefeatEnemy3
-      difficultyLevel: impossible
+    - SceneName: Defeat\nEnemy2
+      difficultyLevel: hard
+      possibility: 1
+    - SceneName: Defeat\nEnemy3
+      difficultyLevel: very hard
       possibility: 1
   - sceneMode: PassTheExamination
     imageColor: {r: 1, g: 0.15905747, b: 0, a: 1}
     sceneClasses:
-    - SceneName: midiumExam
+    - SceneName: midium\nExam
       difficultyLevel: normal
       possibility: 1
-    - SceneName: LastExam
+    - SceneName: Last\nExam
       difficultyLevel: Impossible
+      possibility: 1
+    - SceneName: Last\nExam
+      difficultyLevel: easy
       possibility: 1
   difficultyText:
   - {fileID: 304143748}

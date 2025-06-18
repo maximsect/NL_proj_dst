@@ -15,6 +15,7 @@ TagManager:
   - healItem
   - lava
   - observer
+  - damage_factor
   layers:
   - Default
   - TransparentFX

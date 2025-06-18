@@ -19,8 +19,8 @@ public class player_main : MonoBehaviour
     public GameObject skill;
     public arrowmaker arrowmaker;
     [System.NonSerialized]public int attackkeyholdtime=0;
-    bool arrowkeyhold=false;
-    readonly Vector3 hide=new Vector3(0f, 10000f, 0f);
+    //bool arrowkeyhold=false;
+    readonly Vector3 hide=new Vector3(0f, 100f, 0f);
     bool isgrapping=false;
     Vector3 pos_tomove;
     Vector3 grapvelocity;
@@ -62,7 +62,6 @@ public class player_main : MonoBehaviour
         
         if(!this.iskbing() && !this.isgrapping)
         {
-            //!this.isgrapping && 
 
             if(this.rigid.IsTouchingLayers(this.ground) && this.rigid.linearVelocity.y<0.01f && this.rigid.linearVelocity.y>-0.01f && this.last_velocity<0.01f && this.last_velocity>-0.01f){
                 //接地判定
@@ -173,7 +172,7 @@ public class player_main : MonoBehaviour
             this.attackobj.transform.position=new Vector3(this.transform.position.x+0.75f*this.direction, this.transform.position.y, 0f);
         }
 
-        if(65<this.skillcooldown && this.skillcooldown<85){
+        if(this.isskillusing()){
             this.skill.transform.position=new Vector3(this.transform.position.x+1.5f*this.direction, this.transform.position.y, 0f);
         }
         else{
@@ -200,7 +199,7 @@ public class player_main : MonoBehaviour
         this.transform.localScale=new Vector3(-this.direction, this.transform.localScale.y, 1);
 
         if(8<=this.attackkeyholdtime){this.behavior=3;}
-        if(65<this.skillcooldown){this.behavior=4;}
+        if(this.isskillusing(1)){this.behavior=4;}
         animator.SetInteger("behave", this.behavior);
     }
 
@@ -240,7 +239,7 @@ public class player_main : MonoBehaviour
     }
 
     void OnCollisionStay2D(Collision2D collision){
-        if(collision.gameObject.CompareTag("Enemy") && !this.hitflag && this.invincibletime<=0){
+        if((collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("damage_factor")) && !this.hitflag && this.invincibletime<=0){
             Debug.Log("damage");
             this.life--;
             this.hitflag=true;
@@ -248,6 +247,7 @@ public class player_main : MonoBehaviour
             this.rigid.AddForce(this.transform.position.x<=collision.transform.position.x ? this.KBVEC : Vector2.Reflect(this.KBVEC, Vector2.right), ForceMode2D.Impulse);
             this.kb_time=20;
             this.invincibletime=60;
+            this.dashtime=0;
             if(this.life<=0){
                 Debug.Log("dead");
             }
@@ -266,5 +266,11 @@ public class player_main : MonoBehaviour
 
     bool iskbing(){
         return this.kb_time > 0 ? true:false;
+    }
+
+    bool isskillusing(int mode=0){
+        if(mode==1)
+            return 65<this.skillcooldown;
+        return 65<this.skillcooldown && this.skillcooldown<85;
     }
 }

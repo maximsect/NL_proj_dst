@@ -13,6 +13,8 @@ public class catdemon : MonoBehaviour
     public float checkDistance = 0.1f;
     public float footOffset = 0.01f;
 
+    public float interactionZone = 0.5f;
+
     public float tpPower = 24f;
 
     int tpCount = 300;//�e���|�[�g���Ǘ�����J�E���^�[�@
@@ -40,18 +42,33 @@ public class catdemon : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        animator.SetInteger("catbehave", this.behavior);
 
+
+            }
+
+    private void FixedUpdate()
+    {
         //�������猩���v���C���[�̕����x�N�g�����擾
         Vector3 dir = (taregtObject.transform.position - transform.position).normalized;
 
         //x�����̈ړ�
 
         re_x = dir.x;
-        float vx = dir.x * speed;
+        float vx = re_x * speed;
         float vy = dir.y * speed;
-        rbody.linearVelocity = new Vector2(vx, rbody.linearVelocity.y);
-        GetComponent<SpriteRenderer>().flipX = vx > 0;
 
+        if (Mathf.Abs(re_x) > interactionZone)
+        {
+            rbody.linearVelocity = new Vector2(vx, rbody.linearVelocity.y);
+            GetComponent<SpriteRenderer>().flipX = vx > 0;
+            behavior = 0;
+        }
+        else
+        {
+            behavior = 1;
+
+        }
 
         // �n�ʂɐڐG���Ă��邩���m�F
         isGrounded = Physics2D.Raycast(transform.position, Vector2.down, checkDistance + footOffset, LayerMask.GetMask("Ground"));
@@ -62,14 +79,7 @@ public class catdemon : MonoBehaviour
                 isJumping = true;
                 rbody.AddForce(Vector2.up * jumppower, ForceMode2D.Impulse);
             }
-        
-    }
-
-    private void FixedUpdate()
-    {
-
-        animator.SetInteger("behave", this.behavior);
-
+       
         /*
         // �e���|�[�g�J�E���^�[�����炷
         if (tpCount > 0)

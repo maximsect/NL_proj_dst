@@ -17,6 +17,9 @@ public class catdemon : MonoBehaviour
 
     int tpCount = 300;//�e���|�[�g���Ǘ�����J�E���^�[�@
 
+    public Animator animator;
+    int behavior = 0;
+
     Rigidbody2D rbody;
     bool isGrounded;
     bool isJumping = false;
@@ -47,7 +50,7 @@ public class catdemon : MonoBehaviour
         float vx = dir.x * speed;
         float vy = dir.y * speed;
         rbody.linearVelocity = new Vector2(vx, rbody.linearVelocity.y);
-        GetComponent<SpriteRenderer>().flipX = vx < 0;
+        GetComponent<SpriteRenderer>().flipX = vx > 0;
 
 
         // �n�ʂɐڐG���Ă��邩���m�F
@@ -64,6 +67,10 @@ public class catdemon : MonoBehaviour
 
     private void FixedUpdate()
     {
+
+        animator.SetInteger("behave", this.behavior);
+
+        /*
         // �e���|�[�g�J�E���^�[�����炷
         if (tpCount > 0)
         {
@@ -83,6 +90,7 @@ public class catdemon : MonoBehaviour
                 tpCount = UnityEngine.Random.Range(300, 600); // �����_���ȃJ�E���g��ݒ�
             }
         }
+        */
     }
 }
 

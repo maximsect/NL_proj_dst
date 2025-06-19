@@ -119,6 +119,33 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &25257641 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4482937538460693618, guid: e504056476e34b6419533e9c78e06045, type: 3}
+  m_PrefabInstance: {fileID: 1431970155771372421}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &25257647
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 25257641}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ac0913f8e17d6954f95db18ed92ca02a, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &253477770
 GameObject:
   m_ObjectHideFlags: 0
@@ -5136,6 +5163,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 3623654207399372413, guid: e504056476e34b6419533e9c78e06045, type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 25257647}
+    - target: {fileID: 3623654207399372413, guid: e504056476e34b6419533e9c78e06045, type: 3}
       propertyPath: taregtObject
       value: 
       objectReference: {fileID: 253477770}
@@ -5145,11 +5176,43 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4482937538460693618, guid: e504056476e34b6419533e9c78e06045, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4482937538460693618, guid: e504056476e34b6419533e9c78e06045, type: 3}
       propertyPath: m_TagString
       value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 4643516500968956341, guid: e504056476e34b6419533e9c78e06045, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4643516500968956341, guid: e504056476e34b6419533e9c78e06045, type: 3}
+      propertyPath: m_Offset.x
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4643516500968956341, guid: e504056476e34b6419533e9c78e06045, type: 3}
+      propertyPath: m_Offset.y
+      value: 0.45
+      objectReference: {fileID: 0}
+    - target: {fileID: 4643516500968956341, guid: e504056476e34b6419533e9c78e06045, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4643516500968956341, guid: e504056476e34b6419533e9c78e06045, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4643516500968956341, guid: e504056476e34b6419533e9c78e06045, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5951666972095822486, guid: e504056476e34b6419533e9c78e06045, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -2833316723285120895, guid: 352ec9ff79aa6be4a861394aca78297f, type: 3}
+    - target: {fileID: 5951666972095822486, guid: e504056476e34b6419533e9c78e06045, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7064803356767360119, guid: e504056476e34b6419533e9c78e06045, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5194,7 +5257,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4482937538460693618, guid: e504056476e34b6419533e9c78e06045, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 25257647}
   m_SourcePrefab: {fileID: 100100000, guid: e504056476e34b6419533e9c78e06045, type: 3}
 --- !u!1001 &3535240863877644131
 PrefabInstance:

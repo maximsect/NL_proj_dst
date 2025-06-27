@@ -14,6 +14,7 @@ public class enemy_main : MonoBehaviour
             this.hitflag=false;
         }
         if(this.life<=0){
+            SceneScript.KillEnemy();
             Destroy(this.gameObject);
         }
     }

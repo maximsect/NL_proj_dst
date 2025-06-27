@@ -133,7 +133,6 @@ GameObject:
   - component: {fileID: 253477772}
   - component: {fileID: 253477771}
   - component: {fileID: 253477776}
-  - component: {fileID: 253477777}
   m_Layer: 7
   m_Name: player
   m_TagString: Player
@@ -330,31 +329,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &253477777
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 253477770}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0fc2de563d84b004a845c031d69615ca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerSetting: {fileID: 11400000, guid: e2f95bca2b0544a4a9e0e72ffbec0b8e, type: 2}
-  enemyManager: {fileID: 1875600550}
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 256
-  dashInterval: 0.3
-  sufferDamageInterval: 0.3
-  mainSprite: {fileID: 253477770}
-  sword_AttackRegion: {fileID: 1620335143}
-  dashKeyCode: z
-  attackKeyCode: x
-  specialKeyCode: c
-  chargeKeyCode: s
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0

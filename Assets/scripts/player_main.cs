@@ -248,6 +248,7 @@ public class player_main : MonoBehaviour
             this.kb_time=20;
             this.invincibletime=60;
             this.dashtime=0;
+            SceneScript.GetDamaged();
             if(this.life<=0){
                 Debug.Log("dead");
             }

@@ -5,46 +5,59 @@ using UnityEngine.UI;
 using TMPro;
 public class player_main : MonoBehaviour
 {
-    public EnemyManager enemyManager;
 
     Rigidbody2D rigid;
     float hor_input=0f;
     float ver_input=0f;
     Vector2 velcopy_x;
     Vector2 velcopy_y;
-    readonly float maxspeedX=5.0f;
 
     GameObject enemy;
-    public GameObject attackobj;
-    public GameObject skill;
-    public arrowmaker arrowmaker;
-    [System.NonSerialized]public int attackkeyholdtime=0;
-    //bool arrowkeyhold=false;
-    readonly Vector3 hide=new Vector3(0f, 100f, 0f);
+    bool arrowkeyhold=false;
     bool isgrapping=false;
     Vector3 pos_tomove;
     Vector3 grapvelocity;
     int dashtime=0;
     bool hitflag=false;
-    int direction=1;
     int life=5;
     bool isground=false;
-    public LayerMask ground;
     bool istwicejumpused=false;
     short keyputting=0;
-    [System.NonSerialized] public int skillcooldown=0;
     int invincibletime=0;
     int kb_time=0;
-    public int xp=0;
     int kbtimer=0;
     float last_velocity=0f;
     bool dashflag=false;
+    int behavior=0;
+    int attacktime=0;
+    int arrowtime=0;
+    [System.NonSerialized]public int direction=1;
+    [System.NonSerialized]public int skillcooldown=0;
+
+    public EnemyManager enemyManager;
+    public GameObject attackobj;
+    public GameObject skill;
+    public arrowmaker arrowmaker;
+    public LayerMask ground;
+    public int xp=0;
     public float grappingSpeed = 25;
     public Animator animator;
-    int behavior=0;
+    public Animator skillanimator;
+    public BoxCollider2D skillcollider;
 
+    readonly float maxspeedX=5.0f;
+    readonly Vector3 hide=new Vector3(0f, 100f, 0f);
+    readonly Vector2 hide2D=new Vector3(0f, 100f);
     readonly Vector2 KBVEC=new Vector2(-7f, 7f);
     readonly Vector2 DASHSPEED=new Vector2(12f, 0f);
+    readonly int SKILLINIT=124;
+    readonly int SKILLBEGIN=94;
+    readonly int SKILLEND=64;
+    readonly int ATTACKINIT=24;
+    readonly int ATTACKBEGIN=19;
+    readonly int ATTACKEND=14;
+    readonly int ARROWINIT=19;
+    readonly int ARROWBEGIN=4;
     void Start()
     {
         rigid = GetComponent<Rigidbody2D>();
@@ -59,35 +72,35 @@ public class player_main : MonoBehaviour
     void FixedUpdate(){
         this.hor_input=Input.GetAxisRaw("Horizontal");
         this.ver_input=Input.GetAxisRaw("Vertical");
+
+        if(this.rigid.IsTouchingLayers(this.ground) && this.rigid.linearVelocity.y<0.01f && this.rigid.linearVelocity.y>-0.01f && this.last_velocity<0.01f && this.last_velocity>-0.01f){
+            //接地判定
+            this.isground=true;
+            this.istwicejumpused=false;
+            this.dashflag=false;
+        }
+        else{
+            this.isground=false;
+        }
         
         if(!this.iskbing() && !this.isgrapping)
         {
 
-            if(this.rigid.IsTouchingLayers(this.ground) && this.rigid.linearVelocity.y<0.01f && this.rigid.linearVelocity.y>-0.01f && this.last_velocity<0.01f && this.last_velocity>-0.01f){
-                //接地判定
-                this.isground=true;
-                this.istwicejumpused=false;
-                this.dashflag=false;
-            }
-            else{
-                this.isground=false;
-            }
-
-            if(this.hor_input>0.1f){
+            if(this.hor_input>0.1f && this.dashtime<=8 && !this.isskillusing(2) && this.arrowtime<=0){
                 //右移動
                 this.velcopy_x=this.rigid.linearVelocity;
                 this.velcopy_x.x=this.maxspeedX;
                 this.rigid.linearVelocity=this.velcopy_x;
-                if(this.attackkeyholdtime<8 && this.skillcooldown<=65)
+                if(this.attacktime<8 && this.skillcooldown<=65)
                     this.direction=1;
                 this.behavior=1;
             }
-            if(this.hor_input<-0.1f){
+            if(this.hor_input<-0.1f && this.dashtime<=8 && !this.isskillusing(2) && this.arrowtime<=0){
                 //左移動
                 this.velcopy_x=this.rigid.linearVelocity;
                 this.velcopy_x.x=-this.maxspeedX;
                 this.rigid.linearVelocity=this.velcopy_x;
-                if(this.attackkeyholdtime<8 && this.skillcooldown<=65)
+                if(this.attacktime<8 && this.skillcooldown<=65)
                     this.direction=-1;
                 this.behavior=1;
             }
@@ -100,7 +113,7 @@ public class player_main : MonoBehaviour
                 this.behavior=0;
             }
 
-            if(Input.GetKey(KeyCode.C) && this.isground && this.keyputting%2==0){
+            if(Input.GetKey(KeyCode.C) && this.isground && this.keyputting%2==0 && this.dashtime<=8 && !this.isskillusing(2) && this.arrowtime<=0){
                 //ジャンプ
                 this.velcopy_y=this.rigid.linearVelocity;
                 this.velcopy_y.y=12.0f;
@@ -108,7 +121,7 @@ public class player_main : MonoBehaviour
                 this.keyputting=1;
             }
 
-            if(Input.GetKey(KeyCode.C) && !this.isground && !this.istwicejumpused && this.keyputting%2==0){
+            if(Input.GetKey(KeyCode.C) && !this.isground && !this.istwicejumpused && this.keyputting%2==0 && this.dashtime<=8 && !this.isskillusing(2) && this.arrowtime<=0){
                 //空中ジャンプ
                 this.velcopy_y=this.rigid.linearVelocity;
                 this.velcopy_y.y=10.0f;
@@ -117,15 +130,31 @@ public class player_main : MonoBehaviour
                 this.keyputting=1;
             }
 
-            if(!this.isground){this.behavior=2;}
-
-            if(Input.GetKey(KeyCode.Z) && this.dashtime<=0 && !this.dashflag){
+            if(Input.GetKey(KeyCode.Z) && this.dashtime<=0 && !this.dashflag && !this.isskillusing(2) && this.arrowtime<=0){
                 this.dashtime=20;
                 this.dashflag=true;
             }
 
+            if(Input.GetKey(KeyCode.X) && this.arrowtime<=0){
+                if(this.attacktime<=0){
+                    this.attacktime=this.ATTACKINIT;
+                }
+            }
+
+            if (Input.GetKey(KeyCode.D) && this.skillcooldown<=0 && this.arrowtime<=0){
+                this.skillcooldown=this.SKILLINIT;
+            }
+
+            if(Input.GetKey(KeyCode.S) && !this.arrowkeyhold && this.arrowtime<=0){
+                //this.arrowmaker.arrowmaking=true;
+                this.arrowkeyhold=true;
+                this.arrowtime=this.ARROWINIT;
+            }
+
             this.dash();
         }
+
+        if(!this.isground){this.behavior=2;}
 
         if(!Input.GetKey(KeyCode.C)){
             this.keyputting=0;
@@ -147,42 +176,43 @@ public class player_main : MonoBehaviour
             StartCoroutine(GrappingCoroutine(enemyManager.TheMostDistantObjectOnScreen()));
         }
 
-        if (Input.GetKey(KeyCode.D) && !this.iskbing() && this.skillcooldown<=0){
-            this.skillcooldown=100;
-        }
-
-        if(Input.GetKey(KeyCode.X)){
-            if(this.attackkeyholdtime<=0){
-                this.attackkeyholdtime=20;
-            }
-        }
-
-        /*if(Input.GetKey(KeyCode.S) && !this.arrowkeyhold){
-            this.arrowmaker.arrowmaking=true;
-            this.arrowkeyhold=true;
-        }
         if(!Input.GetKey(KeyCode.S)){
             this.arrowkeyhold=false;
-        }*/
+        }
 
-        if(this.attackkeyholdtime<8){
+        if(this.arrowtime==this.ARROWBEGIN){this.arrowmaker.arrowmaking=true;}
+
+        if(this.attacktime<this.ATTACKEND || this.ATTACKBEGIN<this.attacktime){
             this.attackobj.transform.position=this.hide;
         }
         else{
             this.attackobj.transform.position=new Vector3(this.transform.position.x+0.75f*this.direction, this.transform.position.y, 0f);
         }
 
-        if(this.isskillusing()){
-            this.skill.transform.position=new Vector3(this.transform.position.x+1.5f*this.direction, this.transform.position.y, 0f);
+        if(this.isskillusing(2)){
+            this.skill.transform.position=new Vector3(this.transform.position.x+2.0f*this.direction, this.transform.position.y, 0f);
+            if(this.isskillusing()){this.skillcollider.offset=Vector3.zero;}
+            else{this.skillcollider.offset=this.hide2D;}
+            this.velcopy_x=this.rigid.linearVelocity;
+            this.velcopy_x.x=0f;
+            this.rigid.linearVelocity=this.velcopy_x;
         }
         else{
             this.skill.transform.position=this.hide;
+            this.skillanimator.SetBool("isskillusing", false);
+        }
+
+        if(0<this.arrowtime){
+                this.velcopy_x=this.rigid.linearVelocity;
+                this.velcopy_x.x=0f;
+                this.rigid.linearVelocity=this.velcopy_x;
         }
 
         if(this.iskbing())
             this.rigid.linearVelocity=this.rigid.linearVelocity*(this.kb_time-1)/this.kb_time;
 
-        if(this.attackkeyholdtime>0){this.attackkeyholdtime--;}
+        if(this.attacktime>0){this.attacktime--;}
+        if(this.arrowtime>0){this.arrowtime--;}
         if(this.skillcooldown>0){this.skillcooldown--;}
         if(this.kb_time>0){this.kb_time--;}
         if(this.invincibletime>0){this.invincibletime--;}
@@ -198,8 +228,9 @@ public class player_main : MonoBehaviour
 
         this.transform.localScale=new Vector3(-this.direction, this.transform.localScale.y, 1);
 
-        if(8<=this.attackkeyholdtime){this.behavior=3;}
-        if(this.isskillusing(1)){this.behavior=4;}
+        if(0<this.attacktime){this.behavior=3;}
+        if(0<this.arrowtime){this.behavior=5;}
+        if(this.isskillusing(2)){this.skillanimator.SetBool("isskillusing", true);this.behavior=4;}
         animator.SetInteger("behave", this.behavior);
     }
 
@@ -239,7 +270,7 @@ public class player_main : MonoBehaviour
     }
 
     void OnCollisionStay2D(Collision2D collision){
-        if((collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("damage_factor")) && !this.hitflag && this.invincibletime<=0){
+        if((collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("damage_factor") || (collision.gameObject.CompareTag("assign_attack") && Random.Range(0, 2)==0)) && !this.hitflag && this.invincibletime<=0){
             Debug.Log("damage");
             this.life--;
             this.hitflag=true;
@@ -248,7 +279,6 @@ public class player_main : MonoBehaviour
             this.kb_time=20;
             this.invincibletime=60;
             this.dashtime=0;
-            SceneScript.GetDamaged();
             if(this.life<=0){
                 Debug.Log("dead");
             }
@@ -271,7 +301,9 @@ public class player_main : MonoBehaviour
 
     bool isskillusing(int mode=0){
         if(mode==1)
-            return 65<this.skillcooldown;
-        return 65<this.skillcooldown && this.skillcooldown<85;
+            return this.SKILLBEGIN<this.skillcooldown;
+        if(mode==2)
+            return this.SKILLEND<this.skillcooldown;
+        return this.SKILLEND<this.skillcooldown && this.skillcooldown<this.SKILLBEGIN;
     }
 }

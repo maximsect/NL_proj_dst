@@ -4,7 +4,8 @@ public class arrow : MonoBehaviour
 {
 
     public Rigidbody2D rigid;
-    Vector2 nogravity = new Vector2(5.0f, 0f);
+    Vector2 nogravity = new Vector2(7.5f, 0f);
+    public player_main player;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -14,6 +15,7 @@ public class arrow : MonoBehaviour
         }
         else{
             this.rigid.constraints=RigidbodyConstraints2D.None;
+            this.nogravity*=this.player.direction;
         }
     }
 
@@ -23,7 +25,8 @@ public class arrow : MonoBehaviour
         this.rigid.linearVelocity=this.nogravity;
     }
 
-    void OnTriggerEnter2D(Collider2D collider){
-        Destroy(this.gameObject);
+    void OnCollisionEnter2D(Collision2D collision){
+        if(!collision.gameObject.CompareTag("Player") && !collision.gameObject.CompareTag("arrow"))
+            Destroy(this.gameObject);
     }
 }

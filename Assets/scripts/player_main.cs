@@ -44,6 +44,7 @@ public class player_main : MonoBehaviour
     public Animator animator;
     public Animator skillanimator;
     public BoxCollider2D skillcollider;
+    public UI_skillcooldown UI_skillcooldown;
 
     readonly float maxspeedX=5.0f;
     readonly Vector3 hide=new Vector3(0f, 100f, 0f);
@@ -143,6 +144,7 @@ public class player_main : MonoBehaviour
 
             if (Input.GetKey(KeyCode.D) && this.skillcooldown<=0 && this.arrowtime<=0){
                 this.skillcooldown=this.SKILLINIT;
+                this.UI_skillcooldown.mask.alphaCutoff=1.0f;
             }
 
             if(Input.GetKey(KeyCode.S) && !this.arrowkeyhold && this.arrowtime<=0){

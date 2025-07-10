@@ -3,15 +3,21 @@ using UnityEngine;
 public class UI_skillcooldown : MonoBehaviour
 {
     public player_main player;
-    public SpriteRenderer sprite;
-    public Sprite in_cooldown;
-    public Sprite ready;
+    //public SpriteRenderer sprite;
+    //public Sprite in_cooldown;
+    //public Sprite ready;
+    public SpriteMask mask;
 
     void FixedUpdate()
-    {
+    {/*
         if(this.player.skillcooldown<=0)
             this.sprite.sprite=this.ready;
         else
-            this.sprite.sprite=this.in_cooldown;
+            this.sprite.sprite=this.in_cooldown;*/
+
+        if(this.player.skillcooldown>0)
+            this.mask.alphaCutoff-=0.008f;
+        else
+            this.mask.alphaCutoff=0.0f;
     }
 }

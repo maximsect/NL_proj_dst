@@ -165,6 +165,7 @@ MonoBehaviour:
   animator: {fileID: 253477776}
   skillanimator: {fileID: 893315257}
   skillcollider: {fileID: 893315254}
+  UI_skillcooldown: {fileID: 1284194241}
 --- !u!50 &253477772
 Rigidbody2D:
   serializedVersion: 5
@@ -1919,8 +1920,8 @@ SpriteMask:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 0}
-  m_MaskAlphaCutoff: 0.2
+  m_Sprite: {fileID: 21300000, guid: 62aa6d2b1331f0e4382f16a3ec898b36, type: 3}
+  m_MaskAlphaCutoff: 0
   m_FrontSortingLayerID: 0
   m_BackSortingLayerID: 0
   m_FrontSortingLayer: 0
@@ -4698,9 +4699,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 253477771}
-  sprite: {fileID: 1284194242}
-  in_cooldown: {fileID: 21300000, guid: 126fb29cf11f7534c8ce4465b0283411, type: 3}
-  ready: {fileID: 21300000, guid: ec428c0738246654fac75a8afa95d2dd, type: 3}
+  mask: {fileID: 593666670}
 --- !u!212 &1284194242
 SpriteRenderer:
   m_ObjectHideFlags: 0

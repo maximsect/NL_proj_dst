@@ -31,7 +31,7 @@ public class SyllabusScript : MonoBehaviour
     List<int> getList = new List<int>();
     public void ChangeScene(int index)
     {
-        SceneManager.LoadScene(syllabusClasses[index].sceneClasses[getList[index]].SceneName);
+        this.LoadSceneByName(syllabusClasses[index].sceneClasses[getList[index]].SceneName);
     }
     public void ReselectTheCources()
     {
@@ -74,7 +74,7 @@ public class SyllabusScript : MonoBehaviour
             for (int l = 0; l < syllabusClasses[k].sceneClasses.Length; l++)
             {
                 check += syllabusClasses[k].sceneClasses[l].possibility;
-                if(check > rand)
+                if (check > rand)
                 {
                     getList.Add(l);
                     break;

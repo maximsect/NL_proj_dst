@@ -102,9 +102,12 @@ public class ProfessorMovement : MonoBehaviour
             {
                 if (--hp == 0)
                 {
-                    SceneScript.KillEnemy();
+                    Debug.Log("Errot");
+                    SceneTransition.main.StageClearReciever();
                     Destroy(rendererPref.gameObject);
                     Destroy(this.gameObject);
+                    /*SceneScript.KillEnemy();
+                    /**/
                 }
             }
         }

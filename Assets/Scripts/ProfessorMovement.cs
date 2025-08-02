@@ -3,12 +3,14 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 public enum DrawFunctions
 {
     SinWave,TanWave,Exp,Sqrt,PingPong,Log
 }
 public class ProfessorMovement : MonoBehaviour
 {
+    public GameObject player;
     public SpriteRenderer mainImage;
     public LineRenderer rendererPref;
     public EdgeCollider2D edge2D;
@@ -21,12 +23,16 @@ public class ProfessorMovement : MonoBehaviour
     public int hp = 25;
     public Slider hpDisplay;
     public bool isObserved = false;
+    public LayerMask groundLayer;
+    private Animator animator;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         hpDisplay.minValue = 0;
         hpDisplay.maxValue = hp;
         hpDisplay.value = hp;
+        animator = transform.GetChild(0).gameObject.GetComponent<Animator>();
+        StartCoroutine(ProfessorAnimation());
         //edge2D = rendererPref.gameObject.GetComponent<EdgeCollider2D>();
         //StartCoroutine(DrawSinWave());
     }
@@ -39,11 +45,16 @@ public class ProfessorMovement : MonoBehaviour
         if (!isObserved)
         {
             _count += Time.deltaTime;
-            mainImage.enabled = Mathf.PingPong(10 *_count, 1) < 0.5f;
+            //mainImage.enabled = Mathf.PingPong(10 *_count, 1) < 0.5f;
         }
         else
         {
             mainImage.enabled = true;
+        }
+        Vector3 relativePos = player.transform.position - transform.position;
+        if(Mathf.Abs(relativePos.y) <= 2)
+        {
+            transform.localScale = (relativePos.x > 0) ? new Vector3(-1, 1, 1) : new Vector3(1, 1, 1);
         }
     }
     void Draw()
@@ -86,10 +97,6 @@ public class ProfessorMovement : MonoBehaviour
         }
         edge2D.SetPoints(linePoints);
     }
-    //IEnumerator DrawSinWave()
-    //{
-
-    //}
     void OnTriggerEnter2D(Collider2D other)
     {
         hpDisplay.value = hp;
@@ -102,6 +109,7 @@ public class ProfessorMovement : MonoBehaviour
             {
                 if (--hp == 0)
                 {
+                    SceneTransition.main.StageClearReciever();
                     Destroy(rendererPref.gameObject);
                     Destroy(this.gameObject);
                 }
@@ -114,6 +122,8 @@ public class ProfessorMovement : MonoBehaviour
         if(other.gameObject.tag == "observer")
         {
             isObserved = true;
+            selectableMovementIndex.Remove(3);
+            selectableMovementIndex.Add(3);
         }
     }
     void OnTriggerExit2D(Collider2D other)
@@ -122,5 +132,55 @@ public class ProfessorMovement : MonoBehaviour
         {
             isObserved = false;
         }
+    }
+    Vector2 RandomPos()
+    {
+        while (true)
+        {
+            Vector2 pos = new Vector2(Random.Range(-3f, 10f), Random.Range(-10f, 10f));
+            if (Physics2D.OverlapCircle(pos, 0.5f,groundLayer)) continue;
+            if (!Physics2D.OverlapCircle(pos - new Vector2(0, 0.3f), 0.5f,groundLayer)) continue;
+            if (Vector3.Distance(transform.position, pos) < 7) continue;
+            return pos + new Vector2(0, 0.2f);
+        }
+    }
+    List<int> selectableMovementIndex = new List<int>() { 0, 1, 2, 3 };
+    IEnumerator ProfessorAnimation()
+    {
+        while (true)
+        {
+            int rand = selectableMovementIndex[Random.Range(0, selectableMovementIndex.Count - 1)] ;
+            print(rand);
+            selectableMovementIndex.Remove(rand);
+            selectableMovementIndex.Add(rand);
+            switch (rand)
+            {
+                case 0://idol
+                    AnimeState(0);
+                    yield return new WaitForSeconds(2f);
+                    break;
+                case 1://attack
+                    AnimeState(1);
+                    yield return new WaitForSeconds(0.2f);
+                    break;
+                case 2://attackWithSin
+                    AnimeState(2);
+                    yield return new WaitForSeconds(0.2f);
+                    break;
+                case 3:// Warp
+                    AnimeState(3);
+                    yield return new WaitForSeconds(0.4f);
+                    transform.position = RandomPos().ToVector3();
+                    AnimeState(0);
+                    yield return new WaitForSeconds(0.4f);
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+    void AnimeState(int index)
+    {
+        animator.SetInteger("Mode", index);
     }
 }

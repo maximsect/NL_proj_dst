@@ -16,6 +16,7 @@ TagManager:
   - lava
   - observer
   - damage_factor
+  - assign_attack
   layers:
   - Default
   - TransparentFX

@@ -40,7 +40,7 @@ public class catdemon : MonoBehaviour
 
         // "Player"�^�O���t����GameObject���擾
         taregtObject = GameObject.Find("player");
-        this.animator.SetInteger("color", Random.Range(0, 1));
+        this.animator.SetInteger("color", Random.Range(0, 3));
     }
 
     // Update is called once per frame

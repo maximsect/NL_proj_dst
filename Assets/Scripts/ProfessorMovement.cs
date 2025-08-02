@@ -25,6 +25,7 @@ public class ProfessorMovement : MonoBehaviour
     public bool isObserved = false;
     public LayerMask groundLayer;
     private Animator animator;
+    public Color color;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -45,11 +46,15 @@ public class ProfessorMovement : MonoBehaviour
         if (!isObserved)
         {
             _count += Time.deltaTime;
-            //mainImage.enabled = Mathf.PingPong(10 *_count, 1) < 0.5f;
+            color.a = 0.5f + Mathf.Sin(_count * 8) * 0.3f;
+            mainImage.material.color = color;
         }
         else
         {
-            mainImage.enabled = true;
+            color.a = 1;
+            mainImage.material.color = color;
+            selectableMovementIndex.Remove(3);
+            selectableMovementIndex.Add(3);
         }
         Vector3 relativePos = player.transform.position - transform.position;
         if(Mathf.Abs(relativePos.y) <= 2)
@@ -122,8 +127,6 @@ public class ProfessorMovement : MonoBehaviour
         if(other.gameObject.tag == "observer")
         {
             isObserved = true;
-            selectableMovementIndex.Remove(3);
-            selectableMovementIndex.Add(3);
         }
     }
     void OnTriggerExit2D(Collider2D other)

@@ -15,8 +15,9 @@ public class EyeObjectRandomMovement : MonoBehaviour
     private bool isEnemy = true;
     public float returnEnemyInterval = 10f;
     private float enemyCounter = 0;
-    public SpriteRenderer outliner;
+    public SpriteRenderer outliner,mainSprite;
     public GameObject observer;
+    public Sprite[] eyes;
     Coroutine coroutine;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -44,6 +45,11 @@ public class EyeObjectRandomMovement : MonoBehaviour
             }
         }
         observer.SetActive(!isEnemy);
+        if (oniProfessor == null) isEnemy = true;
+        Vector3 relativePos = (isEnemy) ? player.transform.position - transform.position : oniProfessor.transform.position - transform.position;
+        float angle = Mathf.Atan2(relativePos.y, relativePos.x) * Mathf.Rad2Deg + 360;
+        int eyeIndex = (int)((angle + 15) / 30) % 12;
+        mainSprite.sprite = eyes[eyeIndex];
     }
     private void OnDrawGizmos()
     {
@@ -91,6 +97,7 @@ public class EyeObjectRandomMovement : MonoBehaviour
             {
                 relativePos = oniProfessor.transform.position - transform.position;
                 someDeg = Mathf.Lerp(someDeg, Mathf.Atan2(relativePos.y, relativePos.x) * Mathf.Rad2Deg, 0.05f);
+
             }
             else
             {

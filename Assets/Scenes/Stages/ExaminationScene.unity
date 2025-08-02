@@ -152,12 +152,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1010803687}
   mainImage: {fileID: 212627859}
-  rendererPref: {fileID: 1483241105}
-  edge2D: {fileID: 1483241107}
+  functionRenderObj: {fileID: 1483241103}
   drawFunction: 0
   numberOfPoints: 295
-  xStart: 0
-  xFinish: 15.70796
+  xStart: -15
+  xFinish: 15
   hp: 25
   hpDisplay: {fileID: 186502577}
   isObserved: 0
@@ -448,7 +447,7 @@ Transform:
   m_GameObject: {fileID: 212627855}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.46, y: -0.06, z: 0}
+  m_LocalPosition: {x: -0.48, y: -0.18, z: 0}
   m_LocalScale: {x: 1.29844, y: 1.5388, z: 1.5388}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5354,7 +5353,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 6.3, y: 6.3, z: 6.3}
+  m_LocalScale: {x: 2.5, y: 2.5, z: 2.5}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1190614811}
@@ -5786,7 +5785,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.7100002, y: 1.7100002, z: 1.7100002}
+  m_LocalScale: {x: 2.5, y: 2.5, z: 2.5}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1594090919}

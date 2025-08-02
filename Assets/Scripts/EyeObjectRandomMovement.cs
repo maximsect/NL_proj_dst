@@ -11,7 +11,6 @@ public class EyeObjectRandomMovement : MonoBehaviour
     public float movementSpeed = 5f, waitingDuration = 3f;
     public GameObject LaserPref;
 
-    private int movementStage = 0;
     private bool isEnemy = true;
     public float returnEnemyInterval = 10f;
     private float enemyCounter = 0;

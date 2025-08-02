@@ -21,12 +21,15 @@ public class catdemon : MonoBehaviour
 
     public Animator animator;
     int behavior = 0;
+    int color;
 
     Rigidbody2D rbody;
     bool isGrounded;
     bool isJumping = false;
 
     float re_x;
+
+    short invincible=0;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -37,6 +40,7 @@ public class catdemon : MonoBehaviour
 
         // "Player"�^�O���t����GameObject���擾
         taregtObject = GameObject.Find("player");
+        this.animator.SetInteger("color", Random.Range(0, 3));
     }
 
     // Update is called once per frame
@@ -101,6 +105,35 @@ public class catdemon : MonoBehaviour
             }
         }
         */
+    }
+
+    void OnTriggerStay2D(Collider2D collider){
+        if(collider.gameObject.CompareTag("attack") && this.invincible==0){
+            this.catdemon_hp-=10;
+            this.invincible=1;
+            if(this.catdemon_hp<=0)
+                Destroy(this.gameObject);
+        }
+        if(collider.gameObject.CompareTag("skillattack") && this.invincible==0){
+            this.catdemon_hp-=30;
+            this.invincible=1;
+            if(this.catdemon_hp<=0)
+                Destroy(this.gameObject);
+        }
+    }
+
+    void OnCollisionEnter2D(Collision2D collision){
+        if(collision.gameObject.CompareTag("arrow") && this.invincible==0){
+            this.catdemon_hp-=5;
+            if(this.catdemon_hp<=0)
+                Destroy(this.gameObject);
+        }
+    }
+
+    void OnTriggerExit2D(Collider2D collider){
+        if((collider.gameObject.CompareTag("attack") || collider.gameObject.CompareTag("skillattack")) && this.invincible==1){
+            this.invincible=0;
+        }
     }
 }
 

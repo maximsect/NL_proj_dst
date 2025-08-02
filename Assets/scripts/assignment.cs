@@ -55,7 +55,7 @@ public class assignment : MonoBehaviour
     
     // && Random.Range(0, 2)==0
     
-    void OnTriggerStay2D(Collider2D collider){
+    void OnTriggerEnter2D(Collider2D collider){
         int rand=Random.Range(0, 2);
         if(this.invincible==0){Debug.Log(rand==0 ? "hit" : "miss");}
         if(collider.gameObject.CompareTag("attack") && this.invincible==0 && rand==0){

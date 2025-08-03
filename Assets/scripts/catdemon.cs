@@ -12,14 +12,19 @@ public class catdemon : MonoBehaviour
     public float jumppower = 8f;
     public float checkDistance = 0.1f;
     public float footOffset = 0.01f;
+    public int attackPower = 10;
+    public float interactionZone = 0.35f;
 
-    public float attackPower = 10;
-
-    public float interactionZone = 0.5f;
+   
+    public float StartTime = 0;
+    public float delTime = 0;
+    public float attStartTime = 0.1f;
+    public float attEndTime = 0.2f;
+    public float animEndTime = 0.3f;
 
     public float tpPower = 24f;
-
-    int tpCount = 300;//�e���|�[�g���Ǘ�����J�E���^�[�@
+    public GameObject attackObj;
+    int tpCount = 300;
 
     public Animator animator;
     int behavior = 0;
@@ -46,15 +51,13 @@ public class catdemon : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+
+
+    private void Update()
     {
+
         animator.SetInteger("catbehave", this.behavior);
 
-
-            }
-
-    private void FixedUpdate()
-    {
         //�������猩���v���C���[�̕����x�N�g�����擾
         Vector3 dir = (taregtObject.transform.position - transform.position).normalized;
 
@@ -64,33 +67,29 @@ public class catdemon : MonoBehaviour
         float vx = re_x * speed;
         float vy = dir.y * speed;
 
-        if (Mathf.Abs(re_x) > interactionZone)
+        delTime = StartTime - Time.time;
+
+        if (Mathf.Abs(re_x) > interactionZone)//もしプレイヤーとのX軸方向の距離がinteractionZoneより大きい場合
         {
-            rbody.linearVelocity = new Vector2(vx, rbody.linearVelocity.y);
+            if ((animEndTime - (Time.time - StartTime) <= 0) ){
+                rbody.linearVelocity = new Vector2(vx, rbody.linearVelocity.y);
+                //プレイヤー方向に移動する
 
-            if (vx < 0)
-            {
-                // ���v���C���[�����E���ɂ���ꍇ
-                this.transform.localScale = new Vector3(1, 1, 1);
+                if (vx < 0) { this.transform.localScale = new Vector3(1, 1, 1); }
+                else if (vx > 0) { this.transform.localScale = new Vector3(-1, 1, 1); }
 
+                behavior = 0;
             }
-            else if (vx > 0)
-            {
-                // ���v���C���[�����E���ɂ���ꍇ
-               this.transform.localScale = new Vector3(-1, 1, 1);
-
-            }
-
-            behavior = 0;
         }
-        else
+        else if (animEndTime - (Time.time - StartTime) <= 0) { StartTime = Time.time;}
+
+        if (animEndTime - (Time.time - StartTime) > 0)
         {
             behavior = 1;
+                              }       
 
-        }
-
-        // �n�ʂɐڐG���Ă��邩���m�F
-        isGrounded = Physics2D.Raycast(transform.position, Vector2.down, checkDistance + footOffset, LayerMask.GetMask("Ground"));
+            // �n�ʂɐڐG���Ă��邩���m�F
+            isGrounded = Physics2D.Raycast(transform.position, Vector2.down, checkDistance + footOffset, LayerMask.GetMask("Ground"));
         // �W�����v����
         if (isGrounded && !isJumping)
             if (vy < 0)
@@ -120,6 +119,15 @@ public class catdemon : MonoBehaviour
             }
         }
         */
+    }
+
+    void OnTiriggerEnter2D(Collider2D other)
+    {
+        if (attStartTime < Time.time - StartTime && Time.time - StartTime < attEndTime)
+            if (other.gameObject.CompareTag("Player"))
+            {
+               PlayerData.main.Damage(attackPower);
+            }
     }
 
     void OnTriggerStay2D(Collider2D collider){

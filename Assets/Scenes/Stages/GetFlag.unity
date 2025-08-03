@@ -377,10 +377,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8396dd9caa9ed2b4da88059614b81560, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerObj: {fileID: 61341620}
   flagObjs: {fileID: 6476810760450363588, guid: 747e74b38e5421d4fb2a9b928880b19f, type: 3}
   enemyPref: {fileID: 4482937538460693618, guid: e504056476e34b6419533e9c78e06045, type: 3}
   numberOfFlags: 5
   attendFlagImage: {fileID: 21300000, guid: 1610db533590cec49889774bf4ac96c6, type: 3}
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 256
+  generatePoints: []
 --- !u!114 &205008131
 MonoBehaviour:
   m_ObjectHideFlags: 0

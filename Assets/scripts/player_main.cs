@@ -70,7 +70,7 @@ public class player_main : MonoBehaviour
             Time.timeScale=1f;
     }*/
 
-    void FixedUpdate(){
+    void Update(){
         this.hor_input=Input.GetAxisRaw("Horizontal");
         this.ver_input=Input.GetAxisRaw("Vertical");
 

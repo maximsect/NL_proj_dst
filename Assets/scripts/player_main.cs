@@ -19,7 +19,6 @@ public class player_main : MonoBehaviour
     Vector3 grapvelocity;
     int dashtime=0;
     bool hitflag=false;
-    int life=5;
     bool isground=false;
     bool istwicejumpused=false;
     short keyputting=0;
@@ -34,7 +33,9 @@ public class player_main : MonoBehaviour
     [System.NonSerialized]public int direction=1;
     [System.NonSerialized]public int skillcooldown=0;
 
+    public PlayerData playerData;
     public EnemyManager enemyManager;
+    public Slider hpSlider;
     public GameObject attackobj;
     public GameObject skill;
     public arrowmaker arrowmaker;
@@ -54,14 +55,19 @@ public class player_main : MonoBehaviour
     readonly int SKILLINIT=124;
     readonly int SKILLBEGIN=94;
     readonly int SKILLEND=64;
-    readonly int ATTACKINIT=24;
+    readonly int ATTACKINIT=20;
     readonly int ATTACKBEGIN=19;
     readonly int ATTACKEND=14;
     readonly int ARROWINIT=19;
     readonly int ARROWBEGIN=4;
     void Start()
     {
+        playerData.OnStartSetting(playerData);
         rigid = GetComponent<Rigidbody2D>();
+
+        hpSlider.minValue = 0;
+        hpSlider.maxValue = PlayerData.main.maxHp;
+        hpSlider.value = PlayerData.main.hp;
     }
     /*void Update(){
         if(this.kbtimer>0)
@@ -69,8 +75,13 @@ public class player_main : MonoBehaviour
         else
             Time.timeScale=1f;
     }*/
+    void LateUpdate()
+    {
+        hpSlider.maxValue = PlayerData.main.maxHp;
+        hpSlider.value = PlayerData.main.hp;
+    }
 
-    void Update(){
+    void FixedUpdate(){
         this.hor_input=Input.GetAxisRaw("Horizontal");
         this.ver_input=Input.GetAxisRaw("Vertical");
 
@@ -274,14 +285,14 @@ public class player_main : MonoBehaviour
     void OnCollisionStay2D(Collision2D collision){
         if((collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("damage_factor") || (collision.gameObject.CompareTag("assign_attack") && Random.Range(0, 2)==0)) && !this.hitflag && this.invincibletime<=0){
             Debug.Log("damage");
-            this.life--;
+            PlayerData.main.Damage(1);
             this.hitflag=true;
             this.rigid.linearVelocity=Vector2.zero;
             this.rigid.AddForce(this.transform.position.x<=collision.transform.position.x ? this.KBVEC : Vector2.Reflect(this.KBVEC, Vector2.right), ForceMode2D.Impulse);
             this.kb_time=20;
             this.invincibletime=60;
             this.dashtime=0;
-            if(this.life<=0){
+            if(PlayerData.main.hp<= 0){
                 Debug.Log("dead");
             }
             //this.kbtimer=50;

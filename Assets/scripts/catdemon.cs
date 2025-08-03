@@ -6,12 +6,14 @@ public class catdemon : MonoBehaviour
 {
 
     public GameObject taregtObject;
-    public int catdemon_hp = 10;
+    public int catdemon_hp = 30;
 
     public float speed = 5f;
     public float jumppower = 8f;
     public float checkDistance = 0.1f;
     public float footOffset = 0.01f;
+
+    public float attackPower = 10;
 
     public float interactionZone = 0.5f;
 
@@ -21,7 +23,7 @@ public class catdemon : MonoBehaviour
 
     public Animator animator;
     int behavior = 0;
-    int color;
+    int color = 1;
 
     Rigidbody2D rbody;
     bool isGrounded;
@@ -40,7 +42,7 @@ public class catdemon : MonoBehaviour
 
         // "Player"�^�O���t����GameObject���擾
         taregtObject = GameObject.Find("player");
-        this.animator.SetInteger("color", Random.Range(0, 3));
+        this.animator.SetInteger("color", color);
     }
 
     // Update is called once per frame
@@ -65,7 +67,20 @@ public class catdemon : MonoBehaviour
         if (Mathf.Abs(re_x) > interactionZone)
         {
             rbody.linearVelocity = new Vector2(vx, rbody.linearVelocity.y);
-            GetComponent<SpriteRenderer>().flipX = vx > 0;
+
+            if (vx < 0)
+            {
+                // ���v���C���[�����E���ɂ���ꍇ
+                this.transform.localScale = new Vector3(1, 1, 1);
+
+            }
+            else if (vx > 0)
+            {
+                // ���v���C���[�����E���ɂ���ꍇ
+               this.transform.localScale = new Vector3(-1, 1, 1);
+
+            }
+
             behavior = 0;
         }
         else

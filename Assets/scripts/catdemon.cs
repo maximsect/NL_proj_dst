@@ -28,7 +28,7 @@ public class catdemon : MonoBehaviour
 
     public Animator animator;
     int behavior = 0;
-    int color = 1;
+    public int color = 0;
 
     Rigidbody2D rbody;
     bool isGrounded;

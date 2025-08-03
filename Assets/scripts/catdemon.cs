@@ -86,7 +86,16 @@ public class catdemon : MonoBehaviour
         if (animEndTime - (Time.time - StartTime) > 0)
         {
             behavior = 1;
-                              }       
+            
+                              }
+        if (attStartTime < (Time.time - StartTime) && (Time.time - StartTime) < attEndTime)
+        {
+            this.attackObj.SetActive(true);
+        }
+        else
+        {
+            this.attackObj.SetActive(false);
+        }
 
             // �n�ʂɐڐG���Ă��邩���m�F
             isGrounded = Physics2D.Raycast(transform.position, Vector2.down, checkDistance + footOffset, LayerMask.GetMask("Ground"));
@@ -121,14 +130,7 @@ public class catdemon : MonoBehaviour
         */
     }
 
-    void OnTiriggerEnter2D(Collider2D other)
-    {
-        if (attStartTime < Time.time - StartTime && Time.time - StartTime < attEndTime)
-            if (other.gameObject.CompareTag("Player"))
-            {
-               PlayerData.main.Damage(attackPower);
-            }
-    }
+    
 
     void OnTriggerStay2D(Collider2D collider){
         if(collider.gameObject.CompareTag("attack") && this.invincible==0){

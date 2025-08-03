@@ -299,6 +299,7 @@ public class player_main : MonoBehaviour
             //Time.timeScale=0;
         }
     }
+    
 
     void dash(){
         if(this.dashtime>0){

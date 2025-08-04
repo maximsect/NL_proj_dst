@@ -17,10 +17,10 @@ public class catdemon : MonoBehaviour
 
    
     public float StartTime = 0;
-    public float delTime = 0;
     public float attStartTime = 0.1f;
     public float attEndTime = 0.2f;
-    public float animEndTime = 0.3f;
+    public float animEndTime = 0.6f;
+    public float coolEndTime = 0.8f;
 
     public float tpPower = 24f;
     public GameObject attackObj;
@@ -67,11 +67,11 @@ public class catdemon : MonoBehaviour
         float vx = re_x * speed;
         float vy = dir.y * speed;
 
-        delTime = StartTime - Time.time;
-
-        if (Mathf.Abs(re_x) > interactionZone)//もしプレイヤーとのX軸方向の距離がinteractionZoneより大きい場合
+       
+        if ((coolEndTime - (Time.time - StartTime) <= 0))//攻撃中じゃない
         {
-            if ((animEndTime - (Time.time - StartTime) <= 0) ){
+            if (Mathf.Abs(re_x) > interactionZone)//もしプレイヤーとのX軸方向の距離がinteractionZoneより大きい場合
+            {
                 rbody.linearVelocity = new Vector2(vx, rbody.linearVelocity.y);
                 //プレイヤー方向に移動する
 
@@ -80,22 +80,40 @@ public class catdemon : MonoBehaviour
 
                 behavior = 0;
             }
+            else//もしプレイヤーとのX軸方向の距離がinteractionZone以下の場合
+            {
+                //停止する
+                StartTime = Time.time;//攻撃開始
+                behavior = 1;
+                
+            }
         }
-        else if (animEndTime - (Time.time - StartTime) <= 0) { StartTime = Time.time;}
+        else//攻撃中
+        {
 
-        if (animEndTime - (Time.time - StartTime) > 0)
-        {
-            behavior = 1;
-            
-                              }
-        if (attStartTime < (Time.time - StartTime) && (Time.time - StartTime) < attEndTime)
-        {
-            this.attackObj.SetActive(true);
+            if (animEndTime - (Time.time - StartTime) > 0)
+            {
+                behavior = 1;
+
+            }
+            else { behavior = 0; }
+
+
+            if (attStartTime < (Time.time - StartTime) && (Time.time - StartTime) < attEndTime)
+            {
+                this.attackObj.SetActive(true);
+            }
+            else
+            {
+                this.attackObj.SetActive(false);
+            }
+
         }
-        else
-        {
-            this.attackObj.SetActive(false);
-        }
+
+        
+
+               
+     
 
             // �n�ʂɐڐG���Ă��邩���m�F
             isGrounded = Physics2D.Raycast(transform.position, Vector2.down, checkDistance + footOffset, LayerMask.GetMask("Ground"));

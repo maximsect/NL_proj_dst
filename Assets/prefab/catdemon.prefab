@@ -337,11 +337,13 @@ MonoBehaviour:
   StartTime: 0
   delTime: 0
   attStartTime: 0.1
-  attEndTime: 0.2
-  animEndTime: 0.3
+  attEndTime: 0.4
+  animEndTime: 0.5
+  coolEndTime: 1.5
   tpPower: 24
   attackObj: {fileID: 3384144711544539316}
   animator: {fileID: 3769205888707289567}
+  color: 0
 --- !u!95 &3769205888707289567
 Animator:
   serializedVersion: 7

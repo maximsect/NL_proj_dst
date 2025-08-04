@@ -16,11 +16,12 @@ public class catdemon : MonoBehaviour
     public float interactionZone = 0.35f;
 
    
-    public float StartTime = 0;
+   
     public float attStartTime = 0.1f;
     public float attEndTime = 0.2f;
     public float animEndTime = 0.6f;
     public float coolEndTime = 0.8f;
+    public float StartTime = 0;
 
     public float tpPower = 24f;
     public GameObject attackObj;
@@ -42,6 +43,8 @@ public class catdemon : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+
+        StartTime = -coolEndTime * 2; 
         rbody = GetComponent<Rigidbody2D>();
         rbody.constraints = RigidbodyConstraints2D.FreezeRotation; // Prevent rotation
 

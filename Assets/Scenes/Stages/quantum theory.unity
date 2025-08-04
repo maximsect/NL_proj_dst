@@ -1643,7 +1643,7 @@ MonoBehaviour:
   animator: {fileID: 604353921}
   skillanimator: {fileID: 604353921}
   skillcollider: {fileID: 938966268}
-  UI_skillcooldown: {fileID: 0}
+  UI_skillcooldown: {fileID: 1284194241}
 --- !u!50 &604353923
 Rigidbody2D:
   serializedVersion: 5

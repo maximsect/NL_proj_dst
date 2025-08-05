@@ -4,11 +4,18 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
+public enum GameMode
+{
+    Survival, Damage, Attendance, Attack, KillNumber, KillSpeed
+}
 public class SceneTransition : MonoBehaviour
 {
     public static SceneTransition main;
+    public PlayerData playerData;
     public ScoreData scoreData;
     public SceneData sceneData;
+    public GameMode gameMode;
+    public GameObject resultPanel;
     [HideInInspector] public bool clearFlag = false;
 
     public void E_SceneTransition(string name)
@@ -24,19 +31,41 @@ public class SceneTransition : MonoBehaviour
     {
         yield return new WaitUntil(() => clearFlag);
         clearFlag = false;
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.2f);
+        ChangeScoreData(GetScore());
+        yield return new WaitForSecondsRealtime(3f);
         if (sceneData.StageCheck()) this.LoadSceneByName("SyllabusScene");
         else this.LoadSceneByName("ResultScene");
     }
     public void StageClearReciever()
     {
-        Debug.Log("Admitted");
         clearFlag = true;
     }
     public void ChangeScoreData(int num)
     {
         scoreData.scores.Add(num);
         scoreData.sumScore = scoreData.scores.GetSum();
+    }
+    public int GetScore()
+    {
+        resultPanel.SetActive(true);
+        switch (gameMode)
+        {
+            case GameMode.Survival:
+                return 50 + (int)(50 * ((float)playerData.hp / playerData.maxHp));
+            case GameMode.Damage:
+                return 100 - (playerData.maxHp - playerData.hp);
+            case GameMode.Attendance:
+                return 100;
+            case GameMode.Attack:
+                return 100;
+            case GameMode.KillNumber:
+                return 100;
+            case GameMode.KillSpeed:
+                return 100;
+            default:
+                return 100;
+        }
     }
 }
 public static class GameObjectExtention

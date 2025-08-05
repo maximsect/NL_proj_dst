@@ -2,9 +2,11 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
+
 public class GameManager : MonoBehaviour
 {
     public static GameManager main;
+    public ScoreData scoreData;
     public GameObject camera;
     public GameObject player;
     public List<string> playerTag = new List<string>();
@@ -18,5 +20,9 @@ public class GameManager : MonoBehaviour
     public GameObject GetKillEffect()
     {
         return killEffect[UnityEngine.Random.Range(0, killEffect.Count)];
+    }
+    public void ChangeScore(int delta)
+    {
+        scoreData.sumScore += delta;
     }
 }

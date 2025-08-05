@@ -153,7 +153,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 964ad8e0b2607fc4e95ec3dc2d3a4510, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyManager: {fileID: 1875600550}
+  playerData: {fileID: 11400000, guid: dc4bf2af19840754abdc4cf88e72b30e, type: 2}
+  hpSlider: {fileID: 1688056184}
   attackobj: {fileID: 1620335143}
   skill: {fileID: 893315253}
   arrowmaker: {fileID: 527913245}

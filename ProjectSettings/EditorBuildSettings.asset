@@ -5,11 +5,26 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/Scenes/SampleScene.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
-    path: "Assets/Scenes/\u53C2\u80031.unity"
-    guid: 2c2159e893010c146b4404590fcebf80
+    path: Assets/Scenes/Others/ResultScene.unity
+    guid: 5ab78c529c67dfa429debf71a3db8c34
+  - enabled: 1
+    path: Assets/Scenes/Others/StartScene.unity
+    guid: 461feab41f95f444697b897e3a8df2e4
+  - enabled: 1
+    path: Assets/Scenes/Others/SyllabusScene.unity
+    guid: 949e9c5e4d734ac45972cf44b86e4569
+  - enabled: 1
+    path: Assets/Scenes/Stages/assignment.unity
+    guid: 762d8fa1545087a479a4969fc0a05266
+  - enabled: 1
+    path: Assets/Scenes/Stages/ExaminationScene.unity
+    guid: 3d8e35adff8358040add2bae0b32e571
+  - enabled: 1
+    path: Assets/Scenes/Stages/GetFlag.unity
+    guid: cd0941e00c253b84e801cb77d2ed64be
+  - enabled: 1
+    path: Assets/Scenes/Stages/quantum theory.unity
+    guid: 709a4468c7ff50d4c96c7c4a4dce12c1
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0

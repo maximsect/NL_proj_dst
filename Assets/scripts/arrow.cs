@@ -5,7 +5,8 @@ public class arrow : MonoBehaviour
 
     public Rigidbody2D rigid;
     Vector2 nogravity = new Vector2(7.5f, 0f);
-    public player_main player;
+    player_main player;
+    public PlayerData playerData;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -15,7 +16,8 @@ public class arrow : MonoBehaviour
         }
         else{
             this.rigid.constraints=RigidbodyConstraints2D.None;
-            this.nogravity*=this.player.direction;
+            this.nogravity*=PlayerData.main.direction;
+            this.transform.localScale=new Vector3(-PlayerData.main.direction, 1, 1);
         }
     }
 

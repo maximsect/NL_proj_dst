@@ -4,24 +4,30 @@ using UnityEngine;
 
 public class catdemon : MonoBehaviour
 {
-
-    public GameObject taregtObject;
-    public int catdemon_hp = 10;
+    public int catdemon_hp = 30;
 
     public float speed = 5f;
     public float jumppower = 8f;
     public float checkDistance = 0.1f;
     public float footOffset = 0.01f;
+    public int attackPower = 10;
+    public float interactionZone = 0.35f;
 
-    public float interactionZone = 0.5f;
+   
+   
+    public float attStartTime = 0.1f;
+    public float attEndTime = 0.2f;
+    public float animEndTime = 0.6f;
+    public float coolEndTime = 0.8f;
+    public float StartTime = 0;
 
     public float tpPower = 24f;
-
-    int tpCount = 300;//�e���|�[�g���Ǘ�����J�E���^�[�@
+    public GameObject attackObj;
+    int tpCount = 300;
 
     public Animator animator;
     int behavior = 0;
-    int color;
+    public int color = 0;
 
     Rigidbody2D rbody;
     bool isGrounded;
@@ -35,47 +41,82 @@ public class catdemon : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+
+        StartTime = -coolEndTime * 2; 
         rbody = GetComponent<Rigidbody2D>();
         rbody.constraints = RigidbodyConstraints2D.FreezeRotation; // Prevent rotation
 
-        // "Player"�^�O���t����GameObject���擾
-        taregtObject = GameObject.Find("player");
-        this.animator.SetInteger("color", Random.Range(0, 3));
+        this.animator.SetInteger("color", color);
     }
 
     // Update is called once per frame
-    void Update()
+
+
+    private void Update()
     {
+
         animator.SetInteger("catbehave", this.behavior);
 
-
-            }
-
-    private void FixedUpdate()
-    {
         //�������猩���v���C���[�̕����x�N�g�����擾
-        Vector3 dir = (taregtObject.transform.position - transform.position).normalized;
+        Vector3 dir = (GameManager.main.player.transform.position - transform.position).normalized;
 
         //x�����̈ړ�
 
         re_x = dir.x;
         float vx = re_x * speed;
         float vy = dir.y * speed;
+       
+               
 
-        if (Mathf.Abs(re_x) > interactionZone)
+        if ((coolEndTime - (Time.time - StartTime) <= 0))//攻撃中じゃない
         {
-            rbody.linearVelocity = new Vector2(vx, rbody.linearVelocity.y);
-            GetComponent<SpriteRenderer>().flipX = vx > 0;
-            behavior = 0;
+            if (Mathf.Abs(re_x) > interactionZone)//もしプレイヤーとのX軸方向の距離がinteractionZoneより大きい場合
+            {
+                rbody.linearVelocity = new Vector2(vx, rbody.linearVelocity.y);
+                //プレイヤー方向に移動する
+
+                if (vx < 0) { this.transform.localScale = new Vector3(1, 1, 1); }
+                else if (vx > 0) { this.transform.localScale = new Vector3(-1, 1, 1); }
+
+                behavior = 0;
+            }
+            else//もしプレイヤーとのX軸方向の距離がinteractionZone以下の場合
+            {
+                //停止する
+                StartTime = Time.time;//攻撃開始
+                behavior = 1;
+                
+            }
         }
-        else
+        else//攻撃中
         {
-            behavior = 1;
+
+            if (animEndTime - (Time.time - StartTime) > 0)
+            {
+                behavior = 1;
+
+            }
+            else { behavior = 2; }
+
+
+            if (attStartTime < (Time.time - StartTime) && (Time.time - StartTime) < attEndTime)
+            {
+                this.attackObj.SetActive(true);
+            }
+            else
+            {
+                this.attackObj.SetActive(false);
+            }
 
         }
 
-        // �n�ʂɐڐG���Ă��邩���m�F
-        isGrounded = Physics2D.Raycast(transform.position, Vector2.down, checkDistance + footOffset, LayerMask.GetMask("Ground"));
+        
+
+               
+     
+
+            // �n�ʂɐڐG���Ă��邩���m�F
+            isGrounded = Physics2D.Raycast(transform.position, Vector2.down, checkDistance + footOffset, LayerMask.GetMask("Ground"));
         // �W�����v����
         if (isGrounded && !isJumping)
             if (vy < 0)
@@ -106,6 +147,8 @@ public class catdemon : MonoBehaviour
         }
         */
     }
+
+    
 
     void OnTriggerStay2D(Collider2D collider){
         if(collider.gameObject.CompareTag("attack") && this.invincible==0){

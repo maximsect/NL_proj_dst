@@ -25,7 +25,8 @@ public class PlayerData : ScriptableObject
     public float moveSpeed = 10;
     public int numberOfDash = 1;
     public int numberOfJump = 1;
-    public float jumpSpeed = 3;
+    public float jumpSpeed = 12;
+    public float airJumpSpeed = 10;
     public float Speed = 20;
     public float dashSpeed = 30;
     [Header("Attack")]

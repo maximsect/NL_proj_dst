@@ -7,59 +7,58 @@ public class player_main : MonoBehaviour
 {
 
     Rigidbody2D rigid;
-    float hor_input=0f;
-    float ver_input=0f;
+    float hor_input = 0f;
+    float ver_input = 0f;
     Vector2 velcopy_x;
     Vector2 velcopy_y;
 
     GameObject enemy;
-    bool arrowkeyhold=false;
-    bool isgrapping=false;
+    bool arrowkeyhold = false;
+    bool isgrapping = false;
     Vector3 pos_tomove;
     Vector3 grapvelocity;
-    int dashtime=0;
-    bool hitflag=false;
-    bool isground=false;
-    bool istwicejumpused=false;
-    short keyputting=0;
-    int invincibletime=0;
-    int kb_time=0;
-    int kbtimer=0;
-    float last_velocity=0f;
-    bool dashflag=false;
-    int behavior=0;
-    int attacktime=0;
-    int arrowtime=0;
-    [System.NonSerialized]public int direction=1;
-    [System.NonSerialized]public int skillcooldown=0;
+    int dashtime = 0;
+    bool hitflag = false;
+    bool isground = false;
+    bool istwicejumpused = false;
+    short keyputting = 0;
+    int invincibletime = 0;
+    int kb_time = 0;
+    int kbtimer = 0;
+    float last_velocity = 0f;
+    bool dashflag = false;
+    int behavior = 0;
+    int attacktime = 0;
+    int arrowtime = 0;
+    [System.NonSerialized] public int direction = 1;
+    [System.NonSerialized] public int skillcooldown = 0;
 
     public PlayerData playerData;
-    public EnemyManager enemyManager;
     public Slider hpSlider;
     public GameObject attackobj;
     public GameObject skill;
     public arrowmaker arrowmaker;
     public LayerMask ground;
-    public int xp=0;
+    public int xp = 0;
     public float grappingSpeed = 25;
     public Animator animator;
     public Animator skillanimator;
     public BoxCollider2D skillcollider;
     public UI_skillcooldown UI_skillcooldown;
 
-    readonly float maxspeedX=5.0f;
-    readonly Vector3 hide=new Vector3(0f, 100f, 0f);
-    readonly Vector2 hide2D=new Vector3(0f, 100f);
-    readonly Vector2 KBVEC=new Vector2(-7f, 7f);
-    readonly Vector2 DASHSPEED=new Vector2(12f, 0f);
-    readonly int SKILLINIT=124;
-    readonly int SKILLBEGIN=94;
-    readonly int SKILLEND=64;
-    readonly int ATTACKINIT=20;
-    readonly int ATTACKBEGIN=19;
-    readonly int ATTACKEND=14;
-    readonly int ARROWINIT=19;
-    readonly int ARROWBEGIN=4;
+    readonly float maxspeedX = 5.0f;
+    readonly Vector3 hide = new Vector3(0f, 100f, 0f);
+    readonly Vector2 hide2D = new Vector3(0f, 100f);
+    readonly Vector2 KBVEC = new Vector2(-7f, 7f);
+    readonly Vector2 DASHSPEED = new Vector2(12f, 0f);
+    readonly int SKILLINIT = 124;
+    readonly int SKILLBEGIN = 94;
+    readonly int SKILLEND = 64;
+    readonly int ATTACKINIT = 20;
+    readonly int ATTACKBEGIN = 19;
+    readonly int ATTACKEND = 14;
+    readonly int ARROWINIT = 19;
+    readonly int ARROWBEGIN = 4;
     void Start()
     {
         playerData.OnStartSetting(playerData);
@@ -81,96 +80,96 @@ public class player_main : MonoBehaviour
         hpSlider.value = PlayerData.main.hp;
     }
 
-    void FixedUpdate(){
-        this.hor_input=Input.GetAxisRaw("Horizontal");
-        this.ver_input=Input.GetAxisRaw("Vertical");
+    void FixedUpdate() {
+        this.hor_input = Input.GetAxisRaw("Horizontal");
+        this.ver_input = Input.GetAxisRaw("Vertical");
 
-        if(this.rigid.IsTouchingLayers(this.ground) && this.rigid.linearVelocity.y<0.01f && this.rigid.linearVelocity.y>-0.01f && this.last_velocity<0.01f && this.last_velocity>-0.01f){
+        if (this.rigid.IsTouchingLayers(this.ground) && this.rigid.linearVelocity.y < 0.01f && this.rigid.linearVelocity.y > -0.01f && this.last_velocity < 0.01f && this.last_velocity > -0.01f) {
             //接地判定
-            this.isground=true;
-            this.istwicejumpused=false;
-            this.dashflag=false;
+            this.isground = true;
+            this.istwicejumpused = false;
+            this.dashflag = false;
         }
-        else{
-            this.isground=false;
+        else {
+            this.isground = false;
         }
-        
-        if(!this.iskbing() && !this.isgrapping)
+
+        if (!this.iskbing() && !this.isgrapping)
         {
 
-            if(this.hor_input>0.1f && this.dashtime<=8 && !this.isskillusing(2) && this.arrowtime<=0){
+            if (this.hor_input > 0.1f && this.dashtime <= 8 && !this.isskillusing(2) && this.arrowtime <= 0) {
                 //右移動
-                this.velcopy_x=this.rigid.linearVelocity;
-                this.velcopy_x.x=this.maxspeedX;
-                this.rigid.linearVelocity=this.velcopy_x;
-                if(this.attacktime<8 && this.skillcooldown<=65)
-                    this.direction=1;
-                this.behavior=1;
+                this.velcopy_x = this.rigid.linearVelocity;
+                this.velcopy_x.x = PlayerData.main.moveSpeed * ((Input.GetKey(KeyCode.X)) ? 0.3f : 1);//this.maxspeedX;
+                this.rigid.linearVelocity = this.velcopy_x;
+                if (this.attacktime < 8 && this.skillcooldown <= 65)
+                    this.direction = 1;
+                this.behavior = 1;
             }
-            if(this.hor_input<-0.1f && this.dashtime<=8 && !this.isskillusing(2) && this.arrowtime<=0){
+            if (this.hor_input < -0.1f && this.dashtime <= 8 && !this.isskillusing(2) && this.arrowtime <= 0) {
                 //左移動
-                this.velcopy_x=this.rigid.linearVelocity;
-                this.velcopy_x.x=-this.maxspeedX;
-                this.rigid.linearVelocity=this.velcopy_x;
-                if(this.attacktime<8 && this.skillcooldown<=65)
-                    this.direction=-1;
-                this.behavior=1;
+                this.velcopy_x = this.rigid.linearVelocity;
+                this.velcopy_x.x = -PlayerData.main.moveSpeed * ((Input.GetKey(KeyCode.X)) ? 0.3f : 1);// -this.maxspeedX;
+                this.rigid.linearVelocity = this.velcopy_x;
+                if (this.attacktime < 8 && this.skillcooldown <= 65)
+                    this.direction = -1;
+                this.behavior = 1;
             }
 
-            if(this.hor_input<=0.1f && this.hor_input>=-0.1f){
+            if (this.hor_input <= 0.1f && this.hor_input >= -0.1f) {
                 //停止
-                this.velcopy_x=this.rigid.linearVelocity;
-                this.velcopy_x.x=0f;
-                this.rigid.linearVelocity=this.velcopy_x;
-                this.behavior=0;
+                this.velcopy_x = this.rigid.linearVelocity;
+                this.velcopy_x.x = 0f;
+                this.rigid.linearVelocity = this.velcopy_x;
+                this.behavior = 0;
             }
 
-            if(Input.GetKey(KeyCode.C) && this.isground && this.keyputting%2==0 && this.dashtime<=8 && !this.isskillusing(2) && this.arrowtime<=0){
+            if (Input.GetKey(KeyCode.C) && this.isground && this.keyputting % 2 == 0 && this.dashtime <= 8 && !this.isskillusing(2) && this.arrowtime <= 0) {
                 //ジャンプ
-                this.velcopy_y=this.rigid.linearVelocity;
-                this.velcopy_y.y=12.0f;
-                this.rigid.linearVelocity=this.velcopy_y;
-                this.keyputting=1;
+                this.velcopy_y = this.rigid.linearVelocity;
+                this.velcopy_y.y = PlayerData.main.jumpSpeed;
+                this.rigid.linearVelocity = this.velcopy_y;
+                this.keyputting = 1;
             }
 
-            if(Input.GetKey(KeyCode.C) && !this.isground && !this.istwicejumpused && this.keyputting%2==0 && this.dashtime<=8 && !this.isskillusing(2) && this.arrowtime<=0){
+            if (Input.GetKey(KeyCode.C) && !this.isground && !this.istwicejumpused && this.keyputting % 2 == 0 && this.dashtime <= 8 && !this.isskillusing(2) && this.arrowtime <= 0) {
                 //空中ジャンプ
-                this.velcopy_y=this.rigid.linearVelocity;
-                this.velcopy_y.y=10.0f;
-                this.rigid.linearVelocity=this.velcopy_y;
-                this.istwicejumpused=true;
-                this.keyputting=1;
+                this.velcopy_y = this.rigid.linearVelocity;
+                this.velcopy_y.y = PlayerData.main.airJumpSpeed;
+                this.rigid.linearVelocity = this.velcopy_y;
+                this.istwicejumpused = true;
+                this.keyputting = 1;
             }
 
-            if(Input.GetKey(KeyCode.Z) && this.dashtime<=0 && !this.dashflag && !this.isskillusing(2) && this.arrowtime<=0){
-                this.dashtime=20;
-                this.dashflag=true;
+            if (Input.GetKey(KeyCode.Z) && this.dashtime <= 0 && !this.dashflag && !this.isskillusing(2) && this.arrowtime <= 0) {
+                this.dashtime = 20;
+                this.dashflag = true;
             }
 
-            if(Input.GetKey(KeyCode.X) && this.arrowtime<=0){
-                if(this.attacktime<=0){
-                    this.attacktime=this.ATTACKINIT;
+            if (Input.GetKey(KeyCode.X) && this.arrowtime <= 0) {
+                if (this.attacktime <= 0) {
+                    this.attacktime = this.ATTACKINIT;
                 }
             }
 
-            if (Input.GetKey(KeyCode.D) && this.skillcooldown<=0 && this.arrowtime<=0){
-                this.skillcooldown=this.SKILLINIT;
-                this.UI_skillcooldown.mask.alphaCutoff=1.0f;
+            if (Input.GetKey(KeyCode.D) && this.skillcooldown <= 0 && this.arrowtime <= 0) {
+                this.skillcooldown = this.SKILLINIT;
+                this.UI_skillcooldown.mask.alphaCutoff = 1.0f;
             }
 
-            if(Input.GetKey(KeyCode.S) && !this.arrowkeyhold && this.arrowtime<=0){
+            if (Input.GetKey(KeyCode.S) && !this.arrowkeyhold && this.arrowtime <= 0) {
                 //this.arrowmaker.arrowmaking=true;
-                this.arrowkeyhold=true;
-                this.arrowtime=this.ARROWINIT;
+                this.arrowkeyhold = true;
+                this.arrowtime = this.ARROWINIT;
             }
 
             this.dash();
         }
 
-        if(!this.isground){this.behavior=2;}
+        if (!this.isground) { this.behavior = 2; }
 
-        if(!Input.GetKey(KeyCode.C)){
-            this.keyputting=0;
+        if (!Input.GetKey(KeyCode.C)) {
+            this.keyputting = 0;
         }
 
         /*if(Input.GetKey(KeyCode.A) && !this.isgrapping){
@@ -186,64 +185,64 @@ public class player_main : MonoBehaviour
         //引き寄せ
         if ((Input.GetKeyDown(KeyCode.A)) && !this.iskbing())
         {
-            StartCoroutine(GrappingCoroutine(enemyManager.TheMostDistantObjectOnScreen()));
+            StartCoroutine(GrappingCoroutine(GetDistantObject()));
         }
 
-        if(!Input.GetKey(KeyCode.S)){
-            this.arrowkeyhold=false;
+        if (!Input.GetKey(KeyCode.S)) {
+            this.arrowkeyhold = false;
         }
 
-        if(this.arrowtime==this.ARROWBEGIN){this.arrowmaker.arrowmaking=true;}
+        if (this.arrowtime == this.ARROWBEGIN) { this.arrowmaker.arrowmaking = true; }
 
-        if(this.attacktime<this.ATTACKEND || this.ATTACKBEGIN<this.attacktime){
-            this.attackobj.transform.position=this.hide;
+        if (this.attacktime < this.ATTACKEND || this.ATTACKBEGIN < this.attacktime) {
+            this.attackobj.transform.position = this.hide;
         }
-        else{
-            this.attackobj.transform.position=new Vector3(this.transform.position.x+0.75f*this.direction, this.transform.position.y, 0f);
+        else {
+            this.attackobj.transform.position = new Vector3(this.transform.position.x + 0.75f * this.direction, this.transform.position.y, 0f);
         }
 
-        if(this.isskillusing(2)){
-            this.skill.transform.position=new Vector3(this.transform.position.x+2.0f*this.direction, this.transform.position.y, 0f);
-            if(this.isskillusing()){this.skillcollider.offset=Vector3.zero;}
-            else{this.skillcollider.offset=this.hide2D;}
-            this.velcopy_x=this.rigid.linearVelocity;
-            this.velcopy_x.x=0f;
-            this.rigid.linearVelocity=this.velcopy_x;
+        if (this.isskillusing(2)) {
+            this.skill.transform.position = new Vector3(this.transform.position.x + 2.0f * this.direction, this.transform.position.y, 0f);
+            if (this.isskillusing()) { this.skillcollider.offset = Vector3.zero; }
+            else { this.skillcollider.offset = this.hide2D; }
+            this.velcopy_x = this.rigid.linearVelocity;
+            this.velcopy_x.x = 0f;
+            this.rigid.linearVelocity = this.velcopy_x;
         }
-        else{
-            this.skill.transform.position=this.hide;
+        else {
+            this.skill.transform.position = this.hide;
             this.skillanimator.SetBool("isskillusing", false);
         }
 
-        if(0<this.arrowtime){
-                this.velcopy_x=this.rigid.linearVelocity;
-                this.velcopy_x.x=0f;
-                this.rigid.linearVelocity=this.velcopy_x;
+        if (0 < this.arrowtime) {
+            this.velcopy_x = this.rigid.linearVelocity;
+            this.velcopy_x.x = 0f;
+            this.rigid.linearVelocity = this.velcopy_x;
         }
 
-        if(this.iskbing())
-            this.rigid.linearVelocity=this.rigid.linearVelocity*(this.kb_time-1)/this.kb_time;
+        if (this.iskbing())
+            this.rigid.linearVelocity = this.rigid.linearVelocity * (this.kb_time - 1) / this.kb_time;
 
-        if(this.attacktime>0){this.attacktime--;}
-        if(this.arrowtime>0){this.arrowtime--;}
-        if(this.skillcooldown>0){this.skillcooldown--;}
-        if(this.kb_time>0){this.kb_time--;}
-        if(this.invincibletime>0){this.invincibletime--;}
+        if (this.attacktime > 0) { this.attacktime--; }
+        if (this.arrowtime > 0) { this.arrowtime--; }
+        if (this.skillcooldown > 0) { this.skillcooldown--; }
+        if (this.kb_time > 0) { this.kb_time--; }
+        if (this.invincibletime > 0) { this.invincibletime--; }
 
         /*if(this.isgrapping){
             this.grap(this.enemy);
         }/**/
 
-        if(this.hitflag)
-            this.hitflag=false;
+        if (this.hitflag)
+            this.hitflag = false;
 
-        this.last_velocity=this.rigid.linearVelocity.y;
+        this.last_velocity = this.rigid.linearVelocity.y;
 
-        this.transform.localScale=new Vector3(-this.direction, this.transform.localScale.y, 1);
+        this.transform.localScale = new Vector3(-this.direction, this.transform.localScale.y, 1);
 
-        if(0<this.attacktime){this.behavior=3;}
-        if(0<this.arrowtime){this.behavior=5;}
-        if(this.isskillusing(2)){this.skillanimator.SetBool("isskillusing", true);this.behavior=4;}
+        if (0 < this.attacktime) { this.behavior = 3; }
+        if (0 < this.arrowtime) { this.behavior = 5; }
+        if (this.isskillusing(2)) { this.skillanimator.SetBool("isskillusing", true); this.behavior = 4; }
         animator.SetInteger("behave", this.behavior);
     }
 
@@ -282,17 +281,17 @@ public class player_main : MonoBehaviour
         yield break;
     }
 
-    void OnCollisionStay2D(Collision2D collision){
-        if((collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("damage_factor") || (collision.gameObject.CompareTag("assign_attack") && Random.Range(0, 2)==0)) && !this.hitflag && this.invincibletime<=0){
+    void OnCollisionStay2D(Collision2D collision) {
+        if ((collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("damage_factor") || (collision.gameObject.CompareTag("assign_attack") && Random.Range(0, 2) == 0)) && !this.hitflag && this.invincibletime <= 0) {
             Debug.Log("damage");
             PlayerData.main.Damage(1);
-            this.hitflag=true;
-            this.rigid.linearVelocity=Vector2.zero;
-            this.rigid.AddForce(this.transform.position.x<=collision.transform.position.x ? this.KBVEC : Vector2.Reflect(this.KBVEC, Vector2.right), ForceMode2D.Impulse);
-            this.kb_time=20;
-            this.invincibletime=60;
-            this.dashtime=0;
-            if(PlayerData.main.hp<= 0){
+            this.hitflag = true;
+            this.rigid.linearVelocity = Vector2.zero;
+            this.rigid.AddForce(this.transform.position.x <= collision.transform.position.x ? this.KBVEC : Vector2.Reflect(this.KBVEC, Vector2.right), ForceMode2D.Impulse);
+            this.kb_time = 20;
+            this.invincibletime = 60;
+            this.dashtime = 0;
+            if (PlayerData.main.hp <= 0) {
                 Debug.Log("dead");
             }
             //this.kbtimer=50;
@@ -301,23 +300,56 @@ public class player_main : MonoBehaviour
     }
     
 
-    void dash(){
-        if(this.dashtime>0){
-            if(this.dashtime>8)
-                this.rigid.linearVelocity=this.DASHSPEED*this.direction;
+    void dash() {
+        if (this.dashtime > 0) {
+            if (this.dashtime > 8)
+                this.rigid.linearVelocity = this.DASHSPEED * this.direction;
             this.dashtime--;
         }
     }
 
-    bool iskbing(){
-        return this.kb_time > 0 ? true:false;
+    bool iskbing() {
+        return this.kb_time > 0 ? true : false;
     }
 
-    bool isskillusing(int mode=0){
-        if(mode==1)
-            return this.SKILLBEGIN<this.skillcooldown;
-        if(mode==2)
-            return this.SKILLEND<this.skillcooldown;
-        return this.SKILLEND<this.skillcooldown && this.skillcooldown<this.SKILLBEGIN;
+    bool isskillusing(int mode = 0) {
+        if (mode == 1)
+            return this.SKILLBEGIN < this.skillcooldown;
+        if (mode == 2)
+            return this.SKILLEND < this.skillcooldown;
+        return this.SKILLEND < this.skillcooldown && this.skillcooldown < this.SKILLBEGIN;
+    }
+
+    private GameObject GetDistantObject()
+    {
+        List<GameObject> enemyList = new List<GameObject>(); 
+        GameObject obj = null; 
+        float distance = 0;
+        enemyList.AddRange(GameObject.FindGameObjectsWithTag("Enemy"));
+        enemyList.RemoveAll(item => !item.isVisible());
+        if (enemyList.Count == 0) return null;
+        else if (enemyList.Count == 1) return enemyList[0];
+        else
+        {
+            for (int i = 0; i < enemyList.Count; i++)
+            {
+                if (enemyList[i] != null)
+                {
+                    Vector3 pos = enemyList[i].transform.position - transform.position;
+                    obj = (distance < pos.magnitude) ? enemyList[i] : obj;
+                    distance = (distance < pos.magnitude) ? pos.magnitude : distance;
+
+                }
+            }
+            return obj;
+        }
+    }
+}
+public static class Extentions
+{
+    public static bool isVisible(this GameObject go)
+    {
+        Vector3 pos = go.transform.position;
+        return (pos.x >= 0 && pos.x <= Screen.width && pos.y >= 0 && pos.y <= Screen.height);
     }
 }

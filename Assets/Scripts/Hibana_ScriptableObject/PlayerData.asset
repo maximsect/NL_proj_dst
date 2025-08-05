@@ -18,10 +18,11 @@ MonoBehaviour:
   autoHealInterval: 10
   autoHealAmount: 1
   luck: 0.02
-  moveSpeed: 10
+  moveSpeed: 7
   numberOfDash: 1
   numberOfJump: 1
-  jumpSpeed: 3
+  jumpSpeed: 12
+  airJumpSpeed: 10
   Speed: 20
   dashSpeed: 30
   attackPower: 10

@@ -5036,7 +5036,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 964ad8e0b2607fc4e95ec3dc2d3a4510, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyManager: {fileID: 1984650650}
+  playerData: {fileID: 11400000, guid: dc4bf2af19840754abdc4cf88e72b30e, type: 2}
+  hpSlider: {fileID: 736886399}
   attackobj: {fileID: 2057731669}
   skill: {fileID: 1767141372}
   arrowmaker: {fileID: 0}

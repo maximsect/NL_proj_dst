@@ -18,7 +18,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2536265115649267216
 Transform:
   m_ObjectHideFlags: 0
@@ -326,7 +326,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ce988f7d1ff8b14094834b2e15f24c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  taregtObject: {fileID: 0}
   catdemon_hp: 10
   speed: 3
   jumppower: 8
@@ -334,12 +333,11 @@ MonoBehaviour:
   footOffset: 0.01
   attackPower: 30
   interactionZone: 0.2
-  StartTime: 0
-  delTime: 0
-  attStartTime: 0.1
-  attEndTime: 0.4
-  animEndTime: 0.5
+  attStartTime: 0.35
+  attEndTime: 0.7
+  animEndTime: 0.4
   coolEndTime: 1.5
+  StartTime: 0
   tpPower: 24
   attackObj: {fileID: 3384144711544539316}
   animator: {fileID: 3769205888707289567}

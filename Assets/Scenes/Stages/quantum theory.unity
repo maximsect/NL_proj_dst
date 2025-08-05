@@ -1630,7 +1630,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerData: {fileID: 11400000, guid: dc4bf2af19840754abdc4cf88e72b30e, type: 2}
-  enemyManager: {fileID: 1875600550}
   hpSlider: {fileID: 1688056184}
   attackobj: {fileID: 1813638574}
   skill: {fileID: 938966267}
@@ -4219,8 +4218,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1046410491}
+  - component: {fileID: 1046410492}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: GameManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4241,6 +4241,25 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1046410492
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1046410490}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c47a98783b5f7904c93ee049070e7862, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  camera: {fileID: 519420028}
+  player: {fileID: 604353919}
+  playerTag:
+  - player
+  enemyTag:
+  - enemy
+  killEffect: []
 --- !u!1 &1077951298
 GameObject:
   m_ObjectHideFlags: 0

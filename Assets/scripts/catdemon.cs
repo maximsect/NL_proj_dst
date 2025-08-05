@@ -65,8 +65,9 @@ public class catdemon : MonoBehaviour
         re_x = dir.x;
         float vx = re_x * speed;
         float vy = dir.y * speed;
-
        
+               
+
         if ((coolEndTime - (Time.time - StartTime) <= 0))//攻撃中じゃない
         {
             if (Mathf.Abs(re_x) > interactionZone)//もしプレイヤーとのX軸方向の距離がinteractionZoneより大きい場合
@@ -95,7 +96,7 @@ public class catdemon : MonoBehaviour
                 behavior = 1;
 
             }
-            else { behavior = 0; }
+            else { behavior = 2; }
 
 
             if (attStartTime < (Time.time - StartTime) && (Time.time - StartTime) < attEndTime)

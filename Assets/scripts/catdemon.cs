@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class catdemon : MonoBehaviour
 {
-
-    public GameObject taregtObject;
     public int catdemon_hp = 30;
 
     public float speed = 5f;
@@ -48,8 +46,6 @@ public class catdemon : MonoBehaviour
         rbody = GetComponent<Rigidbody2D>();
         rbody.constraints = RigidbodyConstraints2D.FreezeRotation; // Prevent rotation
 
-        // "Player"�^�O���t����GameObject���擾
-        taregtObject = GameObject.Find("player");
         this.animator.SetInteger("color", color);
     }
 
@@ -62,7 +58,7 @@ public class catdemon : MonoBehaviour
         animator.SetInteger("catbehave", this.behavior);
 
         //�������猩���v���C���[�̕����x�N�g�����擾
-        Vector3 dir = (taregtObject.transform.position - transform.position).normalized;
+        Vector3 dir = (GameManager.main.player.transform.position - transform.position).normalized;
 
         //x�����̈ړ�
 

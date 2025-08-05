@@ -12,16 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9df799d781c95c74d8c8bc3f211af0f2, type: 3}
   m_Name: PlayerData
   m_EditorClassIdentifier: 
-  <hp>k__BackingField: 5
-  maxHp: 10
+  <hp>k__BackingField: 8
+  maxHp: 16
   healAmount: 3
   autoHealInterval: 10
   autoHealAmount: 1
   luck: 0.02
-  moveSpeed: 10
+  moveSpeed: 7
   numberOfDash: 1
   numberOfJump: 1
-  jumpSpeed: 3
+  jumpSpeed: 12
+  airJumpSpeed: 10
   Speed: 20
   dashSpeed: 30
   attackPower: 10

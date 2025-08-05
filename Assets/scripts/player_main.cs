@@ -30,7 +30,7 @@ public class player_main : MonoBehaviour
     int behavior = 0;
     int attacktime = 0;
     int arrowtime = 0;
-    [System.NonSerialized] public int direction = 1;
+    //[System.NonSerialized] public int direction = 1;
     [System.NonSerialized] public int skillcooldown = 0;
 
     public PlayerData playerData;
@@ -103,7 +103,7 @@ public class player_main : MonoBehaviour
                 this.velcopy_x.x = PlayerData.main.moveSpeed * ((Input.GetKey(KeyCode.X)) ? 0.3f : 1);//this.maxspeedX;
                 this.rigid.linearVelocity = this.velcopy_x;
                 if (this.attacktime < 8 && this.skillcooldown <= 65)
-                    this.direction = 1;
+                    PlayerData.main.direction = 1;
                 this.behavior = 1;
             }
             if (this.hor_input < -0.1f && this.dashtime <= 8 && !this.isskillusing(2) && this.arrowtime <= 0) {
@@ -112,7 +112,7 @@ public class player_main : MonoBehaviour
                 this.velcopy_x.x = -PlayerData.main.moveSpeed * ((Input.GetKey(KeyCode.X)) ? 0.3f : 1);// -this.maxspeedX;
                 this.rigid.linearVelocity = this.velcopy_x;
                 if (this.attacktime < 8 && this.skillcooldown <= 65)
-                    this.direction = -1;
+                    PlayerData.main.direction = -1;
                 this.behavior = 1;
             }
 
@@ -198,11 +198,11 @@ public class player_main : MonoBehaviour
             this.attackobj.transform.position = this.hide;
         }
         else {
-            this.attackobj.transform.position = new Vector3(this.transform.position.x + 0.75f * this.direction, this.transform.position.y, 0f);
+            this.attackobj.transform.position = new Vector3(this.transform.position.x + 0.75f * PlayerData.main.direction, this.transform.position.y, 0f);
         }
 
         if (this.isskillusing(2)) {
-            this.skill.transform.position = new Vector3(this.transform.position.x + 2.0f * this.direction, this.transform.position.y, 0f);
+            this.skill.transform.position = new Vector3(this.transform.position.x + 2.0f * PlayerData.main.direction, this.transform.position.y, 0f);
             if (this.isskillusing()) { this.skillcollider.offset = Vector3.zero; }
             else { this.skillcollider.offset = this.hide2D; }
             this.velcopy_x = this.rigid.linearVelocity;
@@ -238,7 +238,7 @@ public class player_main : MonoBehaviour
 
         this.last_velocity = this.rigid.linearVelocity.y;
 
-        this.transform.localScale = new Vector3(-this.direction, this.transform.localScale.y, 1);
+        this.transform.localScale = new Vector3(-PlayerData.main.direction, this.transform.localScale.y, 1);
 
         if (0 < this.attacktime) { this.behavior = 3; }
         if (0 < this.arrowtime) { this.behavior = 5; }
@@ -302,7 +302,7 @@ public class player_main : MonoBehaviour
     void dash() {
         if (this.dashtime > 0) {
             if (this.dashtime > 8)
-                this.rigid.linearVelocity = this.DASHSPEED * this.direction;
+                this.rigid.linearVelocity = this.DASHSPEED * PlayerData.main.direction;
             this.dashtime--;
         }
     }

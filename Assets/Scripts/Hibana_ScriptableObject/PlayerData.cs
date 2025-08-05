@@ -29,6 +29,7 @@ public class PlayerData : ScriptableObject
     public float airJumpSpeed = 10;
     public float Speed = 20;
     public float dashSpeed = 30;
+    public int direction = 1;
     [Header("Attack")]
     public int attackPower = 10;
     public float attackInterval = 0.5f;

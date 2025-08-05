@@ -582,8 +582,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae55f76d442a54a4dad3c50e9d34d178, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  arrow_prefab: {fileID: 0}
+  player: {fileID: 296382345}
+  arrow_prefab: {fileID: 1635755092}
 --- !u!4 &436431306
 Transform:
   m_ObjectHideFlags: 0
@@ -6504,6 +6504,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 296382352}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1635755092 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8528301776315028820, guid: 3f082b3f302e2924899debe1fbe2930b, type: 3}
+  m_PrefabInstance: {fileID: 1268506120}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1707648200
 GameObject:
   m_ObjectHideFlags: 0

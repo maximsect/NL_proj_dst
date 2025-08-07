@@ -4255,10 +4255,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   camera: {fileID: 519420028}
   player: {fileID: 604353919}
-  playerTag:
-  - player
-  enemyTag:
-  - enemy
+  playerTag: []
+  enemyTag: []
   killEffect: []
 --- !u!1 &1077951298
 GameObject:

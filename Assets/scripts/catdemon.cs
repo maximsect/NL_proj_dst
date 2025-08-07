@@ -11,7 +11,7 @@ public class catdemon : MonoBehaviour
     public float checkDistance = 0.1f;
     public float footOffset = 0.01f;
     public int attackPower = 10;
-    public float interactionZone = 0.35f;
+    public float interactionZone = 0.2f;
 
    
    
@@ -19,7 +19,7 @@ public class catdemon : MonoBehaviour
     public float attEndTime = 0.2f;
     public float animEndTime = 0.6f;
     public float coolEndTime = 0.8f;
-    public float StartTime = 0;
+    private float StartTime = 0;
 
     public float tpPower = 24f;
     public GameObject attackObj;

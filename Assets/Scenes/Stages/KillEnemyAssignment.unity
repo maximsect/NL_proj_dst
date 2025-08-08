@@ -699,9 +699,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1024158566}
   - component: {fileID: 1024158565}
-  - component: {fileID: 1024158567}
+  - component: {fileID: 1024158568}
   m_Layer: 0
-  m_Name: Timer
+  m_Name: AssignmentManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -737,7 +737,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1024158567
+--- !u!114 &1024158568
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -746,17 +746,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 1024158563}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b5e6feb3ee3a0e34cbc5d4c3c3b6a3ae, type: 3}
+  m_Script: {fileID: 11500000, guid: 5aa677ba6592662488ec3e0506b8f198, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   playerObj: {fileID: 296382345}
   groundLayer:
     serializedVersion: 2
     m_Bits: 256
-  enemyPrefs:
-  - {fileID: 4482937538460693618, guid: e504056476e34b6419533e9c78e06045, type: 3}
-  surviveTime: 30
-  clock: {fileID: 1375328021}
+  assignments:
+  - killTarget: {fileID: 4482937538460693618, guid: e504056476e34b6419533e9c78e06045, type: 3}
+    genList: []
+    assignmentKillNumber: 5
+    generatedNumber: 0
+  - killTarget: {fileID: 4482937538460693618, guid: 7d86c07cf07b6e34297ebd39b8fcb1a5, type: 3}
+    genList: []
+    assignmentKillNumber: 5
+    generatedNumber: 0
+  generateInterval: 2
 --- !u!1 &1089946285
 GameObject:
   m_ObjectHideFlags: 0

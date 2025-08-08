@@ -11,7 +11,7 @@ public class catdemon : MonoBehaviour
     public float checkDistance = 0.1f;
     public float footOffset = 0.01f;
     public int attackPower = 10;
-    public float interactionZone = 0.2f;
+    public float interactionZone = 0.35f;
 
    
    
@@ -58,7 +58,7 @@ public class catdemon : MonoBehaviour
         animator.SetInteger("catbehave", this.behavior);
 
         //�������猩���v���C���[�̕����x�N�g�����擾
-        Vector3 dir = (GameManager.main.player.transform.position - transform.position).normalized;
+        Vector3 dir = (GameManager.main.player.transform.position - transform.position);
 
         //x�����̈ړ�
 
@@ -75,8 +75,18 @@ public class catdemon : MonoBehaviour
                 rbody.linearVelocity = new Vector2(vx, rbody.linearVelocity.y);
                 //プレイヤー方向に移動する
 
-                if (vx < 0) { this.transform.localScale = new Vector3(1, 1, 1); }
-                else if (vx > 0) { this.transform.localScale = new Vector3(-1, 1, 1); }
+                if (re_x < 0)
+                {
+                    rbody.linearVelocity = new Vector2(-speed, rbody.linearVelocity.y);
+                    this.transform.localScale = new Vector3(1, 1, 1); 
+                
+                
+                }
+                else if (re_x > 0) 
+                { this.transform.localScale = new Vector3(-1, 1, 1);
+                  rbody.linearVelocity = new Vector2(speed, rbody.linearVelocity.y);
+
+                }
 
                 behavior = 0;
             }

@@ -14,7 +14,7 @@ public class SceneData : ScriptableObject
     public int StageCheck()
     {
 #if UNITY_EDITOR
-        if(deviceMode)
+        if(!deviceMode)
         {
             currentScene = 0;
             return 0;

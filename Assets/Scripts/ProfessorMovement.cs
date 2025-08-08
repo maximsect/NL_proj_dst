@@ -182,7 +182,7 @@ public class ProfessorMovement : MonoBehaviour
                     break;
                 case 3:// Warp
                     AnimeState(3);
-                    yield return new WaitForSeconds(0.4f);
+                    yield return new WaitForSeconds(1.0f);
                     transform.position = RandomPos().ToVector3();
                     AnimeState(0);
                     yield return new WaitForSeconds(0.4f);

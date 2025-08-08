@@ -28,6 +28,7 @@ MonoBehaviour:
   direction: 1
   attackPower: 10
   attackInterval: 0.5
+  weapon: 0
   invinsibleDuration: 0.3
   copySource: {fileID: 0}
   sceneData: {fileID: 0}

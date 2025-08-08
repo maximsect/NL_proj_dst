@@ -8,7 +8,10 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Linq;
 using UnityEngine.SceneManagement;
-
+public enum Weapon
+{
+    Bat,Spear,Bow,Hammer
+}
 [CreateAssetMenu(fileName = "PlayerData", menuName = "Scriptable Objects/PlayerData")]
 public class PlayerData : ScriptableObject
 {
@@ -33,6 +36,7 @@ public class PlayerData : ScriptableObject
     [Header("Attack")]
     public int attackPower = 10;
     public float attackInterval = 0.5f;
+    public Weapon weapon;
     [Header("Variable")]
     public float invinsibleDuration = 0.3f;
     public PlayerData copySource;
@@ -76,6 +80,9 @@ public class PlayerData : ScriptableObject
                     break;
                 case "System.Boolean":
                     field.SetValue(this, val == "true");
+                    break;
+                case "Weapon":
+                    field.SetValue(this, (Weapon)int.Parse(val));
                     break;
                 default:
                     Debug.Log("NoMatches");

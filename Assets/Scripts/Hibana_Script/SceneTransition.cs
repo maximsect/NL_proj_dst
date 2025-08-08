@@ -25,8 +25,20 @@ public class SceneTransition : MonoBehaviour
         yield return new WaitUntil(() => clearFlag);
         clearFlag = false;
         yield return new WaitForSeconds(1f);
-        if (sceneData.StageCheck()) this.LoadSceneByName("SyllabusScene");
-        else this.LoadSceneByName("ResultScene");
+        switch (sceneData.StageCheck())
+        {
+            case 0:
+                this.LoadSceneByName("SyllabusScene");
+                break;
+            case 1:
+                this.LoadSceneByName("SelectMajorScene");
+                break;
+            case 2:
+                this.LoadSceneByName("ResultScene");
+                break;
+            default:
+                break;
+        }
     }
     public void StageClearReciever()
     {

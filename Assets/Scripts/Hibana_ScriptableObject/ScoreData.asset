@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10677f6ed6929174896070099b4940dd, type: 3}
   m_Name: ScoreData
   m_EditorClassIdentifier: 
-  scores: 5c0000005e000000
-  sumScore: 186
+  scores: 
+  sumScore: 0
   elapsedTime: 0
   numberOfKill: 0
   numberOfDeath: 0

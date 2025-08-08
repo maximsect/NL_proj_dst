@@ -36,7 +36,7 @@ public class SurvivorManager : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(4f);
             GameObject target = enemyPrefs[Random.Range(0, enemyPrefs.Count)];
             GameObject generated = Instantiate(target);
             generated.transform.position = RandomPos().ToVector3(0);

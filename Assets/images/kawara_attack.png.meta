@@ -106,12 +106,12 @@ TextureImporter:
       name: kawara_attack_0
       rect:
         serializedVersion: 2
-        x: 0
+        x: 34
         y: 0
-        width: 128
+        width: 71
         height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -128,12 +128,12 @@ TextureImporter:
       name: kawara_attack_1
       rect:
         serializedVersion: 2
-        x: 128
+        x: 162
         y: 0
-        width: 128
+        width: 71
         height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []

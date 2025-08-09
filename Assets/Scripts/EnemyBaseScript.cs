@@ -6,7 +6,7 @@ public class EnemyBaseScript : MonoBehaviour
 {
     public int hp = 30;
     private bool isInvincible = false;
-    void OnCollisionEnter2D(Collision2D collision)
+    void OnCollisionStay2D(Collision2D collision)
     {
         if (isInvincible) return;
         switch (collision.collider.gameObject.tag)
@@ -34,13 +34,16 @@ public class EnemyBaseScript : MonoBehaviour
         }
         isInvincible = true;
         if (hp <= 0)
+        {
+            print("Destroyed" + this.gameObject.name);
             Destroy(this.gameObject);
+        }
         KnockBack();
 
     }
     void OnCollisionExit2D(Collision2D collision)
     {
-        if (GameManager.main.playerTag.Contains(collision.collider.gameObject.tag))
+        if (GameManager.playerTag.Contains(collision.collider.gameObject.tag))
         {
             isInvincible = false;
         }

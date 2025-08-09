@@ -21,7 +21,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Stages/ExaminationScene.unity
     guid: 3d8e35adff8358040add2bae0b32e571
   - enabled: 1
-    path: Assets/Scenes/Stages/GetFlag.unity
+    path: Assets/Scenes/Stages/GetFlagB.unity
     guid: cd0941e00c253b84e801cb77d2ed64be
   - enabled: 1
     path: Assets/Scenes/Stages/quantum theory.unity

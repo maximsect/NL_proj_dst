@@ -5210,7 +5210,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   newPrefab: {fileID: 4482937538460693618, guid: e504056476e34b6419533e9c78e06045, type: 3}
   intervalSec: 3
-  newZ: -5
+  newZ: 0
 --- !u!4 &1875600549
 Transform:
   m_ObjectHideFlags: 0

@@ -6307,8 +6307,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   camera: {fileID: 801054521}
   player: {fileID: 296382345}
-  playerTag: []
-  enemyTag: []
   killEffect: []
 --- !u!4 &1948295697
 Transform:
@@ -6455,7 +6453,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2836802160314547150, guid: 62b86c94eebff9043aee71d578b7ca66, type: 3}
       propertyPath: m_IsTrigger
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2836802160314547150, guid: 62b86c94eebff9043aee71d578b7ca66, type: 3}
       propertyPath: m_ForceSendLayers.m_Bits
@@ -6555,7 +6553,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8249693313189414305, guid: 62b86c94eebff9043aee71d578b7ca66, type: 3}
       propertyPath: m_IsTrigger
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8249693313189414305, guid: 62b86c94eebff9043aee71d578b7ca66, type: 3}
       propertyPath: m_ForceSendLayers.m_Bits

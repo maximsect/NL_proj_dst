@@ -762,6 +762,10 @@ MonoBehaviour:
     genList: []
     assignmentKillNumber: 5
     generatedNumber: 0
+  - killTarget: {fileID: 4482937538460693618, guid: 7d86c07cf07b6e34297ebd39b8fcb1a5, type: 3}
+    genList: []
+    assignmentKillNumber: 5
+    generatedNumber: 0
   generateInterval: 2
 --- !u!1 &1089946285
 GameObject:

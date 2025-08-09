@@ -19,7 +19,7 @@ public class catdemon : MonoBehaviour
     public float attEndTime = 0.2f;
     public float animEndTime = 0.6f;
     public float coolEndTime = 0.8f;
-    public float StartTime = 0;
+    private float StartTime = 0;
 
     public float tpPower = 24f;
     public GameObject attackObj;
@@ -58,7 +58,7 @@ public class catdemon : MonoBehaviour
         animator.SetInteger("catbehave", this.behavior);
 
         //�������猩���v���C���[�̕����x�N�g�����擾
-        Vector3 dir = (GameManager.main.player.transform.position - transform.position).normalized;
+        Vector3 dir = (GameManager.main.player.transform.position - transform.position);
 
         //x�����̈ړ�
 
@@ -75,8 +75,18 @@ public class catdemon : MonoBehaviour
                 rbody.linearVelocity = new Vector2(vx, rbody.linearVelocity.y);
                 //プレイヤー方向に移動する
 
-                if (vx < 0) { this.transform.localScale = new Vector3(1, 1, 1); }
-                else if (vx > 0) { this.transform.localScale = new Vector3(-1, 1, 1); }
+                if (re_x < 0)
+                {
+                    rbody.linearVelocity = new Vector2(-speed, rbody.linearVelocity.y);
+                    this.transform.localScale = new Vector3(1, 1, 1); 
+                
+                
+                }
+                else if (re_x > 0) 
+                { this.transform.localScale = new Vector3(-1, 1, 1);
+                  rbody.linearVelocity = new Vector2(speed, rbody.linearVelocity.y);
+
+                }
 
                 behavior = 0;
             }

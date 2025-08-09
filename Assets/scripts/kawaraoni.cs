@@ -39,32 +39,37 @@ public class kawaraoni : MonoBehaviour
         yield break;
     }
 
-    void OnTriggerStay2D(Collider2D collider){
-        if(collider.gameObject.CompareTag("attack") && this.invincible==0){
-            this.hp-=10;
-            this.invincible=1;
-            if(this.hp<=0)
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (!collision.gameObject.CompareTag("ground"))
+            Debug.Log(collision.collider.name);
+        if (collision.collider.name == "attack" && this.invincible == 0)
+        {
+            this.hp -= 10;
+            this.invincible = 1;
+            if (this.hp <= 0)
                 Destroy(this.gameObject);
         }
-        if(collider.gameObject.CompareTag("skillattack") && this.invincible==0){
-            this.hp-=30;
-            this.invincible=1;
-            if(this.hp<=0)
+        if (collision.collider.name == "skillattack" && this.invincible == 0)
+        {
+            this.hp -= 30;
+            this.invincible = 1;
+            if (this.hp <= 0)
+                Destroy(this.gameObject);
+        }
+        if (collision.gameObject.CompareTag("arrow") && this.invincible == 0)
+        {
+            this.hp -= 5;
+            if (this.hp <= 0)
                 Destroy(this.gameObject);
         }
     }
 
-    void OnCollisionEnter2D(Collision2D collision){
-        if(collision.gameObject.CompareTag("arrow") && this.invincible==0){
-            this.hp-=5;
-            if(this.hp<=0)
-                Destroy(this.gameObject);
-        }
-    }
-
-    void OnTriggerExit2D(Collider2D collider){
-        if((collider.gameObject.CompareTag("attack") || collider.gameObject.CompareTag("skillattack")) && this.invincible==1){
-            this.invincible=0;
+    void OnCollisionExit2D(Collision2D collision)
+    {
+        if ((collision.collider.name == "attack" || collision.collider.name == "skillattack") && this.invincible == 1)
+        {
+            this.invincible = 0;
         }
     }
 }

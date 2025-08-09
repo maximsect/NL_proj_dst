@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9df799d781c95c74d8c8bc3f211af0f2, type: 3}
   m_Name: PlayerData
   m_EditorClassIdentifier: 
-  <hp>k__BackingField: 106
+  <hp>k__BackingField: 0
   maxHp: 106
   healAmount: 3
   autoHealInterval: 10
@@ -28,6 +28,7 @@ MonoBehaviour:
   direction: 1
   attackPower: 10
   attackInterval: 0.5
+  weapon: 0
   invinsibleDuration: 0.3
   copySource: {fileID: 0}
   sceneData: {fileID: 0}

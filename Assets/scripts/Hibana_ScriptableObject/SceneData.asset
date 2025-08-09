@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d47fd4e41c3906248a195b2ae9e30f25, type: 3}
   m_Name: SceneData
   m_EditorClassIdentifier: 
+  deviceMode: 1
   currentScene: 0
-  maxScene: 10
+  majorScene: 10
+  resultScene: 15
   bossScene: 

@@ -13,8 +13,6 @@ public class catdemon : MonoBehaviour
     public int attackPower = 10;
     public float interactionZone = 0.35f;
 
-   
-   
     public float attStartTime = 0.1f;
     public float attEndTime = 0.2f;
     public float animEndTime = 0.6f;
@@ -35,14 +33,14 @@ public class catdemon : MonoBehaviour
 
     float re_x;
 
-    short invincible=0;
+    short invincible = 0;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
 
-        StartTime = -coolEndTime * 2; 
+        StartTime = -coolEndTime * 2;
         rbody = GetComponent<Rigidbody2D>();
         rbody.constraints = RigidbodyConstraints2D.FreezeRotation; // Prevent rotation
 
@@ -65,8 +63,8 @@ public class catdemon : MonoBehaviour
         re_x = dir.x;
         float vx = re_x * speed;
         float vy = dir.y * speed;
-       
-               
+
+
 
         if ((coolEndTime - (Time.time - StartTime) <= 0))//攻撃中じゃない
         {
@@ -78,13 +76,14 @@ public class catdemon : MonoBehaviour
                 if (re_x < 0)
                 {
                     rbody.linearVelocity = new Vector2(-speed, rbody.linearVelocity.y);
-                    this.transform.localScale = new Vector3(1, 1, 1); 
-                
-                
+                    this.transform.localScale = new Vector3(1, 1, 1);
+
+
                 }
-                else if (re_x > 0) 
-                { this.transform.localScale = new Vector3(-1, 1, 1);
-                  rbody.linearVelocity = new Vector2(speed, rbody.linearVelocity.y);
+                else if (re_x > 0)
+                {
+                    this.transform.localScale = new Vector3(-1, 1, 1);
+                    rbody.linearVelocity = new Vector2(speed, rbody.linearVelocity.y);
 
                 }
 
@@ -95,7 +94,7 @@ public class catdemon : MonoBehaviour
                 //停止する
                 StartTime = Time.time;//攻撃開始
                 behavior = 1;
-                
+
             }
         }
         else//攻撃中
@@ -120,13 +119,13 @@ public class catdemon : MonoBehaviour
 
         }
 
-        
 
-               
-     
 
-            // �n�ʂɐڐG���Ă��邩���m�F
-            isGrounded = Physics2D.Raycast(transform.position, Vector2.down, checkDistance + footOffset, LayerMask.GetMask("Ground"));
+
+
+
+        // �n�ʂɐڐG���Ă��邩���m�F
+        isGrounded = Physics2D.Raycast(transform.position, Vector2.down, checkDistance + footOffset, LayerMask.GetMask("Ground"));
         // �W�����v����
         if (isGrounded && !isJumping)
             if (vy < 0)
@@ -134,7 +133,7 @@ public class catdemon : MonoBehaviour
                 isJumping = true;
                 rbody.AddForce(Vector2.up * jumppower, ForceMode2D.Impulse);
             }
-       
+
         /*
         // �e���|�[�g�J�E���^�[�����炷
         if (tpCount > 0)
@@ -158,36 +157,39 @@ public class catdemon : MonoBehaviour
         */
     }
 
-    
 
-    void OnTriggerStay2D(Collider2D collider){
-        if(collider.gameObject.CompareTag("attack") && this.invincible==0){
-            this.catdemon_hp-=10;
-            this.invincible=1;
-            if(this.catdemon_hp<=0)
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (!collision.gameObject.CompareTag("ground"))
+            Debug.Log(collision.collider.name);
+        if (collision.collider.name == "attack" && this.invincible == 0)
+        {
+            this.catdemon_hp -= 10;
+            this.invincible = 1;
+            if (this.catdemon_hp <= 0)
                 Destroy(this.gameObject);
         }
-        if(collider.gameObject.CompareTag("skillattack") && this.invincible==0){
-            this.catdemon_hp-=30;
-            this.invincible=1;
-            if(this.catdemon_hp<=0)
+        if (collision.collider.name == "skillattack" && this.invincible == 0)
+        {
+            this.catdemon_hp -= 30;
+            this.invincible = 1;
+            if (this.catdemon_hp <= 0)
+                Destroy(this.gameObject);
+        }
+        if (collision.gameObject.CompareTag("arrow") && this.invincible == 0)
+        {
+            this.catdemon_hp -= 5;
+            if (this.catdemon_hp <= 0)
                 Destroy(this.gameObject);
         }
     }
 
-    void OnCollisionEnter2D(Collision2D collision){
-        if(collision.gameObject.CompareTag("arrow") && this.invincible==0){
-            this.catdemon_hp-=5;
-            if(this.catdemon_hp<=0)
-                Destroy(this.gameObject);
-        }
-    }
-
-    void OnTriggerExit2D(Collider2D collider){
-        if((collider.gameObject.CompareTag("attack") || collider.gameObject.CompareTag("skillattack")) && this.invincible==1){
-            this.invincible=0;
+    void OnCollisionExit2D(Collision2D collision)
+    {
+        if ((collision.collider.name == "attack" || collision.collider.name == "skillattack") && this.invincible == 1)
+        {
+            this.invincible = 0;
         }
     }
 }
-
-

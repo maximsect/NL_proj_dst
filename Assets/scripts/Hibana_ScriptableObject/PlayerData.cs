@@ -37,6 +37,13 @@ public class PlayerData : ScriptableObject
     public int attackPower = 10;
     public float attackInterval = 0.5f;
     public Weapon weapon;
+    [Header("Weapons")]
+    public int batAttack = 10;
+    public int spearAttack = 10;
+    public int bowAttack = 10;
+    public int hammerAttack = 10;
+    public int arrowAttack = 10;
+    public int skillAttack = 10;
     [Header("Variable")]
     public float invinsibleDuration = 0.3f;
     public PlayerData copySource;

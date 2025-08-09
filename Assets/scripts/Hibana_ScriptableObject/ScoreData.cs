@@ -11,5 +11,5 @@ public class ScoreData : ScriptableObject
     public float elapsedTime = 0;
     public int numberOfKill = 0;
     public int numberOfDeath = 0;
-    public int DamageAmount = 0;
+    public int damageAmount = 0;
 }

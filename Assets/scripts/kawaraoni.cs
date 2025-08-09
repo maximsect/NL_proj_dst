@@ -1,0 +1,70 @@
+using UnityEngine;
+using System.Collections;
+
+public class kawaraoni : MonoBehaviour
+{
+    public int hp=30;
+    public float interval = 2f;
+    public float firetime = 0.5f;
+    public float attackoffset = 1.0f;
+    public GameObject LaserPref;
+    public Animator anim;
+    GameObject laserObj;
+    
+    short in_interval = 0;
+    short invincible=0;
+
+    void FixedUpdate()
+    {
+        if(this.in_interval <= 1)
+            this.transform.localScale=new Vector3(GameManager.main.player.transform.position.x - this.transform.position.x < 0f ? 1 : -1, 1, 1);
+        if(Mathf.Abs(GameManager.main.player.transform.position.y - this.transform.position.y) < this.attackoffset && this.in_interval == 0){
+            this.in_interval = 2;
+            this.anim.SetBool("fire", true);
+            StartCoroutine(Attack());
+        }
+    }
+
+    IEnumerator Attack()
+    {
+        yield return new WaitForSeconds(this.firetime);
+        GameObject laserObj = Instantiate(LaserPref, transform.position, Quaternion.identity);
+        laserObj.GetComponent<Rigidbody2D>().linearVelocity = new Vector2(-10f * this.transform.localScale.x, 0f);
+        yield return new WaitForSeconds(0.2f);
+        this.in_interval = 1;
+        this.anim.SetBool("fire", false);
+        yield return new WaitForSeconds(this.interval - 0.2f);
+        Destroy(laserObj);
+        this.in_interval = 0;
+        yield break;
+    }
+
+    void OnTriggerStay2D(Collider2D collider){
+        if(collider.gameObject.CompareTag("attack") && this.invincible==0){
+            this.hp-=10;
+            this.invincible=1;
+            if(this.hp<=0)
+                Destroy(this.gameObject);
+        }
+        if(collider.gameObject.CompareTag("skillattack") && this.invincible==0){
+            this.hp-=30;
+            this.invincible=1;
+            if(this.hp<=0)
+                Destroy(this.gameObject);
+        }
+    }
+
+    void OnCollisionEnter2D(Collision2D collision){
+        if(collision.gameObject.CompareTag("arrow") && this.invincible==0){
+            this.hp-=5;
+            if(this.hp<=0)
+                Destroy(this.gameObject);
+        }
+    }
+
+    void OnTriggerExit2D(Collider2D collider){
+        if((collider.gameObject.CompareTag("attack") || collider.gameObject.CompareTag("skillattack")) && this.invincible==1){
+            this.invincible=0;
+        }
+    }
+}

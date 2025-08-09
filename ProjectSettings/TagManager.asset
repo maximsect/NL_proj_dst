@@ -17,6 +17,10 @@ TagManager:
   - observer
   - damage_factor
   - assign_attack
+  - bat
+  - spear
+  - bow
+  - hammer
   layers:
   - Default
   - TransparentFX

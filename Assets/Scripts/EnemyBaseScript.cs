@@ -6,10 +6,10 @@ public class EnemyBaseScript : MonoBehaviour
 {
     public int hp = 30;
     private bool isInvincible = false;
-    void OnTriggerStay2D(Collider2D collider)
+    void OnCollisionEnter2D(Collision2D collision)
     {
         if (isInvincible) return;
-        switch (collider.gameObject.tag)
+        switch (collision.collider.gameObject.tag)
         {
             case "bat":
                 hp -= PlayerData.main.batAttack;
@@ -38,9 +38,9 @@ public class EnemyBaseScript : MonoBehaviour
         KnockBack();
 
     }
-    void OnTriggerExit2D(Collider2D collider)
+    void OnCollisionExit2D(Collision2D collision)
     {
-        if (GameManager.main.playerTag.Contains(collider.gameObject.tag))
+        if (GameManager.main.playerTag.Contains(collision.collider.gameObject.tag))
         {
             isInvincible = false;
         }

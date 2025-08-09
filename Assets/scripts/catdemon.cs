@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class catdemon : MonoBehaviour
+public class catdemon : EnemyBaseScript
 {
     public int catdemon_hp = 30;
 
@@ -159,7 +159,7 @@ public class catdemon : MonoBehaviour
 
 
 
-    void OnCollisionEnter2D(Collision2D collision)
+    /*void OnCollisionEnter2D(Collision2D collision)
     {
         if (!collision.gameObject.CompareTag("ground"))
             Debug.Log(collision.collider.name);
@@ -191,5 +191,5 @@ public class catdemon : MonoBehaviour
         {
             this.invincible = 0;
         }
-    }
+    }/**/
 }

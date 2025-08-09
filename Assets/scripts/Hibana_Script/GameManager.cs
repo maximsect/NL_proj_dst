@@ -7,8 +7,8 @@ public class GameManager : MonoBehaviour
     public static GameManager main;
     public GameObject camera;
     [HideInInspector] public GameObject player;
-    public static List<string> playerTag = new List<string>() { "bow", "spear", "bat", "hammer", "arrow", "skillattack" };
-    public static List<string> enemyTag = new List<string>() { "Enemy", "damage_factor", "assign_attack" };
+    public static List<string> playerWeaponTag = new List<string>() { "bow", "spear", "bat", "hammer", "arrow", "skillattack" };
+    public static List<string> enemyWeaponTag = new List<string>() { "enemyweapon", "damage_factor", "assign_attack" };
     public List<GameObject> killEffect = new List<GameObject>();
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void OnEnable()

@@ -8,7 +8,7 @@ public class EnemyBaseScript : MonoBehaviour
     protected float invincibleTimer = 0;
     void OnTriggerStay2D(Collider2D collider)
     {
-        if (GameManager.playerTag.Contains(collider.gameObject.tag) && invincibleTimer < 0)
+        if (GameManager.playerWeaponTag.Contains(collider.gameObject.tag) && invincibleTimer < 0)
         {
             invincibleTimer = 0.1f;
             switch (collider.gameObject.tag)

@@ -481,6 +481,7 @@ MonoBehaviour:
   grappingSpeed: 25
   animator: {fileID: 1559691304650324450}
   skillanimator: {fileID: 3685733435616716147}
+  attackcollider: {fileID: 8249693313189414305}
   skillcollider: {fileID: 2836802160314547150}
   UI_skillcooldown: {fileID: 0}
 --- !u!95 &1559691304650324450

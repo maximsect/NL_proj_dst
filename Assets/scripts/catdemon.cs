@@ -13,8 +13,6 @@ public class catdemon : MonoBehaviour
     public int attackPower = 10;
     public float interactionZone = 0.35f;
 
-
-
     public float attStartTime = 0.1f;
     public float attEndTime = 0.2f;
     public float animEndTime = 0.6f;
@@ -161,26 +159,24 @@ public class catdemon : MonoBehaviour
 
 
 
-    void OnTriggerStay2D(Collider2D collider)
+    void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collider.gameObject.CompareTag("attack") && this.invincible == 0)
+        if (!collision.gameObject.CompareTag("ground"))
+            Debug.Log(collision.collider.name);
+        if (collision.collider.name == "attack" && this.invincible == 0)
         {
             this.catdemon_hp -= 10;
             this.invincible = 1;
             if (this.catdemon_hp <= 0)
                 Destroy(this.gameObject);
         }
-        if (collider.gameObject.CompareTag("skillattack") && this.invincible == 0)
+        if (collision.collider.name == "skillattack" && this.invincible == 0)
         {
             this.catdemon_hp -= 30;
             this.invincible = 1;
             if (this.catdemon_hp <= 0)
                 Destroy(this.gameObject);
         }
-    }
-
-    void OnCollisionEnter2D(Collision2D collision)
-    {
         if (collision.gameObject.CompareTag("arrow") && this.invincible == 0)
         {
             this.catdemon_hp -= 5;
@@ -189,9 +185,9 @@ public class catdemon : MonoBehaviour
         }
     }
 
-    void OnTriggerExit2D(Collider2D collider)
+    void OnCollisionExit2D(Collision2D collision)
     {
-        if ((collider.gameObject.CompareTag("attack") || collider.gameObject.CompareTag("skillattack")) && this.invincible == 1)
+        if ((collision.collider.name == "attack" || collision.collider.name == "skillattack") && this.invincible == 1)
         {
             this.invincible = 0;
         }

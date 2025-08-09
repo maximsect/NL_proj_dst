@@ -35,6 +35,7 @@ public class EnemyBaseScript : MonoBehaviour
         isInvincible = true;
         if (hp <= 0)
             Destroy(this.gameObject);
+        KnockBack();
 
     }
     void OnTriggerExit2D(Collider2D collider)
@@ -44,4 +45,5 @@ public class EnemyBaseScript : MonoBehaviour
             isInvincible = false;
         }
     }
+    public virtual void KnockBack() { }
 }

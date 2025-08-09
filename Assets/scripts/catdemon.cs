@@ -50,7 +50,7 @@ public class catdemon : EnemyBaseScript
     // Update is called once per frame
 
 
-    private void Update()
+    public override void SubUpdate()
     {
 
         animator.SetInteger("catbehave", this.behavior);

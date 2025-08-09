@@ -4,46 +4,46 @@ using System.Collections.Generic;
 
 public class EnemyBaseScript : MonoBehaviour
 {
-    public int hp = 30;
-    private bool isInvincible = false;
-    void OnCollisionEnter2D(Collision2D collision)
+    public int enemyHp = 30;
+    protected float invinsibleTimer = 0;
+    void OnTriggerStay2D(Collider2D collider)
     {
-        if (isInvincible) return;
-        switch (collision.collider.gameObject.tag)
+        if (GameManager.playerTag.Contains(collider.gameObject.tag) && invinsibleTimer < 0)
         {
-            case "bat":
-                hp -= PlayerData.main.batAttack;
-                break;
-            case "spear":
-                hp -= PlayerData.main.spearAttack;
-                break;
-            case "bow":
-                hp -= PlayerData.main.bowAttack;
-                break;
-            case "hammer":
-                hp -= PlayerData.main.hammerAttack;
-                break;
-            case "arrow":
-                hp -= PlayerData.main.arrowAttack;
-                break;
-            case "skillattack":
-                hp -= PlayerData.main.skillAttack;
-                break;
-            default:
-                break;
+            invinsibleTimer = 0.1f;
+            switch (collider.gameObject.tag)
+            {
+                case "bat":
+                    enemyHp -= PlayerData.main.batAttack;
+                    break;
+                case "spear":
+                    enemyHp -= PlayerData.main.spearAttack;
+                    break;
+                case "bow":
+                    enemyHp -= PlayerData.main.bowAttack;
+                    break;
+                case "hammer":
+                    enemyHp -= PlayerData.main.hammerAttack;
+                    break;
+                case "arrow":
+                    enemyHp -= PlayerData.main.arrowAttack;
+                    break;
+                case "skillattack":
+                    enemyHp -= PlayerData.main.skillAttack;
+                    break;
+                default:
+                    break;
+            }
+            if (enemyHp <= 0)
+                Destroy(this.gameObject);
         }
-        isInvincible = true;
-        if (hp <= 0)
-            Destroy(this.gameObject);
-        KnockBack();
 
     }
-    void OnCollisionExit2D(Collision2D collision)
+    void Update()
     {
-        if (GameManager.main.playerTag.Contains(collision.collider.gameObject.tag))
-        {
-            isInvincible = false;
-        }
+        invinsibleTimer -= Time.deltaTime;
+        GetComponent<SpriteRenderer>().color = (invinsibleTimer > 0) ? new Color(1, 0, 0, 1) : new Color(1, 1, 1, 1);
+        SubUpdate();
     }
-    public virtual void KnockBack() { }
+    public virtual void SubUpdate() { }
 }

@@ -1650,7 +1650,7 @@ MonoBehaviour:
       value: 2
       valueMode: 1
       possibility: 2
-    - SceneName: GetFlag
+    - SceneName: GetFlagA
       difficultyLevel: "\u4ECF"
       skillSprite: {fileID: 21300000, guid: ff53b649bb4bbc64180272f82b9c49b0, type: 3}
       getSkillName: "\u6700\u5927HP\u5897\u52A0+3"

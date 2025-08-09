@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class kawaraoni : MonoBehaviour
+public class kawaraoni : EnemyBaseScript
 {
     public int hp=30;
     public float interval = 2f;
@@ -38,7 +38,7 @@ public class kawaraoni : MonoBehaviour
         this.in_interval = 0;
         yield break;
     }
-
+    /*
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (!collision.gameObject.CompareTag("ground"))
@@ -71,5 +71,5 @@ public class kawaraoni : MonoBehaviour
         {
             this.invincible = 0;
         }
-    }
+    }/**/
 }

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class catdemon : MonoBehaviour
+public class catdemon : EnemyBaseScript
 {
     public int catdemon_hp = 30;
 
@@ -50,9 +50,8 @@ public class catdemon : MonoBehaviour
     // Update is called once per frame
 
 
-    private void Update()
+    public override void SubUpdate()
     {
-
         animator.SetInteger("catbehave", this.behavior);
 
         //�������猩���v���C���[�̕����x�N�g�����擾
@@ -63,7 +62,7 @@ public class catdemon : MonoBehaviour
         re_x = dir.x;
         float vx = re_x * speed;
         float vy = dir.y * speed;
-
+        
 
 
         if ((coolEndTime - (Time.time - StartTime) <= 0))//攻撃中じゃない
@@ -159,7 +158,7 @@ public class catdemon : MonoBehaviour
 
 
 
-    void OnCollisionEnter2D(Collision2D collision)
+    /*void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.collider.name == "attack" && this.invincible == 0)
         {
@@ -189,5 +188,5 @@ public class catdemon : MonoBehaviour
         {
             this.invincible = 0;
         }
-    }
+    }/**/
 }

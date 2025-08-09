@@ -26,5 +26,17 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Stages/quantum theory.unity
     guid: 709a4468c7ff50d4c96c7c4a4dce12c1
+  - enabled: 1
+    path: Assets/Scenes/Others/SelectMajorScene.unity
+    guid: db00a41e4eb788b48bcc17d4e70979b6
+  - enabled: 1
+    path: Assets/Scenes/Stages/GetFlagA.unity
+    guid: 21b6f594a26424a408bb04790b5490c1
+  - enabled: 1
+    path: Assets/Scenes/Stages/KillEnemyAssignment.unity
+    guid: 0c7ed5a788610af44a1406a0dd6bfa1c
+  - enabled: 1
+    path: Assets/Scenes/Stages/Survivor.unity
+    guid: 5936654fcc3da814a8130784595d1dec
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0

@@ -11,6 +11,7 @@ public class SceneData : ScriptableObject
     public int majorScene = 10;
     public int resultScene = 15;
     public List<int> bossScene = new List<int>();
+    public int stageLevel = 1;
     public int StageCheck()
     {
 #if UNITY_EDITOR

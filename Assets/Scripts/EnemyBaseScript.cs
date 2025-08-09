@@ -5,12 +5,12 @@ using System.Collections.Generic;
 public class EnemyBaseScript : MonoBehaviour
 {
     public int enemyHp = 30;
-    protected float invinsibleTimer = 0;
+    protected float invincibleTimer = 0;
     void OnTriggerStay2D(Collider2D collider)
     {
-        if (GameManager.playerTag.Contains(collider.gameObject.tag) && invinsibleTimer < 0)
+        if (GameManager.playerTag.Contains(collider.gameObject.tag) && invincibleTimer < 0)
         {
-            invinsibleTimer = 0.1f;
+            invincibleTimer = 0.1f;
             switch (collider.gameObject.tag)
             {
                 case "bat":
@@ -41,8 +41,8 @@ public class EnemyBaseScript : MonoBehaviour
     }
     void Update()
     {
-        invinsibleTimer -= Time.deltaTime;
-        GetComponent<SpriteRenderer>().color = (invinsibleTimer > 0) ? new Color(1, 0, 0, 1) : new Color(1, 1, 1, 1);
+        invincibleTimer -= Time.deltaTime;
+        GetComponent<SpriteRenderer>().color = (invincibleTimer > 0) ? new Color(1, 0, 0, 1) : new Color(1, 1, 1, 1);
         SubUpdate();
     }
     public virtual void SubUpdate() { }

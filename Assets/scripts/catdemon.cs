@@ -52,7 +52,6 @@ public class catdemon : EnemyBaseScript
 
     public override void SubUpdate()
     {
-
         animator.SetInteger("catbehave", this.behavior);
 
         //�������猩���v���C���[�̕����x�N�g�����擾
@@ -63,7 +62,7 @@ public class catdemon : EnemyBaseScript
         re_x = dir.x;
         float vx = re_x * speed;
         float vy = dir.y * speed;
-
+        
 
 
         if ((coolEndTime - (Time.time - StartTime) <= 0))//攻撃中じゃない

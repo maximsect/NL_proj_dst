@@ -161,8 +161,6 @@ public class catdemon : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (!collision.gameObject.CompareTag("ground"))
-            Debug.Log(collision.collider.name);
         if (collision.collider.name == "attack" && this.invincible == 0)
         {
             this.catdemon_hp -= 10;

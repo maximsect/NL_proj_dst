@@ -14,6 +14,7 @@ public class SceneClass
 {
     public string SceneName;
     public string difficultyLevel = "Normal";
+    public Sprite skillSprite;
     public string getSkillName;
     public string variableName;
     public string value;
@@ -25,17 +26,16 @@ public class SyllabusClass
 {
     public string sceneMode;
     public Color imageColor = Color.green;
+    public Image backGround;
+    public TextMeshProUGUI difficultyDisplay;
+    public Image skillIcon;
+    public TextMeshProUGUI skillNameDisplay;
     public SceneClass[] sceneClasses;
 }
 public class SyllabusScript : MonoBehaviour
 {
     public PlayerData playerData;
     public SyllabusClass[] syllabusClasses = new SyllabusClass[3];
-    private SceneClass[] sceneClasses = new SceneClass[3];
-    public TextMeshProUGUI[] difficultyText = new TextMeshProUGUI[3];
-    public TextMeshProUGUI[] stageNameDisplay = new TextMeshProUGUI[3];
-    public TextMeshProUGUI[] skillNameDisplay = new TextMeshProUGUI[3];
-    public Image[] sceneSelectImage = new Image[3];
     List<int> getList = new List<int>();
     public void ChangeScene(int index)
     {
@@ -46,9 +46,9 @@ public class SyllabusScript : MonoBehaviour
         SelectRandomThree();
         for (int i = 0; i < 3; i++)
         {
-            difficultyText[i].text = syllabusClasses[i].sceneClasses[getList[i]].difficultyLevel;
-            stageNameDisplay[i].text = syllabusClasses[i].sceneClasses[getList[i]].SceneName;
-            skillNameDisplay[i].text = syllabusClasses[i].sceneClasses[getList[i]].getSkillName;
+            syllabusClasses[i].difficultyDisplay.text = syllabusClasses[i].sceneClasses[getList[i]].difficultyLevel;
+            syllabusClasses[i].skillIcon.sprite = syllabusClasses[i].sceneClasses[getList[i]].skillSprite;
+            syllabusClasses[i].skillNameDisplay.text = syllabusClasses[i].sceneClasses[getList[i]].getSkillName;
         }
     }
     void Start()
@@ -56,10 +56,10 @@ public class SyllabusScript : MonoBehaviour
         SelectRandomThree();
         for (int i = 0; i < 3; i++)
         {
-            difficultyText[i].text = syllabusClasses[i].sceneClasses[getList[i]].difficultyLevel;
-            stageNameDisplay[i].text = syllabusClasses[i].sceneClasses[getList[i]].SceneName;
-            sceneSelectImage[i].color = syllabusClasses[i].imageColor;
-            skillNameDisplay[i].text = syllabusClasses[i].sceneClasses[getList[i]].getSkillName;
+            syllabusClasses[i].difficultyDisplay.text = syllabusClasses[i].sceneClasses[getList[i]].difficultyLevel;
+            syllabusClasses[i].skillIcon.sprite = syllabusClasses[i].sceneClasses[getList[i]].skillSprite;
+            syllabusClasses[i].backGround.color = syllabusClasses[i].imageColor;
+            syllabusClasses[i].skillNameDisplay.text = syllabusClasses[i].sceneClasses[getList[i]].getSkillName;
         }
     }
     public void ChangeStatus(int index)

@@ -44,6 +44,7 @@ public class PlayerData : ScriptableObject
     public int hammerAttack = 10;
     public int arrowAttack = 10;
     public int skillAttack = 10;
+
     [Header("Variable")]
     public float invinsibleDuration = 0.3f;
     public PlayerData copySource;
@@ -145,7 +146,7 @@ public class PlayerData : ScriptableObject
         }
         else
         {
-            object[] arguments = new object[] { int.Parse(val) };
+            object[] arguments = new object[] { float.Parse(val) };
             method.Invoke(this, arguments);
         }
     }
@@ -162,5 +163,23 @@ public class PlayerData : ScriptableObject
     {
         resultText = "Result\n" + "Score: " + score + "\nTime: " + elapsedTime;
         return resultText;
+    }
+    public void AddAttackVal(float mul)
+    {
+        arrowAttack += (int)mul;
+        batAttack += (int)mul;
+        bowAttack += (int)mul;
+        hammerAttack += (int)mul;
+        skillAttack += (int)mul;
+        spearAttack += (int)mul;
+    }
+    public void MultipleAttackVal(float mul)
+    {
+        arrowAttack = (int)(arrowAttack * mul);
+        batAttack = (int)(batAttack * mul);
+        bowAttack = (int)(bowAttack * mul);
+        hammerAttack = (int)(hammerAttack * mul);
+        skillAttack = (int)(skillAttack * mul);
+        spearAttack = (int)(spearAttack * mul);
     }
 }

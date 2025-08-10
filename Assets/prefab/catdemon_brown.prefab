@@ -163,7 +163,7 @@ GameObject:
   - component: {fileID: 3623654207399372413}
   - component: {fileID: 3769205888707289567}
   m_Layer: 11
-  m_Name: catdemon Test
+  m_Name: catdemon_brown
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -229,7 +229,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2833316723285120895, guid: 352ec9ff79aa6be4a861394aca78297f, type: 3}
+  m_Sprite: {fileID: -268469185127522006, guid: d5243fdcffa020d4ea5a97bd06871b60, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -326,12 +326,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneData: {fileID: 11400000, guid: d002b1dff15460843ae4dcd006954aa3, type: 2}
-  enemyHp: 30
+  enemyHp: 50
   speed: 3
   jumppower: 8
   checkDistance: 0.1
   footOffset: 0.01
-  attackPower: 30
+  attackPower: 15
   interactionZone: 1.3
   attStartTime: 0.35
   attEndTime: 0.7

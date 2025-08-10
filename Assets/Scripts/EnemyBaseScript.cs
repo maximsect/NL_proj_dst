@@ -28,6 +28,7 @@ public class EnemyBaseScript : MonoBehaviour
                     break;
                 case "hammer":
                     damage = PlayerData.main.hammerAttack;
+                    GetComponent<Rigidbody2D>().AddForce(new Vector2((transform.position.x - GameManager.player.transform.position.x) > 0 ? 4 : -4, 4),ForceMode2D.Impulse);
                     break;
                 case "arrow":
                     damage = PlayerData.main.arrowAttack;

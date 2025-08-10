@@ -10,7 +10,6 @@ public enum DrawFunctions
 }
 public class ProfessorMovement : StageManager
 {
-    public SceneData sceneData;
     private float powerUpRatio = 1;
     private float invincibleTimer = 0;
     public SpriteRenderer oniImage;

@@ -170,8 +170,8 @@ public class catdemon : EnemyBaseScript
                     yield return null;
                     break;
                 case 1:
-                    int randomMove = UnityEngine.Random.Range(0, 5);
-                    if (randomMove >= 2) randomMove = UnityEngine.Random.Range(0, 5);
+                    int randomMove = UnityEngine.Random.Range(0, 6);
+                    if (randomMove >= 2) randomMove = UnityEngine.Random.Range(0, 6);
                     switch (randomMove)
                     {
                         case 0:

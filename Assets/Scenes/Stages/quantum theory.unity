@@ -1687,6 +1687,7 @@ MonoBehaviour:
   grappingSpeed: 25
   animator: {fileID: 604353921}
   skillanimator: {fileID: 938966271}
+  attackcollider: {fileID: 1813638575}
   skillcollider: {fileID: 938966268}
   UI_skillcooldown: {fileID: 1284194243}
 --- !u!50 &604353923
@@ -4323,11 +4324,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   camera: {fileID: 519420028}
-  player: {fileID: 604353919}
-  playerTag:
-  - player
-  enemyTag:
-  - enemy
   killEffect: []
 --- !u!1 &1077951298
 GameObject:
@@ -5057,7 +5053,7 @@ GameObject:
   - component: {fileID: 1813638575}
   m_Layer: 6
   m_Name: attack
-  m_TagString: attack
+  m_TagString: bat
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

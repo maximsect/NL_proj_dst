@@ -6307,8 +6307,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   camera: {fileID: 801054521}
   player: {fileID: 296382345}
-  playerTag: []
-  enemyTag: []
   killEffect: []
 --- !u!4 &1948295697
 Transform:
@@ -6437,9 +6435,57 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2836802160314547150, guid: 62b86c94eebff9043aee71d578b7ca66, type: 3}
+      propertyPath: m_Size.x
+      value: 2.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 2836802160314547150, guid: 62b86c94eebff9043aee71d578b7ca66, type: 3}
+      propertyPath: m_Size.y
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2836802160314547150, guid: 62b86c94eebff9043aee71d578b7ca66, type: 3}
+      propertyPath: m_Offset.x
+      value: 0.125
+      objectReference: {fileID: 0}
+    - target: {fileID: 2836802160314547150, guid: 62b86c94eebff9043aee71d578b7ca66, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.125
+      objectReference: {fileID: 0}
+    - target: {fileID: 2836802160314547150, guid: 62b86c94eebff9043aee71d578b7ca66, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2836802160314547150, guid: 62b86c94eebff9043aee71d578b7ca66, type: 3}
+      propertyPath: m_ForceSendLayers.m_Bits
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2836802160314547150, guid: 62b86c94eebff9043aee71d578b7ca66, type: 3}
+      propertyPath: m_ForceReceiveLayers.m_Bits
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3111684209507740287, guid: 62b86c94eebff9043aee71d578b7ca66, type: 3}
       propertyPath: m_Name
       value: player
+      objectReference: {fileID: 0}
+    - target: {fileID: 3111684209507740287, guid: 62b86c94eebff9043aee71d578b7ca66, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 5832287058513742495, guid: 62b86c94eebff9043aee71d578b7ca66, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5832287058513742495, guid: 62b86c94eebff9043aee71d578b7ca66, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5832287058513742495, guid: 62b86c94eebff9043aee71d578b7ca66, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5832287058513742495, guid: 62b86c94eebff9043aee71d578b7ca66, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 8121561992547142078, guid: 62b86c94eebff9043aee71d578b7ca66, type: 3}
       propertyPath: m_LocalPosition.x
@@ -6493,6 +6539,30 @@ PrefabInstance:
       propertyPath: UI_skillcooldown
       value: 
       objectReference: {fileID: 55975985}
+    - target: {fileID: 8249693313189414305, guid: 62b86c94eebff9043aee71d578b7ca66, type: 3}
+      propertyPath: m_Size.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8249693313189414305, guid: 62b86c94eebff9043aee71d578b7ca66, type: 3}
+      propertyPath: m_Size.y
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8249693313189414305, guid: 62b86c94eebff9043aee71d578b7ca66, type: 3}
+      propertyPath: m_Offset.x
+      value: -0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8249693313189414305, guid: 62b86c94eebff9043aee71d578b7ca66, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8249693313189414305, guid: 62b86c94eebff9043aee71d578b7ca66, type: 3}
+      propertyPath: m_ForceSendLayers.m_Bits
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8249693313189414305, guid: 62b86c94eebff9043aee71d578b7ca66, type: 3}
+      propertyPath: m_ForceReceiveLayers.m_Bits
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6554,10 +6624,6 @@ PrefabInstance:
       propertyPath: anim
       value: 
       objectReference: {fileID: 1862599815}
-    - target: {fileID: 5030763837123649888, guid: 93a780fab263bdc49a10edf9d126263d, type: 3}
-      propertyPath: m_IsTrigger
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8682382182829615398, guid: 93a780fab263bdc49a10edf9d126263d, type: 3}
       propertyPath: m_Name
       value: kawaraoni

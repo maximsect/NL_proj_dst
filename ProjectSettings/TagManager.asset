@@ -17,6 +17,11 @@ TagManager:
   - observer
   - damage_factor
   - assign_attack
+  - bat
+  - spear
+  - bow
+  - hammer
+  - enemyweapon
   layers:
   - Default
   - TransparentFX
@@ -30,7 +35,7 @@ TagManager:
   - weapon
   - object
   - enemy
-  - 
+  - enemyweapon
   - 
   - 
   - 

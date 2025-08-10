@@ -2,9 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class catdemon : MonoBehaviour
+public class catdemon : EnemyBaseScript
 {
-    public int catdemon_hp = 30;
 
     public float speed = 5f;
     public float jumppower = 8f;
@@ -12,8 +11,6 @@ public class catdemon : MonoBehaviour
     public float footOffset = 0.01f;
     public int attackPower = 10;
     public float interactionZone = 0.35f;
-
-
 
     public float attStartTime = 0.1f;
     public float attEndTime = 0.2f;
@@ -39,7 +36,7 @@ public class catdemon : MonoBehaviour
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public override void SubStart()
     {
 
         StartTime = -coolEndTime * 2;
@@ -47,14 +44,18 @@ public class catdemon : MonoBehaviour
         rbody.constraints = RigidbodyConstraints2D.FreezeRotation; // Prevent rotation
 
         this.animator.SetInteger("color", color);
+        StartCoroutine(CatDemonMovement());
+
+        enemyHp = (int)(enemyHp * powerUpRatio);
+        speed *= powerUpRatio;
     }
 
     // Update is called once per frame
 
-
-    private void Update()
+    /*
+    public override void SubUpdate()
     {
-
+        /*
         animator.SetInteger("catbehave", this.behavior);
 
         //�������猩���v���C���[�̕����x�N�g�����擾
@@ -120,80 +121,131 @@ public class catdemon : MonoBehaviour
             }
 
         }
-
-
-
-
-
-
-        // �n�ʂɐڐG���Ă��邩���m�F
         isGrounded = Physics2D.Raycast(transform.position, Vector2.down, checkDistance + footOffset, LayerMask.GetMask("Ground"));
-        // �W�����v����
+
         if (isGrounded && !isJumping)
             if (vy < 0)
             {
                 isJumping = true;
                 rbody.AddForce(Vector2.up * jumppower, ForceMode2D.Impulse);
             }
+    }/**/
+    /// <summary>
+    /// movementMode 
+    /// 0: playerの方向へ歩く
+    /// 1: ランダムに行動する　歩く、ジャンプ、とびかかる。
+    /// 2:　playerに攻撃する
+    /// 
+    /// behavior
+    /// 0:歩く
+    /// 1:攻撃する
+    /// 2:攻撃停止
+    /// </summary>
+    int movementMode = 0;
+    Vector3 relativePos;
 
-        /*
-        // �e���|�[�g�J�E���^�[�����炷
-        if (tpCount > 0)
+    public override void SubUpdate()
+    {
+        animator.SetInteger("catbehave", this.behavior);
+        relativePos = GameManager.player.transform.position - transform.position;
+        if (Mathf.Abs(relativePos.y) < interactionZone)
         {
-            tpCount--;
+            movementMode = 0;
+            if (Mathf.Abs(relativePos.x) < interactionZone)
+                movementMode = 2;
         }
-        else
+        else movementMode = 1;
+    }
+    IEnumerator CatDemonMovement()
+    {
+        while (true)
         {
-            gameObject.SetActive(false); // �e���|�[�g�J�E���^�[��0�ɂȂ�����I�u�W�F�N�g���\���ɂ���
-            if (re_x < 0)
-            { // �v���C���[�������ɂ���ꍇ
-                rbody.AddForce(Vector2.right * tpPower, ForceMode2D.Impulse);
-            }
-            else // �v���C���[���E���ɂ���ꍇ
+            switch (movementMode)
             {
-                rbody.AddForce(Vector2.left * tpPower, ForceMode2D.Impulse);
+                case 0:
+                    rbody.linearVelocity = new Vector2((relativePos.x > 0) ? speed : -speed, rbody.linearVelocity.y);
+                    //プレイヤー方向に移動する
+                    this.transform.localScale = new Vector3((relativePos.x > 0) ? -1 : 1, 1, 1);
+                    behavior = 0;
+                    yield return null;
+                    break;
+                case 1:
+                    int randomMove = UnityEngine.Random.Range(0, 5);
+                    if (randomMove >= 2) randomMove = UnityEngine.Random.Range(0, 5);
+                    switch (randomMove)
+                    {
+                        case 0:
+                            for (float elapsedTimer = 0; elapsedTimer < 1; elapsedTimer += Time.deltaTime)
+                            {
+                                behavior = 0;
+                                this.transform.localScale = new Vector3(-1, 1, 1);
+                                rbody.linearVelocity = new Vector2(speed, rbody.linearVelocity.y);
+                                yield return null;
+                            }
+                            break;
+                        case 1:
+                            for (float elapsedTimer = 0; elapsedTimer < 1; elapsedTimer += Time.deltaTime)
+                            {
+                                behavior = 0;
+                                this.transform.localScale = new Vector3(1, 1, 1);
+                                rbody.linearVelocity = new Vector2(-speed, rbody.linearVelocity.y);
+                                yield return null;
+                            }
+                            break;
+                        case 2:
+                            rbody.AddForce(Vector2.up * jumppower, ForceMode2D.Impulse);
+                            for (float elapsedTimer = 0; elapsedTimer < 1; elapsedTimer += Time.deltaTime)
+                            {
+                                behavior = 0;
+                                this.transform.localScale = new Vector3(-1, 1, 1);
+                                rbody.linearVelocity = new Vector2(speed, rbody.linearVelocity.y);
 
-                tpCount = UnityEngine.Random.Range(300, 600); // �����_���ȃJ�E���g��ݒ�
+                                yield return null;
+                            }
+                            break;
+                        case 3:
+                            rbody.AddForce(Vector2.up * jumppower, ForceMode2D.Impulse);
+                            for (float elapsedTimer = 0; elapsedTimer < 1; elapsedTimer += Time.deltaTime)
+                            {
+                                behavior = 0;
+                                this.transform.localScale = new Vector3(1, 1, 1);
+                                rbody.linearVelocity = new Vector2(-speed, rbody.linearVelocity.y);
+
+                                yield return null;
+                            }
+                            break;
+                        case 4:
+                            rbody.AddForce(Vector2.up * jumppower, ForceMode2D.Impulse);
+                            for (float elapsedTimer = 0; elapsedTimer < 1; elapsedTimer += Time.deltaTime)
+                            {
+                                behavior = 0;
+                                yield return null;
+                            }
+                            break;
+                        case 5:
+                            for (float elapsedTimer = 0; elapsedTimer < 1; elapsedTimer += Time.deltaTime)
+                            {
+                                yield return null;
+                            }
+                            break;
+                        default:
+                            yield return null;
+                            break;
+                    }
+                    break;
+                case 2:
+                    for (float elapsedTimer = 0; elapsedTimer < coolEndTime; elapsedTimer += Time.deltaTime)
+                    {
+                        behavior = (elapsedTimer < animEndTime) ? 1 : 2;
+                        this.attackObj.SetActive(elapsedTimer == Mathf.Clamp(elapsedTimer, attStartTime, attEndTime));//経過時間がattStartTimeとattEndTimeの途中である場合
+
+                        yield return null;
+                    }
+                    break;
+                default:
+                    yield return null;
+                    break;
             }
-        }
-        */
-    }
-
-
-
-    void OnTriggerStay2D(Collider2D collider)
-    {
-        if (collider.gameObject.CompareTag("attack") && this.invincible == 0)
-        {
-            this.catdemon_hp -= 10;
-            this.invincible = 1;
-            if (this.catdemon_hp <= 0)
-                Destroy(this.gameObject);
-        }
-        if (collider.gameObject.CompareTag("skillattack") && this.invincible == 0)
-        {
-            this.catdemon_hp -= 30;
-            this.invincible = 1;
-            if (this.catdemon_hp <= 0)
-                Destroy(this.gameObject);
-        }
-    }
-
-    void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("arrow") && this.invincible == 0)
-        {
-            this.catdemon_hp -= 5;
-            if (this.catdemon_hp <= 0)
-                Destroy(this.gameObject);
-        }
-    }
-
-    void OnTriggerExit2D(Collider2D collider)
-    {
-        if ((collider.gameObject.CompareTag("attack") || collider.gameObject.CompareTag("skillattack")) && this.invincible == 1)
-        {
-            this.invincible = 0;
         }
     }
 }

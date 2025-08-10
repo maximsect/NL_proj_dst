@@ -1634,6 +1634,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerData: {fileID: 11400000, guid: dc4bf2af19840754abdc4cf88e72b30e, type: 2}
+  sceneData: {fileID: 11400000, guid: d002b1dff15460843ae4dcd006954aa3, type: 2}
   syllabusClasses:
   - sceneMode: "\u51FA\u5E2D"
     imageColor: {r: 0.7528302, g: 1, b: 0.7528302, a: 1}
@@ -1644,15 +1645,15 @@ MonoBehaviour:
     sceneClasses:
     - SceneName: ExaminationScene
       difficultyLevel: "\u9B3C"
-      skillSprite: {fileID: 351143423074838027, guid: ff53b649bb4bbc64180272f82b9c49b0, type: 3}
+      skillSprite: {fileID: 21300000, guid: ff53b649bb4bbc64180272f82b9c49b0, type: 3}
       getSkillName: "\u6700\u5927HP\u5897\u52A0+2"
       variableName: maxHp
       value: 2
       valueMode: 1
       possibility: 2
-    - SceneName: GetFlag
+    - SceneName: GetFlagA
       difficultyLevel: "\u4ECF"
-      skillSprite: {fileID: 351143423074838027, guid: ff53b649bb4bbc64180272f82b9c49b0, type: 3}
+      skillSprite: {fileID: 21300000, guid: ff53b649bb4bbc64180272f82b9c49b0, type: 3}
       getSkillName: "\u6700\u5927HP\u5897\u52A0+3"
       variableName: maxHp
       value: 3
@@ -1667,7 +1668,7 @@ MonoBehaviour:
     sceneClasses:
     - SceneName: KillEnemyAssignment
       difficultyLevel: "\u5927\u9B3C"
-      skillSprite: {fileID: -3927747150297788645, guid: aa4b734898605054cba60f18bc6edc77, type: 3}
+      skillSprite: {fileID: 21300000, guid: aa4b734898605054cba60f18bc6edc77, type: 3}
       getSkillName: "\u901F\u5EA6\u4E0A\u6607+2"
       variableName: moveSpeed
       value: 2
@@ -1675,7 +1676,7 @@ MonoBehaviour:
       possibility: 3
     - SceneName: Survivor
       difficultyLevel: "\u4ECF"
-      skillSprite: {fileID: 1032412051831555667, guid: 805a53075b2998e408cbcf9590c748f9, type: 3}
+      skillSprite: {fileID: 21300000, guid: 805a53075b2998e408cbcf9590c748f9, type: 3}
       getSkillName: "\u653B\u6483\u529B\u5897\u52A0+2"
       variableName: AddAttackVal
       value: 2
@@ -1690,7 +1691,7 @@ MonoBehaviour:
     sceneClasses:
     - SceneName: quantum theory
       difficultyLevel: "\u5927\u4ECF"
-      skillSprite: {fileID: 1032412051831555667, guid: 805a53075b2998e408cbcf9590c748f9, type: 3}
+      skillSprite: {fileID: 21300000, guid: 805a53075b2998e408cbcf9590c748f9, type: 3}
       getSkillName: "\u653B\u6483\u529B\u5897\u52A0"
       variableName: MultipleAttackVal
       value: 1.2
@@ -1698,7 +1699,7 @@ MonoBehaviour:
       possibility: 5
     - SceneName: assignment
       difficultyLevel: "\u795E"
-      skillSprite: {fileID: 2863425692199160618, guid: eae27a57dddb63c438c036a0b85c247d, type: 3}
+      skillSprite: {fileID: 21300000, guid: eae27a57dddb63c438c036a0b85c247d, type: 3}
       getSkillName: "\u30B8\u30E3\u30F3\u30D7\u80FD\u529B\u5411\u4E0A"
       variableName: jumpSpeed
       value: 2

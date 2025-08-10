@@ -43,6 +43,7 @@ public class player_main : MonoBehaviour
     public float grappingSpeed = 25;
     public Animator animator;
     public Animator skillanimator;
+    public BoxCollider2D attackcollider;
     public BoxCollider2D skillcollider;
     public UI_skillcooldown UI_skillcooldown;
 
@@ -202,8 +203,8 @@ public class player_main : MonoBehaviour
         }
 
         if (this.isskillusing(2)) {
-            this.skill.transform.position = new Vector3(this.transform.position.x + 2.0f * PlayerData.main.direction, this.transform.position.y, 0f);
-            if (this.isskillusing()) { this.skillcollider.offset = Vector3.zero; }
+            this.skill.transform.position = new Vector2(this.transform.position.x + 2.5f * PlayerData.main.direction, this.transform.position.y + 0.25f);
+            if (this.isskillusing()) { this.skillcollider.offset = new Vector2(0.125f, -0.125f); }
             else { this.skillcollider.offset = this.hide2D; }
             this.velcopy_x = this.rigid.linearVelocity;
             this.velcopy_x.x = 0f;
@@ -281,21 +282,25 @@ public class player_main : MonoBehaviour
         yield break;
     }
 
-    void OnCollisionStay2D(Collision2D collision) {
-        if ((collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("damage_factor") || (collision.gameObject.CompareTag("assign_attack") && Random.Range(0, 2) == 0)) && !this.hitflag && this.invincibletime <= 0) {
+    void OnTriggerStay2D(Collider2D collider) {
+        //if ((collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("damage_factor") || (collision.gameObject.CompareTag("assign_attack") && Random.Range(0, 2) == 0)) && !this.hitflag && this.invincibletime <= 0 && (!collision.otherCollider.gameObject.CompareTag("attack") && !collision.otherCollider.gameObject.CompareTag("skillattack"))) {
+        if (GameManager.enemyWeaponTag.Contains(collider.gameObject.tag) && Random.Range(0, 2) == 0 && !this.hitflag && this.invincibletime <= 0)
+        {
             Debug.Log("damage");
             PlayerData.main.Damage(1);
             this.hitflag = true;
             this.rigid.linearVelocity = Vector2.zero;
-            this.rigid.AddForce(this.transform.position.x <= collision.transform.position.x ? this.KBVEC : Vector2.Reflect(this.KBVEC, Vector2.right), ForceMode2D.Impulse);
+            this.rigid.AddForce(this.transform.position.x <= collider.transform.position.x ? this.KBVEC : Vector2.Reflect(this.KBVEC, Vector2.right), ForceMode2D.Impulse);
             this.kb_time = 20;
             this.invincibletime = 60;
             this.dashtime = 0;
-            if (PlayerData.main.hp <= 0) {
+            if (PlayerData.main.hp <= 0)
+            {
                 Debug.Log("dead");
             }
             //this.kbtimer=50;
             //Time.timeScale=0;
+
         }
     }
     

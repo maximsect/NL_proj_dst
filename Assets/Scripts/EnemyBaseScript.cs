@@ -1,49 +1,59 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using Random = UnityEngine.Random;
 
 public class EnemyBaseScript : MonoBehaviour
 {
-    public int hp = 30;
-    private bool isInvincible = false;
+    public SceneData sceneData;
+    protected float powerUpRatio = 1;
+    public int enemyHp = 30;
+    protected float invincibleTimer = 0;
     void OnTriggerStay2D(Collider2D collider)
     {
-        if (isInvincible) return;
-        switch (collider.gameObject.tag)
+        if (GameManager.playerWeaponTag.Contains(collider.gameObject.tag) && invincibleTimer < 0)
         {
-            case "bat":
-                hp -= PlayerData.main.batAttack;
-                break;
-            case "spear":
-                hp -= PlayerData.main.spearAttack;
-                break;
-            case "bow":
-                hp -= PlayerData.main.bowAttack;
-                break;
-            case "hammer":
-                hp -= PlayerData.main.hammerAttack;
-                break;
-            case "arrow":
-                hp -= PlayerData.main.arrowAttack;
-                break;
-            case "skillattack":
-                hp -= PlayerData.main.skillAttack;
-                break;
-            default:
-                break;
+            invincibleTimer = 0.1f;
+            switch (collider.gameObject.tag)
+            {
+                case "bat":
+                    enemyHp -= PlayerData.main.batAttack;
+                    break;
+                case "spear":
+                    enemyHp -= PlayerData.main.spearAttack;
+                    break;
+                case "bow":
+                    enemyHp -= PlayerData.main.bowAttack;
+                    break;
+                case "hammer":
+                    enemyHp -= PlayerData.main.hammerAttack;
+                    break;
+                case "arrow":
+                    enemyHp -= PlayerData.main.arrowAttack;
+                    break;
+                case "skillattack":
+                    enemyHp -= PlayerData.main.skillAttack;
+                    break;
+                default:
+                    break;
+            }
+            if (enemyHp <= 0)
+                Destroy(this.gameObject);
         }
-        isInvincible = true;
-        if (hp <= 0)
-            Destroy(this.gameObject);
-        KnockBack();
 
     }
-    void OnTriggerExit2D(Collider2D collider)
+    void Start()
     {
-        if (GameManager.main.playerTag.Contains(collider.gameObject.tag))
-        {
-            isInvincible = false;
-        }
+        int stageLevel = sceneData.GetStageLevel();
+        powerUpRatio = Random.Range(sceneData.ratios[stageLevel].x, sceneData.ratios[stageLevel].y);
+        SubStart();
     }
-    public virtual void KnockBack() { }
+    void Update()
+    {
+        invincibleTimer -= Time.deltaTime;
+        GetComponent<SpriteRenderer>().color = (invincibleTimer > 0) ? new Color(1, 0, 0, 1) : new Color(1, 1, 1, 1);
+        SubUpdate();
+    }
+    public virtual void SubStart() { }
+    public virtual void SubUpdate() { }
 }

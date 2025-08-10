@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8249693313189414305}
   m_Layer: 6
   m_Name: attack
-  m_TagString: attack
+  m_TagString: bat
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -108,10 +108,10 @@ BoxCollider2D:
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 0
   m_ForceReceiveLayers:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 0
   m_ContactCaptureLayers:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -243,10 +243,10 @@ BoxCollider2D:
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 0
   m_ForceReceiveLayers:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 0
   m_ContactCaptureLayers:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -481,6 +481,7 @@ MonoBehaviour:
   grappingSpeed: 25
   animator: {fileID: 1559691304650324450}
   skillanimator: {fileID: 3685733435616716147}
+  attackcollider: {fileID: 8249693313189414305}
   skillcollider: {fileID: 2836802160314547150}
   UI_skillcooldown: {fileID: 0}
 --- !u!95 &1559691304650324450

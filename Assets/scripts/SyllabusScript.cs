@@ -9,12 +9,16 @@ public enum ValueChangeMode
 {
     Change, Add, Multiple, Call, Reset
 }
+public enum SceneMode
+{
+    Complete,LessDamage,NoDamage,NumberOfKill,TimeAttack
+}
 [System.Serializable]
 public class SceneClass
 {
     public string SceneName;
     public string difficultyLevel = "Normal";
-    public string sceneMode = "GetFlag";
+    public SceneMode sceneMode;
     public Sprite skillSprite;
     public string getSkillName;
     public string variableName;
@@ -87,7 +91,7 @@ public class SyllabusScript : MonoBehaviour
                 break;
         }
         sceneData.stageLevel = syllabusClasses[index].sceneClasses[getList[index]].difficultyLevel;
-        sceneData.stageMode = syllabusClasses[index].sceneClasses[getList[index]].sceneMode;
+        sceneData.sceneMode = syllabusClasses[index].sceneClasses[getList[index]].sceneMode;
         SceneManager.LoadScene(syllabusClasses[index].sceneClasses[getList[index]].SceneName);
     }
     public void SelectRandomThree()

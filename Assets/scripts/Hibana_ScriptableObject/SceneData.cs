@@ -1,7 +1,9 @@
 using UnityEngine;
+using UnityEditor;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
 
 [CreateAssetMenu(fileName = "SceneData", menuName = "Scriptable Objects/SceneData")]
 public class SceneData : ScriptableObject
@@ -12,7 +14,8 @@ public class SceneData : ScriptableObject
     public int resultScene = 15;
     public List<int> bossScene = new List<int>();
     public string stageLevel = "ãS";
-    public string stageMode = "GetFlag";
+    public SceneMode sceneMode;
+    public SceneData copySource;
     public List<Vector2> ratios = new List<Vector2>()
     {
         new Vector2(0.6f,0.7f),
@@ -47,5 +50,29 @@ public class SceneData : ScriptableObject
         else if (currentScene == resultScene) return 2;
         else return 0;
 #endif
+    }
+    public void ResetValues()
+    {
+        FieldInfo[] fields = this.GetType().GetFields();
+        foreach (var field in fields)
+        {
+            field.SetValue(this, field.GetValue(copySource));
+        }
+    }
+}
+[CustomEditor(typeof(SceneData))]
+public class SceneDataEditor : Editor
+{
+    ///<summary>
+    ///InspectorÇÃGUIçXêV
+    ///</summary>
+    public override void OnInspectorGUI()
+    {
+        SceneData sceneData = target as SceneData;
+        base.OnInspectorGUI();
+        if (GUILayout.Button("ReplaceEveryValue"))
+        {
+            sceneData.ResetValues();
+        }
     }
 }

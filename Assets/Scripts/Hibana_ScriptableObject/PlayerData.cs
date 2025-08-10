@@ -18,7 +18,8 @@ public class PlayerData : ScriptableObject
     public static PlayerData main { get; private set; }
     public GameObject playerPrefab;
     [Header("Status")]
-    [field: SerializeField] public int hp { get; private set; } = 5;
+    //[field: SerializeField] public int hp { get; private set; } = 5;
+    public int hp = 30;
     public int maxHp = 10;
     public int healAmount = 3;
     public float autoHealInterval = 10f;
@@ -48,11 +49,7 @@ public class PlayerData : ScriptableObject
 
     [Header("Variable")]
     public float invinsibleDuration = 0.3f;
-    public PlayerData copySource;
-    public SceneData sceneData;
-    [field: SerializeField] public string LastSceneName { get; private set; } = "Stage1";
-    public string resultText { get; private set; } = "";
-    public float elapsedTime = 0;
+    public PlayerData copySource,pasteTarget;
     public void OnStartSetting()
     {
         main = this;
@@ -160,11 +157,6 @@ public class PlayerData : ScriptableObject
             field.SetValue(this, field.GetValue(PlayerData.main.copySource));
         }
     }
-    public string GetResultText()
-    {
-        resultText = "Result\n" + "Score: " + score + "\nTime: " + elapsedTime;
-        return resultText;
-    }
     public void AddAttackVal(float mul)
     {
         arrowAttack += (int)mul;
@@ -182,5 +174,29 @@ public class PlayerData : ScriptableObject
         hammerAttack = (int)(hammerAttack * mul);
         skillAttack = (int)(skillAttack * mul);
         spearAttack = (int)(spearAttack * mul);
+    }
+    public void ResetValues()
+    {
+        FieldInfo[] fields = pasteTarget.GetType().GetFields();
+        foreach (var field in fields)
+        {
+            field.SetValue(pasteTarget, field.GetValue(copySource));
+        }
+    }
+}
+[CustomEditor(typeof(PlayerData))]
+public class PlayerDataEditor : Editor
+{
+    ///<summary>
+    ///InspectorÇÃGUIçXêV
+    ///</summary>
+    public override void OnInspectorGUI()
+    {
+        PlayerData playerData = target as PlayerData;
+        base.OnInspectorGUI();
+        if (GUILayout.Button("ReplaceEveryValue"))
+        {
+            playerData.ResetValues();
+        }
     }
 }

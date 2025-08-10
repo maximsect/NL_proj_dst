@@ -12,9 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10677f6ed6929174896070099b4940dd, type: 3}
   m_Name: ScoreData
   m_EditorClassIdentifier: 
-  scores: 
-  sumScore: 0
-  elapsedTime: 0
-  numberOfKill: 0
+  scoreList:
+  - elapsedTime: 146234
+    numberOfKill: 234
+    damageAmount: 1
+    sceneScore: 2
+  - elapsedTime: 342
+    numberOfKill: 34
+    damageAmount: 12
+    sceneScore: 23
+  copySource: {fileID: 11400000, guid: ea8a4293b41cf1a46a08f757b8c20fe8, type: 2}
   numberOfDeath: 0
-  DamageAmount: 0

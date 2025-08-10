@@ -14,31 +14,37 @@ public class EnemyBaseScript : MonoBehaviour
         if (GameManager.playerWeaponTag.Contains(collider.gameObject.tag) && invincibleTimer < 0)
         {
             invincibleTimer = 0.1f;
+            int damage = 0;
             switch (collider.gameObject.tag)
             {
                 case "bat":
-                    enemyHp -= PlayerData.main.batAttack;
+                    damage = PlayerData.main.batAttack;
                     break;
                 case "spear":
-                    enemyHp -= PlayerData.main.spearAttack;
+                    damage = PlayerData.main.spearAttack;
                     break;
                 case "bow":
-                    enemyHp -= PlayerData.main.bowAttack;
+                    damage= PlayerData.main.bowAttack;
                     break;
                 case "hammer":
-                    enemyHp -= PlayerData.main.hammerAttack;
+                    damage = PlayerData.main.hammerAttack;
                     break;
                 case "arrow":
-                    enemyHp -= PlayerData.main.arrowAttack;
+                    damage = PlayerData.main.arrowAttack;
                     break;
                 case "skillattack":
-                    enemyHp -= PlayerData.main.skillAttack;
+                    damage = PlayerData.main.skillAttack;
                     break;
                 default:
                     break;
             }
+            enemyHp -= damage;
+            SceneTransition.main.DamageAmount(damage);
             if (enemyHp <= 0)
+            {
+                SceneTransition.main.GetKill();
                 Destroy(this.gameObject);
+            }
         }
 
     }

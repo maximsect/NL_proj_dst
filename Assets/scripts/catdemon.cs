@@ -163,25 +163,29 @@ public class catdemon : EnemyBaseScript
                 case 0:
                     rbody.linearVelocity = new Vector2((relativePos.x > 0) ? speed : -speed, rbody.linearVelocity.y);
                     //プレイヤー方向に移動する
-                    this.transform.localScale = new Vector3((relativePos.x > 0) ? 1 : -1, 1, 1);
+                    this.transform.localScale = new Vector3((relativePos.x > 0) ? -1 : 1, 1, 1);
                     behavior = 0;
                     yield return null;
                     break;
                 case 1:
-                    int randomMove = UnityEngine.Random.Range(0, 6);
-
+                    int randomMove = UnityEngine.Random.Range(0, 5);
+                    if (randomMove >= 2) randomMove = UnityEngine.Random.Range(0, 5);
                     switch (randomMove)
                     {
                         case 0:
-                            for (float elapsedTimer = 0; elapsedTimer < 2; elapsedTimer += Time.deltaTime)
+                            for (float elapsedTimer = 0; elapsedTimer < 1; elapsedTimer += Time.deltaTime)
                             {
+                                behavior = 0;
+                                this.transform.localScale = new Vector3(-1, 1, 1);
                                 rbody.linearVelocity = new Vector2(speed, rbody.linearVelocity.y);
                                 yield return null;
                             }
                             break;
                         case 1:
-                            for (float elapsedTimer = 0; elapsedTimer < 2; elapsedTimer += Time.deltaTime)
+                            for (float elapsedTimer = 0; elapsedTimer < 1; elapsedTimer += Time.deltaTime)
                             {
+                                behavior = 0;
+                                this.transform.localScale = new Vector3(1, 1, 1);
                                 rbody.linearVelocity = new Vector2(-speed, rbody.linearVelocity.y);
                                 yield return null;
                             }
@@ -190,6 +194,8 @@ public class catdemon : EnemyBaseScript
                             rbody.AddForce(Vector2.up * jumppower, ForceMode2D.Impulse);
                             for (float elapsedTimer = 0; elapsedTimer < 1; elapsedTimer += Time.deltaTime)
                             {
+                                behavior = 0;
+                                this.transform.localScale = new Vector3(-1, 1, 1);
                                 rbody.linearVelocity = new Vector2(speed, rbody.linearVelocity.y);
 
                                 yield return null;
@@ -199,6 +205,8 @@ public class catdemon : EnemyBaseScript
                             rbody.AddForce(Vector2.up * jumppower, ForceMode2D.Impulse);
                             for (float elapsedTimer = 0; elapsedTimer < 1; elapsedTimer += Time.deltaTime)
                             {
+                                behavior = 0;
+                                this.transform.localScale = new Vector3(1, 1, 1);
                                 rbody.linearVelocity = new Vector2(-speed, rbody.linearVelocity.y);
 
                                 yield return null;
@@ -208,6 +216,7 @@ public class catdemon : EnemyBaseScript
                             rbody.AddForce(Vector2.up * jumppower, ForceMode2D.Impulse);
                             for (float elapsedTimer = 0; elapsedTimer < 1; elapsedTimer += Time.deltaTime)
                             {
+                                behavior = 0;
                                 yield return null;
                             }
                             break;

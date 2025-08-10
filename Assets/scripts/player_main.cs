@@ -282,17 +282,20 @@ public class player_main : MonoBehaviour
         yield break;
     }
 
-    void OnCollisionStay2D(Collision2D collision) {
-        if ((collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("damage_factor") || (collision.gameObject.CompareTag("assign_attack") && Random.Range(0, 2) == 0)) && !this.hitflag && this.invincibletime <= 0 && (!collision.otherCollider.gameObject.CompareTag("attack") && !collision.otherCollider.gameObject.CompareTag("skillattack"))) {
+    void OnTriggerStay2D(Collider2D collider) {
+        //if ((collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("damage_factor") || (collision.gameObject.CompareTag("assign_attack") && Random.Range(0, 2) == 0)) && !this.hitflag && this.invincibletime <= 0 && (!collision.otherCollider.gameObject.CompareTag("attack") && !collision.otherCollider.gameObject.CompareTag("skillattack"))) {
+        if (GameManager.enemyWeaponTag.Contains(collider.gameObject.tag) && Random.Range(0, 2) == 0 && !this.hitflag && this.invincibletime <= 0)
+        {
             Debug.Log("damage");
             PlayerData.main.Damage(1);
             this.hitflag = true;
             this.rigid.linearVelocity = Vector2.zero;
-            this.rigid.AddForce(this.transform.position.x <= collision.transform.position.x ? this.KBVEC : Vector2.Reflect(this.KBVEC, Vector2.right), ForceMode2D.Impulse);
+            this.rigid.AddForce(this.transform.position.x <= collider.transform.position.x ? this.KBVEC : Vector2.Reflect(this.KBVEC, Vector2.right), ForceMode2D.Impulse);
             this.kb_time = 20;
             this.invincibletime = 60;
             this.dashtime = 0;
-            if (PlayerData.main.hp <= 0) {
+            if (PlayerData.main.hp <= 0)
+            {
                 Debug.Log("dead");
             }
             //this.kbtimer=50;

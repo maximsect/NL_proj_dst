@@ -45,11 +45,11 @@ public class SceneTransition : MonoBehaviour
         Debug.Log("Admitted");
         clearFlag = true;
     }
-    public void ChangeScoreData(int num)
+    /*public void ChangeScoreData(int num)
     {
         scoreData.scores.Add(num);
         scoreData.sumScore = scoreData.scores.GetSum();
-    }
+    }/**/
 }
 public static class GameObjectExtention
 {

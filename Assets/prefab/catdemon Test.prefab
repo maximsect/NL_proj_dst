@@ -325,8 +325,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ce988f7d1ff8b14094834b2e15f24c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sceneData: {fileID: 11400000, guid: d002b1dff15460843ae4dcd006954aa3, type: 2}
   enemyHp: 30
-  catdemon_hp: 80
   speed: 3
   jumppower: 8
   checkDistance: 0.1

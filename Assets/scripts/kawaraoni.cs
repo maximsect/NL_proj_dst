@@ -3,7 +3,6 @@ using System.Collections;
 
 public class kawaraoni : EnemyBaseScript
 {
-    public int hp=30;
     public float interval = 2f;
     public float firetime = 0.5f;
     public float attackoffset = 1.0f;

@@ -128,8 +128,8 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.109375, y: 1.03125}
+    pivot: {x: 0.5, y: 0.25}
+    oldSize: {x: 1.109375, y: 2}
     newSize: {x: 1.109375, y: 1.03125}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -176,11 +176,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1bcd4e450647d3c44a38104eb6e59793, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 30
+  sceneData: {fileID: 11400000, guid: d002b1dff15460843ae4dcd006954aa3, type: 2}
+  enemyHp: 30
   interval: 2
   firetime: 0.5
   attackoffset: 1
   LaserPref: {fileID: 5086387744944446968, guid: 421b2787bc59890408d5c72da2ca5df5, type: 3}
+  anim: {fileID: 0}
 --- !u!95 &1824132526181676250
 Animator:
   serializedVersion: 7

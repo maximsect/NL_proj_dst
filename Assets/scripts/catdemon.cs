@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class catdemon : EnemyBaseScript
 {
-    public int catdemon_hp = 30;
 
     public float speed = 5f;
     public float jumppower = 8f;
@@ -37,7 +36,7 @@ public class catdemon : EnemyBaseScript
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public override void SubStart()
     {
 
         StartTime = -coolEndTime * 2;
@@ -46,6 +45,9 @@ public class catdemon : EnemyBaseScript
 
         this.animator.SetInteger("color", color);
         StartCoroutine(CatDemonMovement());
+
+        enemyHp = (int)(enemyHp * powerUpRatio);
+        speed *= powerUpRatio;
     }
 
     // Update is called once per frame

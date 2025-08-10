@@ -35,6 +35,7 @@ public class SyllabusClass
 public class SyllabusScript : MonoBehaviour
 {
     public PlayerData playerData;
+    public SceneData sceneData;
     public SyllabusClass[] syllabusClasses = new SyllabusClass[3];
     List<int> getList = new List<int>();
     public void ChangeScene(int index)
@@ -84,6 +85,7 @@ public class SyllabusScript : MonoBehaviour
             default:
                 break;
         }
+        sceneData.stageLevel = syllabusClasses[index].sceneClasses[getList[index]].difficultyLevel;
         SceneManager.LoadScene(syllabusClasses[index].sceneClasses[getList[index]].SceneName);
     }
     public void SelectRandomThree()

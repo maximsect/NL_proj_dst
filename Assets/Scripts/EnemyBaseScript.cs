@@ -1,9 +1,12 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using Random = UnityEngine.Random;
 
 public class EnemyBaseScript : MonoBehaviour
 {
+    public SceneData sceneData;
+    protected float powerUpRatio = 1;
     public int enemyHp = 30;
     protected float invincibleTimer = 0;
     void OnTriggerStay2D(Collider2D collider)
@@ -39,11 +42,18 @@ public class EnemyBaseScript : MonoBehaviour
         }
 
     }
+    void Start()
+    {
+        int stageLevel = sceneData.GetStageLevel();
+        powerUpRatio = Random.Range(sceneData.ratios[stageLevel].x, sceneData.ratios[stageLevel].y);
+        SubStart();
+    }
     void Update()
     {
         invincibleTimer -= Time.deltaTime;
         GetComponent<SpriteRenderer>().color = (invincibleTimer > 0) ? new Color(1, 0, 0, 1) : new Color(1, 1, 1, 1);
         SubUpdate();
     }
+    public virtual void SubStart() { }
     public virtual void SubUpdate() { }
 }

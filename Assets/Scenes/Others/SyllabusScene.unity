@@ -1634,6 +1634,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerData: {fileID: 11400000, guid: dc4bf2af19840754abdc4cf88e72b30e, type: 2}
+  sceneData: {fileID: 11400000, guid: d002b1dff15460843ae4dcd006954aa3, type: 2}
   syllabusClasses:
   - sceneMode: "\u51FA\u5E2D"
     imageColor: {r: 0.7528302, g: 1, b: 0.7528302, a: 1}

@@ -11,7 +11,20 @@ public class SceneData : ScriptableObject
     public int majorScene = 10;
     public int resultScene = 15;
     public List<int> bossScene = new List<int>();
-    public int stageLevel = 1;
+    public string stageLevel = "";
+    public List<Vector2> ratios = new List<Vector2>()
+    {
+        new Vector2(0.6f,0.7f),
+        new Vector2(0.7f,0.8f),
+        new Vector2(0.8f,1.2f),
+        new Vector2(1.2f,1.4f),
+        new Vector2(1.4f,1.7f)
+    };
+    public int GetStageLevel()
+    {
+        List<string> difficultyList = GameManager.syllabusLevel;
+        return difficultyList.IndexOf(stageLevel);
+    }
     public int StageCheck()
     {
 #if UNITY_EDITOR

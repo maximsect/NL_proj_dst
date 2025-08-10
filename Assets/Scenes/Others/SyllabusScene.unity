@@ -598,7 +598,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -139, y: -127}
+  m_AnchoredPosition: {x: -97.6, y: -127}
   m_SizeDelta: {x: 238.4878, y: 103.0391}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &307007221
@@ -1645,6 +1645,7 @@ MonoBehaviour:
     sceneClasses:
     - SceneName: ExaminationScene
       difficultyLevel: "\u9B3C"
+      sceneMode: GetFlag
       skillSprite: {fileID: 21300000, guid: ff53b649bb4bbc64180272f82b9c49b0, type: 3}
       getSkillName: "\u6700\u5927HP\u5897\u52A0+2"
       variableName: maxHp
@@ -1653,6 +1654,7 @@ MonoBehaviour:
       possibility: 2
     - SceneName: GetFlagA
       difficultyLevel: "\u4ECF"
+      sceneMode: GetFlag
       skillSprite: {fileID: 21300000, guid: ff53b649bb4bbc64180272f82b9c49b0, type: 3}
       getSkillName: "\u6700\u5927HP\u5897\u52A0+3"
       variableName: maxHp
@@ -1668,6 +1670,7 @@ MonoBehaviour:
     sceneClasses:
     - SceneName: KillEnemyAssignment
       difficultyLevel: "\u5927\u9B3C"
+      sceneMode: GetFlag
       skillSprite: {fileID: 21300000, guid: aa4b734898605054cba60f18bc6edc77, type: 3}
       getSkillName: "\u901F\u5EA6\u4E0A\u6607+2"
       variableName: moveSpeed
@@ -1676,6 +1679,7 @@ MonoBehaviour:
       possibility: 3
     - SceneName: Survivor
       difficultyLevel: "\u4ECF"
+      sceneMode: GetFlag
       skillSprite: {fileID: 21300000, guid: 805a53075b2998e408cbcf9590c748f9, type: 3}
       getSkillName: "\u653B\u6483\u529B\u5897\u52A0+2"
       variableName: AddAttackVal
@@ -1691,6 +1695,7 @@ MonoBehaviour:
     sceneClasses:
     - SceneName: quantum theory
       difficultyLevel: "\u5927\u4ECF"
+      sceneMode: GetFlag
       skillSprite: {fileID: 21300000, guid: 805a53075b2998e408cbcf9590c748f9, type: 3}
       getSkillName: "\u653B\u6483\u529B\u5897\u52A0"
       variableName: MultipleAttackVal
@@ -1699,6 +1704,7 @@ MonoBehaviour:
       possibility: 5
     - SceneName: assignment
       difficultyLevel: "\u795E"
+      sceneMode: GetFlag
       skillSprite: {fileID: 21300000, guid: eae27a57dddb63c438c036a0b85c247d, type: 3}
       getSkillName: "\u30B8\u30E3\u30F3\u30D7\u80FD\u529B\u5411\u4E0A"
       variableName: jumpSpeed
@@ -2117,7 +2123,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -139, y: -127}
+  m_AnchoredPosition: {x: -97.6, y: -127}
   m_SizeDelta: {x: 238.4878, y: 103.0391}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1148518350
@@ -2756,7 +2762,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -139, y: -127}
+  m_AnchoredPosition: {x: -97.6, y: -127}
   m_SizeDelta: {x: 238.4878, y: 103.0391}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1800165107

@@ -8,7 +8,7 @@ public enum DrawFunctions
 {
     LinearF, QuadraticF, CubicF, SinWave, TanWave, Exp, Sqrt, PingPong, Log, Abs, InverseX
 }
-public class ProfessorMovement : MonoBehaviour
+public class ProfessorMovement : StageManager
 {
     public SceneData sceneData;
     private float powerUpRatio = 1;
@@ -82,6 +82,7 @@ public class ProfessorMovement : MonoBehaviour
 
     void Start()
     {
+        base.MainStart();
         hpDisplay.minValue = 0;
         hpDisplay.maxValue = hp;
         hpDisplay.value = hp;

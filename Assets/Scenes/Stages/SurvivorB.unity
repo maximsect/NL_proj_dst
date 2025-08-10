@@ -685,6 +685,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5e6feb3ee3a0e34cbc5d4c3c3b6a3ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sceneData: {fileID: 11400000, guid: d002b1dff15460843ae4dcd006954aa3, type: 2}
+  stageDecriptionPanel: {fileID: 8722069140523796048, guid: 4979170cf8ee33c4fb30503cf07e784c, type: 3}
   groundLayer:
     serializedVersion: 2
     m_Bits: 256

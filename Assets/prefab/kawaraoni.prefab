@@ -163,7 +163,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &1942260162531037324
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -182,7 +182,7 @@ MonoBehaviour:
   firetime: 0.5
   attackoffset: 1
   LaserPref: {fileID: 5086387744944446968, guid: 421b2787bc59890408d5c72da2ca5df5, type: 3}
-  anim: {fileID: 0}
+  anim: {fileID: 1824132526181676250}
 --- !u!95 &1824132526181676250
 Animator:
   serializedVersion: 7
@@ -193,7 +193,7 @@ Animator:
   m_GameObject: {fileID: 8682382182829615398}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 8df0672f7cf398c4cb3b7422679b9883, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

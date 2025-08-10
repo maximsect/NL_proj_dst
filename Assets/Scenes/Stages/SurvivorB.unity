@@ -690,8 +690,9 @@ MonoBehaviour:
     m_Bits: 256
   enemyPrefs:
   - {fileID: 4482937538460693618, guid: e504056476e34b6419533e9c78e06045, type: 3}
+  - {fileID: 4482937538460693618, guid: 7d86c07cf07b6e34297ebd39b8fcb1a5, type: 3}
   - {fileID: 8682382182829615398, guid: 93a780fab263bdc49a10edf9d126263d, type: 3}
-  surviveTime: 30
+  surviveTime: 50
   clock: {fileID: 1375328021}
 --- !u!1 &1089946285
 GameObject:

@@ -1664,7 +1664,7 @@ MonoBehaviour:
     - SceneName: GetFlagB
       difficultyLevel: "\u4ECF"
       sceneMode: 1
-      skillSprite: {fileID: 21300000, guid: 948eda55b15366f44aa3a196c270a97d, type: 3}
+      skillSprite: {fileID: 21300000, guid: ff53b649bb4bbc64180272f82b9c49b0, type: 3}
       getSkillName: "\u6700\u5927HP\u5897\u52A0+20"
       variableName: maxHP
       value: 20
@@ -1691,7 +1691,7 @@ MonoBehaviour:
     - SceneName: GetFlagB
       difficultyLevel: "\u5927\u9B3C"
       sceneMode: 1
-      skillSprite: {fileID: 21300000, guid: 948eda55b15366f44aa3a196c270a97d, type: 3}
+      skillSprite: {fileID: 21300000, guid: ff53b649bb4bbc64180272f82b9c49b0, type: 3}
       getSkillName: "\u6700\u5927HP\u5897\u52A0+80"
       variableName: maxHP
       value: 80

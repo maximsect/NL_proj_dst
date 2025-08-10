@@ -699,6 +699,10 @@ MonoBehaviour:
     genList: []
     assignmentKillNumber: 1
     generatedNumber: 0
+  - killTarget: {fileID: 4482937538460693618, guid: 6367681ca4323764bb53698e4beb2f16, type: 3}
+    genList: []
+    assignmentKillNumber: 1
+    generatedNumber: 0
   - killTarget: {fileID: 8682382182829615398, guid: 93a780fab263bdc49a10edf9d126263d, type: 3}
     genList: []
     assignmentKillNumber: 1

@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 public class player_main : MonoBehaviour
 {
-
+    public static player_main main;
     Rigidbody2D rigid;
     float hor_input = 0f;
     float ver_input = 0f;
@@ -33,11 +33,10 @@ public class player_main : MonoBehaviour
     //[System.NonSerialized] public int direction = 1;
     [System.NonSerialized] public int skillcooldown = 0;
 
-    public PlayerData playerData;
-    public Slider hpSlider;
+    private Slider hpSlider;
     public GameObject attackobj;
     public GameObject skill;
-    public arrowmaker arrowmaker;
+    private arrowmaker arrowProducer;
     public LayerMask ground;
     public int xp = 0;
     public float grappingSpeed = 25;
@@ -45,7 +44,7 @@ public class player_main : MonoBehaviour
     public Animator skillanimator;
     public BoxCollider2D attackcollider;
     public BoxCollider2D skillcollider;
-    public UI_skillcooldown UI_skillcooldown;
+    private UI_skillcooldown UI_cooldowndisplay;
 
     readonly float maxspeedX = 5.0f;
     readonly Vector3 hide = new Vector3(0f, 100f, 0f);
@@ -60,9 +59,16 @@ public class player_main : MonoBehaviour
     readonly int ATTACKEND = 14;
     readonly int ARROWINIT = 19;
     readonly int ARROWBEGIN = 4;
+    void OnEnable()
+    {
+        if (main == null) main = this;
+        else Destroy(this.gameObject);
+    }
     void Start()
     {
-        playerData.OnStartSetting(playerData);
+        hpSlider = GameObject.Find("Slider").GetComponent<Slider>();
+        UI_cooldowndisplay = GameObject.Find("skillcooldown").GetComponent<UI_skillcooldown>();
+        arrowProducer = GetComponent<arrowmaker>();
         rigid = GetComponent<Rigidbody2D>();
 
         hpSlider.minValue = 0;
@@ -155,7 +161,7 @@ public class player_main : MonoBehaviour
 
             if (Input.GetKey(KeyCode.D) && this.skillcooldown <= 0 && this.arrowtime <= 0) {
                 this.skillcooldown = this.SKILLINIT;
-                this.UI_skillcooldown.mask.alphaCutoff = 1.0f;
+                this.UI_cooldowndisplay.mask.alphaCutoff = 1.0f;
             }
 
             if (Input.GetKey(KeyCode.S) && !this.arrowkeyhold && this.arrowtime <= 0) {
@@ -193,7 +199,7 @@ public class player_main : MonoBehaviour
             this.arrowkeyhold = false;
         }
 
-        if (this.arrowtime == this.ARROWBEGIN) { this.arrowmaker.arrowmaking = true; }
+        if (this.arrowtime == this.ARROWBEGIN) { this.arrowProducer.arrowmaking = true; }
 
         if (this.attacktime < this.ATTACKEND || this.ATTACKBEGIN < this.attacktime) {
             this.attackobj.transform.position = this.hide;

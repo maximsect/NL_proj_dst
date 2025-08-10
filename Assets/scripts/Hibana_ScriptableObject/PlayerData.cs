@@ -16,6 +16,7 @@ public enum Weapon
 public class PlayerData : ScriptableObject
 {
     public static PlayerData main { get; private set; }
+    public GameObject playerPrefab;
     [Header("Status")]
     [field: SerializeField] public int hp { get; private set; } = 5;
     public int maxHp = 10;
@@ -52,9 +53,9 @@ public class PlayerData : ScriptableObject
     [field: SerializeField] public string LastSceneName { get; private set; } = "Stage1";
     public string resultText { get; private set; } = "";
     public float elapsedTime = 0;
-    public void OnStartSetting(PlayerData playerData)
+    public void OnStartSetting()
     {
-        main = playerData;
+        main = this;
         hp = maxHp;
         score = 0;
     }
@@ -152,7 +153,7 @@ public class PlayerData : ScriptableObject
     }
     public void ResetValue()
     {
-        OnStartSetting(this);
+        OnStartSetting();
         FieldInfo[] fields = GetType().GetFields();
         foreach (var field in fields)
         {

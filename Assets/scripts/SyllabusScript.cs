@@ -14,6 +14,7 @@ public class SceneClass
 {
     public string SceneName;
     public string difficultyLevel = "Normal";
+    public string sceneMode = "GetFlag";
     public Sprite skillSprite;
     public string getSkillName;
     public string variableName;
@@ -86,6 +87,7 @@ public class SyllabusScript : MonoBehaviour
                 break;
         }
         sceneData.stageLevel = syllabusClasses[index].sceneClasses[getList[index]].difficultyLevel;
+        sceneData.stageMode = syllabusClasses[index].sceneClasses[getList[index]].sceneMode;
         SceneManager.LoadScene(syllabusClasses[index].sceneClasses[getList[index]].SceneName);
     }
     public void SelectRandomThree()

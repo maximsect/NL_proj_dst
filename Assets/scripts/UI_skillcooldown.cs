@@ -1,13 +1,16 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UI_skillcooldown : MonoBehaviour
 {
-    public player_main player;
     //public SpriteRenderer sprite;
     //public Sprite in_cooldown;
     //public Sprite ready;
-    public SpriteMask mask;
-
+    [HideInInspector] public SpriteMask mask;
+    void Start()
+    {
+        mask = GameObject.Find("Sprite Mask").GetComponent<SpriteMask>();
+    }
     void FixedUpdate()
     {/*
         if(this.player.skillcooldown<=0)
@@ -15,7 +18,7 @@ public class UI_skillcooldown : MonoBehaviour
         else
             this.sprite.sprite=this.in_cooldown;*/
 
-        if(this.player.skillcooldown>0)
+        if(player_main.main.skillcooldown>0)
             this.mask.alphaCutoff-=0.008f;
         else
             this.mask.alphaCutoff=0.0f;

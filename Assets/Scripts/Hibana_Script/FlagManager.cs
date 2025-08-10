@@ -9,7 +9,6 @@ using Random = UnityEngine.Random;
 
 public class FlagManager : MonoBehaviour
 {
-    public GameObject playerObj;
     public GameObject flagObjs;
     public GameObject enemyPref;
     public int numberOfFlags = 5;
@@ -26,7 +25,7 @@ public class FlagManager : MonoBehaviour
         while (true)
         {
             Vector2 pos = new Vector2(Random.Range(-10f, 10f), Random.Range(-3f, 10f));
-            if (Vector3.Distance(pos.ToVector3(), playerObj.transform.position) < 3) continue;
+            if (Vector3.Distance(pos.ToVector3(), GameManager.player.transform.position) < 3) continue;
             if (Physics2D.OverlapCircle(pos, 0.5f, groundLayer)) continue;
             if (!Physics2D.OverlapCircle(pos - new Vector2(0, 0.3f), 0.5f, groundLayer)) continue;
             

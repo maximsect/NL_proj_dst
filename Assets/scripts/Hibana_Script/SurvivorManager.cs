@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
 
-public class SurvivorManager : MonoBehaviour
+public class SurvivorManager : StageManager
 {
     public LayerMask groundLayer;
     public List<GameObject> enemyPrefs = new List<GameObject>();
@@ -18,6 +18,7 @@ public class SurvivorManager : MonoBehaviour
     {
         StartCoroutine(EnemyFactory());
         StartCoroutine(Waiting());
+        base.MainStart();
     }
     Vector2 RandomPos()
     {
@@ -50,6 +51,7 @@ public class SurvivorManager : MonoBehaviour
     }
     IEnumerator Waiting()
     {
+        yield return new WaitForSeconds(0.5f);
         float timer = 0;
         for (; timer < surviveTime; timer += Time.deltaTime)
         {

@@ -15,6 +15,16 @@ public class SceneData : ScriptableObject
     public List<int> bossScene = new List<int>();
     public string stageLevel = "鬼";
     public SceneMode sceneMode;
+
+    List<string> classDescription = new List<string>()
+    {
+        "ステージを攻略するだけで満点がくるおいしい授業\n評価法: 出席満点",
+        "鬼は決して気を緩めない。\n敵の攻撃をよけろ。\n評価法: 被ダメ減点",
+        "かすり傷でも、戦場では死に直結する。\n決して気を緩めるな。\n評価法: 一回でも攻撃に当たらないこと",
+        "倒した敵の数こそが、鬼の強さを物語る。\n敵を殲滅せよ。\n評価法: 敵撃破数",
+        "神出鬼没。鬼らしさを追及せよ。\n評価法: タイムアタック"
+
+    };
     public SceneData copySource;
     public List<Vector2> ratios = new List<Vector2>()
     {
@@ -28,6 +38,10 @@ public class SceneData : ScriptableObject
     {
         List<string> difficultyList = GameManager.syllabusLevel;
         return difficultyList.IndexOf(stageLevel);
+    }
+    public string GetDescription()
+    {
+        return classDescription[(int)sceneMode];
     }
     public int StageCheck()
     {

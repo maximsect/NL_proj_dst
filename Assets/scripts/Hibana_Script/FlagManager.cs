@@ -7,7 +7,7 @@ using UnityEngine.UI;
 using System.Linq;
 using Random = UnityEngine.Random;
 
-public class FlagManager : MonoBehaviour
+public class FlagManager : StageManager
 {
     public GameObject flagObjs;
     public GameObject enemyPref;
@@ -19,6 +19,7 @@ public class FlagManager : MonoBehaviour
     void Start()
     {
         StartCoroutine(FlagGenerator());
+        base.MainStart();
     }
     Vector2 RandomPos()
     {

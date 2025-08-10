@@ -14,7 +14,7 @@ public class AssignmentTarget
     public int assignmentKillNumber = 5;
     [HideInInspector] public int generatedNumber = 0;
 }
-public class AssignmentManager : MonoBehaviour
+public class AssignmentManager : StageManager
 {
     public LayerMask groundLayer;
     public List<AssignmentTarget> assignments = new List<AssignmentTarget>();
@@ -23,6 +23,7 @@ public class AssignmentManager : MonoBehaviour
     {
         StartCoroutine(EnemyFactory());
         StartCoroutine(Waiting());
+        base.MainStart();
     }
     Vector2 RandomPos()
     {
@@ -62,6 +63,7 @@ public class AssignmentManager : MonoBehaviour
     }
     IEnumerator Waiting()
     {
+        yield return new WaitForSeconds(0.5f);
         float timer = 0;
         while (true) 
         { 
@@ -77,5 +79,4 @@ public class AssignmentManager : MonoBehaviour
         }
         SceneTransition.main.StageClearReciever();
     }
-    
 }

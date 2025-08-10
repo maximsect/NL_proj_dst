@@ -52,7 +52,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_Enabled
-    path: Square (1)
+    path: attackRegion
     classID: 61
     script: {fileID: 0}
     flags: 0
@@ -88,7 +88,7 @@ AnimationClip:
   m_ClipBindingConstant:
     genericBindings:
     - serializedVersion: 2
-      path: 2595957057
+      path: 1555733976
       attribute: 3305885265
       script: {fileID: 0}
       typeID: 61
@@ -170,7 +170,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_Enabled
-    path: Square (1)
+    path: attackRegion
     classID: 61
     script: {fileID: 0}
     flags: 0

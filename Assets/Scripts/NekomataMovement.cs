@@ -28,7 +28,7 @@ public class NekomataMovement : StageManager
         hpDisplay.minValue = 0;
         hpDisplay.maxValue = hp;
         hpDisplay.value = hp;
-        animator = transform.GetChild(0).gameObject.GetComponent<Animator>();
+        animator = GetComponent<Animator>();
         StartCoroutine(NekomataAnimation());
 
         int stageLevel = sceneData.GetStageLevel();
@@ -38,16 +38,15 @@ public class NekomataMovement : StageManager
     void Update()
     {
         hpDisplay.value = hp;
-        Vector3 relativePos = GameManager.player.transform.position - transform.position;
+        relativePos = transform.position - GameManager.player.transform.position;
         if (Mathf.Abs(relativePos.y) <= 2)
         {
-            transform.localScale = (relativePos.x > 0) ? new Vector3(-1, 1, 1) : new Vector3(1, 1, 1);
+            transform.localScale = (relativePos.x > 0) ? new Vector3(1, 1, 1) : new Vector3(-1, 1, 1);
         }
 
         invincibleTimer -= Time.deltaTime;
         nekoImage.color = (invincibleTimer > 0) ? new Color(1, 0, 0, 1) : new Color(1, 1, 1, 1);
 
-        relativePos = transform.position - GameManager.player.transform.position;
         if (Mathf.Abs(relativePos.y) < interactableZone)
         {
             moveMode = 1;
@@ -127,7 +126,6 @@ public class NekomataMovement : StageManager
                             for (float elapsedTimer = 0; elapsedTimer < 1; elapsedTimer += Time.deltaTime)
                             {
                                 AnimeState(1);
-                                this.transform.localScale = new Vector3(-1, 1, 1);
                                 rb2d.linearVelocity = new Vector2(speed, rb2d.linearVelocity.y);
                                 yield return null;
                             }
@@ -136,7 +134,6 @@ public class NekomataMovement : StageManager
                             for (float elapsedTimer = 0; elapsedTimer < 1; elapsedTimer += Time.deltaTime)
                             {
                                 AnimeState(1);
-                                this.transform.localScale = new Vector3(1, 1, 1);
                                 rb2d.linearVelocity = new Vector2(-speed, rb2d.linearVelocity.y);
                                 yield return null;
                             }
@@ -146,7 +143,6 @@ public class NekomataMovement : StageManager
                             for (float elapsedTimer = 0; elapsedTimer < 1; elapsedTimer += Time.deltaTime)
                             {
                                 AnimeState(1);
-                                this.transform.localScale = new Vector3(-1, 1, 1);
                                 rb2d.linearVelocity = new Vector2(speed, rb2d.linearVelocity.y);
 
                                 yield return null;
@@ -157,7 +153,6 @@ public class NekomataMovement : StageManager
                             for (float elapsedTimer = 0; elapsedTimer < 1; elapsedTimer += Time.deltaTime)
                             {
                                 AnimeState(1);
-                                this.transform.localScale = new Vector3(1, 1, 1);
                                 rb2d.linearVelocity = new Vector2(-speed, rb2d.linearVelocity.y);
 
                                 yield return null;
@@ -196,18 +191,18 @@ public class NekomataMovement : StageManager
                     }
                     break;
                 case 1:
-                    rb2d.linearVelocity = new Vector2((relativePos.x > 0) ? speed : -speed, rb2d.linearVelocity.y);
+                    rb2d.linearVelocity = new Vector2((relativePos.x > 0) ? -speed : speed, rb2d.linearVelocity.y);
                     //ƒvƒŒƒCƒ„[•ûŒü‚ÉˆÚ“®‚·‚é
-                    this.transform.localScale = new Vector3((relativePos.x > 0) ? -1 : 1, 1, 1);
                     AnimeState(1);
                     yield return null;
                     break;
                 case 2:
-                    for (float elapsedTimer = 0; elapsedTimer < 1; elapsedTimer += Time.deltaTime)
+                    for (float elapsedTimer = 0; elapsedTimer < 0.4f; elapsedTimer += Time.deltaTime)
                     {
                         AnimeState(2);
                         yield return null;
                     }
+                    yield return new WaitForSeconds(0.5f);
                     break;
                 case 3:
                     AnimeState(3);

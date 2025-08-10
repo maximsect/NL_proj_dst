@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: PlayerData
   m_EditorClassIdentifier: 
   playerPrefab: {fileID: 5643282837821384152, guid: 176e6e08322a7db488ca79952b294300, type: 3}
-  hp: 30
-  maxHp: 30
+  hp: 25
+  maxHp: 32
   healAmount: 3
   autoHealInterval: 10
   autoHealAmount: 1
@@ -26,7 +26,7 @@ MonoBehaviour:
   airJumpSpeed: 10
   Speed: 20
   dashSpeed: 30
-  direction: 1
+  direction: -1
   attackPower: 10
   attackInterval: 0.5
   weapon: 0
@@ -35,7 +35,7 @@ MonoBehaviour:
   bowAttack: 10
   hammerAttack: 10
   arrowAttack: 10
-  skillAttack: 10
+  skillAttack: 80
   invinsibleDuration: 0.3
   copySource: {fileID: 11400000, guid: 7d355b550e16d804688b14ed27e86fda, type: 2}
   pasteTarget: {fileID: 11400000}

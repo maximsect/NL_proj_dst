@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 public class EyeObjectRandomMovement : MonoBehaviour
 {
-    public GameObject player, oniProfessor;
+    public GameObject oniProfessor;
     public Vector2 basePoint = new Vector2(0, 0);
     public Vector2 boxSize = new Vector2(10, 10);
     public float movementSpeed = 5f, waitingDuration = 3f;
@@ -17,6 +17,7 @@ public class EyeObjectRandomMovement : MonoBehaviour
     public SpriteRenderer outliner,mainSprite;
     public GameObject observer;
     public Sprite[] eyes;
+    private float invincibleTimer = 0;
     Coroutine coroutine;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -45,7 +46,7 @@ public class EyeObjectRandomMovement : MonoBehaviour
         }
         observer.SetActive(!isEnemy);
         if (oniProfessor == null) isEnemy = true;
-        Vector3 relativePos = (isEnemy) ? player.transform.position - transform.position : oniProfessor.transform.position - transform.position;
+        Vector3 relativePos = (isEnemy) ? GameManager.player.transform.position - transform.position : oniProfessor.transform.position - transform.position;
         float angle = Mathf.Atan2(relativePos.y, relativePos.x) * Mathf.Rad2Deg + 360;
         int eyeIndex = (int)((angle + 15) / 30) % 12;
         mainSprite.sprite = eyes[eyeIndex];
@@ -79,7 +80,7 @@ public class EyeObjectRandomMovement : MonoBehaviour
             if (isEnemy)
             {
                 GameObject laserObj = Instantiate(LaserPref, transform.position, Quaternion.identity);
-                Vector3 relativePos = player.transform.position - transform.position;
+                Vector3 relativePos = GameManager.player.transform.position - transform.position;
                 laserObj.GetComponent<Rigidbody2D>().AddForce(new Vector2(relativePos.x, relativePos.y).normalized * 5f, ForceMode2D.Impulse);
                 Destroy(laserObj, 10f);
             }
@@ -109,7 +110,7 @@ public class EyeObjectRandomMovement : MonoBehaviour
     }
     void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.gameObject.tag == "attack")
+        if (GameManager.playerWeaponTag.Contains(other.gameObject.tag) && isEnemy)
         {
             isEnemy = false;
             if (coroutine != null)

@@ -38,5 +38,11 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Stages/Survivor.unity
     guid: 5936654fcc3da814a8130784595d1dec
+  - enabled: 1
+    path: Assets/Scenes/Stages/SurvivorA.unity
+    guid: 1c040cc0d87a19741b05cc458825dcb7
+  - enabled: 1
+    path: Assets/Scenes/Stages/SurvivorB.unity
+    guid: 15c9d19881a616346809676adfc1f654
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0

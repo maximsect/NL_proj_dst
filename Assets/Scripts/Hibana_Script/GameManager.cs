@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
     public static List<string> playerWeaponTag = new List<string>() { "bow", "spear", "bat", "hammer", "arrow", "skillattack" };
     public static List<string> enemyWeaponTag = new List<string>() { "enemyweapon", "damage_factor", "assign_attack" };
     public static List<string> syllabusLevel = new List<string>() { "_", "‘å•§", "•§", "‹S", "‘å‹S" };
-    public static List<string> stageMode = new List<string>() { "GetFlag", "Examination", "KillEnemy", "Survivor", "NoDamage" };
+    //public static List<string> stageMode = new List<string>() { "GetFlag", "LessDamage", "KillEnemy", "Survivor", "NoDamage" };
     public List<GameObject> killEffect = new List<GameObject>();
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void OnEnable()

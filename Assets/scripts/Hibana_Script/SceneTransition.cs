@@ -21,6 +21,7 @@ public class SceneTransition : MonoBehaviour
     {
         if(main == null) main = this;
         StartCoroutine(AwaitStageClear());
+        if (SceneManager.GetActiveScene().name == "StartScene") scoreData.ResetValues();
     }
     private IEnumerator AwaitStageClear()
     {

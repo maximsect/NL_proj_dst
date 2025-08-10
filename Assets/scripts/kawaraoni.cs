@@ -17,8 +17,8 @@ public class kawaraoni : EnemyBaseScript
     void FixedUpdate()
     {
         if(this.in_interval <= 1)
-            this.transform.localScale=new Vector3(GameManager.main.player.transform.position.x - this.transform.position.x < 0f ? 1 : -1, 1, 1);
-        if(Mathf.Abs(GameManager.main.player.transform.position.y - this.transform.position.y) < this.attackoffset && this.in_interval == 0){
+            this.transform.localScale=new Vector3(GameManager.player.transform.position.x - this.transform.position.x < 0f ? 1 : -1, 1, 1);
+        if(Mathf.Abs(GameManager.player.transform.position.y - this.transform.position.y) < this.attackoffset && this.in_interval == 0){
             this.in_interval = 2;
             this.anim.SetBool("fire", true);
             StartCoroutine(Attack());

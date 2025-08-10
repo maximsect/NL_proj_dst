@@ -21,6 +21,7 @@ TagManager:
   - spear
   - bow
   - hammer
+  - enemyweapon
   layers:
   - Default
   - TransparentFX

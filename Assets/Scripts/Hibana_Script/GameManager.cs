@@ -6,7 +6,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager main;
     public GameObject camera;
-    [HideInInspector] public GameObject player;
+    public static GameObject player;
     public static List<string> playerWeaponTag = new List<string>() { "bow", "spear", "bat", "hammer", "arrow", "skillattack" };
     public static List<string> enemyWeaponTag = new List<string>() { "enemyweapon", "damage_factor", "assign_attack" };
     public List<GameObject> killEffect = new List<GameObject>();

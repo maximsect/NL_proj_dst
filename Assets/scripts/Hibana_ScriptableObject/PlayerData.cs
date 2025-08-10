@@ -198,5 +198,6 @@ public class PlayerDataEditor : Editor
         {
             playerData.ResetValues();
         }
+        EditorGUILayout.HelpBox("AddAttackVal と MultipleAttackVal が使用可能（callを選択してください)", MessageType.Info);
     }
 }

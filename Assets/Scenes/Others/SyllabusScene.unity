@@ -1644,7 +1644,7 @@ MonoBehaviour:
     skillNameDisplay: {fileID: 270909848}
     sceneClasses:
     - SceneName: ExaminationScene
-      difficultyLevel: "\u9B3C"
+      difficultyLevel: "\u5927\u9B3C"
       sceneMode: 1
       skillSprite: {fileID: 21300000, guid: ff53b649bb4bbc64180272f82b9c49b0, type: 3}
       getSkillName: "\u6700\u5927HP\u5897\u52A0+2"
@@ -1686,7 +1686,7 @@ MonoBehaviour:
       value: 2
       valueMode: 3
       possibility: 3
-  - sceneMode: 
+  - sceneMode: "\u671F\u672B\u30C6\u30B9\u30C8"
     imageColor: {r: 1, g: 0.6320754, b: 0.63953483, a: 1}
     backGround: {fileID: 174911749}
     difficultyDisplay: {fileID: 1593619105}

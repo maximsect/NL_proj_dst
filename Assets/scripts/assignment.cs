@@ -4,7 +4,7 @@ public class assignment : MonoBehaviour
 {
     public GameObject assign;
     public Rigidbody2D rigid;
-    public GameObject player;
+    //public GameObject player;
 
     int attacktimer=0;
     float direction=1f;
@@ -27,9 +27,9 @@ public class assignment : MonoBehaviour
     void FixedUpdate()
     {
         if(this.attacktimer<this.ATTACKEND)
-            this.direction = this.player.transform.position.x < this.transform.position.x ? -1f : 1f;
+            this.direction = GameManager.player.transform.position.x < this.transform.position.x ? -1f : 1f;
         this.assign.transform.position=this.hide;
-        this.relativeX=(this.transform.position - this.player.transform.position).x;
+        this.relativeX=(this.transform.position - GameManager.player.transform.position).x;
 
         //move
         if(this.attacktimer<=this.ATTACKFREEZEEND){
@@ -43,7 +43,7 @@ public class assignment : MonoBehaviour
         }
 
         //attack
-        if(this.attacktimer<=0 && Vector3.Distance(this.transform.position, this.player.transform.position)<=this.ATTACKDISTANCE)
+        if(this.attacktimer<=0 && Vector3.Distance(this.transform.position, GameManager.player.transform.position)<=this.ATTACKDISTANCE)
             this.attacktimer=this.ATTACKDEFAULT;
         if(this.attacktimer>0){
             this.attacktimer--;

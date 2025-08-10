@@ -11,7 +11,8 @@ public class SceneData : ScriptableObject
     public int majorScene = 10;
     public int resultScene = 15;
     public List<int> bossScene = new List<int>();
-    public string stageLevel = "";
+    public string stageLevel = "‹S";
+    public string stageMode = "GetFlag";
     public List<Vector2> ratios = new List<Vector2>()
     {
         new Vector2(0.6f,0.7f),

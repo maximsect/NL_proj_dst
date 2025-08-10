@@ -4,6 +4,6 @@ public class BackGround : MonoBehaviour
 {
     void Update()
     {
-        transform.position = GameManager.main.camera.transform.position * 0.3f;
+        transform.position = Camera.main.gameObject.transform.position * 0.3f;
     }
 }

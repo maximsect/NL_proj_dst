@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class camera : MonoBehaviour
 {
-    public GameObject player;
     float minimum_x=-30f;
     float maximum_x=34f;
     float minimum_y=-3f;
@@ -23,7 +22,7 @@ public class camera : MonoBehaviour
 
     void Update()
     {
-        Vector3 playerpos=this.player.transform.position;
+        Vector3 playerpos= GameManager.player.transform.position;
 
         if(playerpos.x>this.test_battle_begin_pos && !this.f){
             //展示用に無効化

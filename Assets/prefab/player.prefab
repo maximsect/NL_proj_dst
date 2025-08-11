@@ -607,6 +607,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 964ad8e0b2607fc4e95ec3dc2d3a4510, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  xp: 0
   batObj: {fileID: 632074403986615129}
   spearObj: {fileID: 7990703233014826600}
   hammerObj: {fileID: 4014691770741032664}
@@ -614,12 +615,16 @@ MonoBehaviour:
   ground:
     serializedVersion: 2
     m_Bits: 256
-  xp: 0
   grappingSpeed: 25
   animator: {fileID: 1838468967516663090}
   skillanimator: {fileID: 6103749989807870536}
-  attackcollider: {fileID: 8911828759017664911}
   skillcollider: {fileID: 1088595756064134729}
+  jumpSound: {fileID: 8300000, guid: 1ddf93020b488264ab678b8584bd799c, type: 3}
+  batSound: {fileID: 8300000, guid: 68e78a8da0612cd408d87e5ed1cd9649, type: 3}
+  bowSound: {fileID: 8300000, guid: 68e78a8da0612cd408d87e5ed1cd9649, type: 3}
+  spearSound: {fileID: 8300000, guid: 68e78a8da0612cd408d87e5ed1cd9649, type: 3}
+  hammerSound: {fileID: 8300000, guid: 63d77e518c528454ebc7020846173faa, type: 3}
+  skillSound: {fileID: 8300000, guid: 63d77e518c528454ebc7020846173faa, type: 3}
 --- !u!95 &1838468967516663090
 Animator:
   serializedVersion: 7

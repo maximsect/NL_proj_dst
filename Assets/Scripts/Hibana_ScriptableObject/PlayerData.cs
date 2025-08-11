@@ -49,7 +49,6 @@ public class PlayerData : ScriptableObject
     public int skillAttack = 10;
     [Header("Sound")]
     public GameObject seObj;
-    public float BGMvolume = 0, SEVolume = 0;
     public AudioMixer audioMixer;
 
     [Header("Effect")]

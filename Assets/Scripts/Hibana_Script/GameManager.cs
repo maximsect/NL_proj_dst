@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour
         seSource = seObj.GetComponent<AudioSource>();
         DontDestroyOnLoad(this.gameObject);
     }
-    public void PlayAttackSE(AudioClip sound)
+    public void PlayOneShot(AudioClip sound)
     {
         seSource.pitch = UnityEngine.Random.Range(1f, 1.2f);
         seSource.PlayOneShot(sound);

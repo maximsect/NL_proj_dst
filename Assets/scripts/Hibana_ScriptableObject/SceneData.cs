@@ -1,9 +1,13 @@
+
 using UnityEngine;
 using UnityEditor;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
+using System.Linq;
+using UnityEngine.SceneManagement;
+using UnityEngine.Audio;
 
 [CreateAssetMenu(fileName = "SceneData", menuName = "Scriptable Objects/SceneData")]
 public class SceneData : ScriptableObject
@@ -65,7 +69,7 @@ public class SceneData : ScriptableObject
         else return 0;
 #endif
     }
-    public void ResetValues()
+    public void ResetValue()
     {
         FieldInfo[] fields = this.GetType().GetFields();
         foreach (var field in fields)
@@ -86,7 +90,7 @@ public class SceneDataEditor : Editor
         base.OnInspectorGUI();
         if (GUILayout.Button("ReplaceEveryValue"))
         {
-            sceneData.ResetValues();
+            sceneData.ResetValue();
         }
     }
 }

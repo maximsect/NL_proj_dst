@@ -8,6 +8,7 @@ public class ResultSceneScript : MonoBehaviour
 {
     public TextMeshProUGUI resultText;
     public ScoreData scoreData;
+    public SceneData sceneData;
     public PlayerData playerData;
     private float sumElapsedTime = 0;
     private int sumNumberOfKill = 0;
@@ -39,5 +40,6 @@ public class ResultSceneScript : MonoBehaviour
         }
         scoreData.ResetValues();
         playerData.ResetValue();
+        sceneData.ResetValue();
     }
 }

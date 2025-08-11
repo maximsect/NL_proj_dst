@@ -387,7 +387,7 @@ public class player_main : MonoBehaviour
             this.dashtime = 0;
             if (PlayerData.main.hp <= 0)
             {
-                Debug.Log("dead");
+                Debug.Log("DEAD");
             }
             //this.kbtimer=50;
             //Time.timeScale=0;

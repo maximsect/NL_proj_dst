@@ -21,6 +21,7 @@ public class SceneTransition : MonoBehaviour
     {
         if(main == null) main = this;
         StartCoroutine(AwaitStageClear());
+        StartCoroutine(AwaitGameOver());
         if (SceneManager.GetActiveScene().name == "StartScene") scoreData.ResetValues();
     }
     private IEnumerator AwaitStageClear()
@@ -31,7 +32,7 @@ public class SceneTransition : MonoBehaviour
         endTime = Time.time;
         sceneScore.elapsedTime = endTime - startTime;
         ScoreCalculation();
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSecondsRealtime(1f);
         switch (sceneData.StageCheck())
         {
             case 0:
@@ -46,6 +47,14 @@ public class SceneTransition : MonoBehaviour
             default:
                 break;
         }
+    }
+    private IEnumerator AwaitGameOver()
+    {
+        yield return new WaitUntil(() => PlayerData.main.hp <= 0);
+        Time.timeScale = 0.2f;
+        yield return new WaitForSecondsRealtime(2);
+        Time.timeScale = 1;
+        this.LoadSceneByName("ResultScene");
     }
     public void StageClearReciever()
     {

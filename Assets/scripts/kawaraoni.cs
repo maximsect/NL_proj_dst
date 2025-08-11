@@ -9,16 +9,17 @@ public class kawaraoni : EnemyBaseScript
     public GameObject LaserPref;
     public Animator anim;
     GameObject laserObj;
-    
+
     short in_interval = 0;
-    short invincible=0;
+    short invincible = 0;
     public AudioClip fireSound;
 
     void FixedUpdate()
     {
-        if(this.in_interval <= 1)
-            this.transform.localScale=new Vector3(GameManager.player.transform.position.x - this.transform.position.x < 0f ? 1 : -1, 1, 1);
-        if(Mathf.Abs(GameManager.player.transform.position.y - this.transform.position.y) < this.attackoffset && this.in_interval == 0){
+        if (this.in_interval <= 1)
+            this.transform.localScale = new Vector3(GameManager.player.transform.position.x - this.transform.position.x < 0f ? 1 : -1, 1, 1);
+        if (Mathf.Abs(GameManager.player.transform.position.y - this.transform.position.y) < this.attackoffset && this.in_interval == 0)
+        {
             this.in_interval = 2;
             this.anim.SetBool("fire", true);
             StartCoroutine(Attack());
@@ -39,6 +40,10 @@ public class kawaraoni : EnemyBaseScript
         Destroy(laserObj);
         this.in_interval = 0;
         yield break;
+    }
+    public override void KnockBack()
+    {
+        GetComponent<Rigidbody2D>().AddForce(new Vector2((transform.position.x - GameManager.player.transform.position.x) > 0 ? 4 : -4, 4), ForceMode2D.Impulse);
     }
     /*
     void OnCollisionEnter2D(Collision2D collision)

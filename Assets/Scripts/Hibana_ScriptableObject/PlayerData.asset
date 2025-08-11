@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PlayerData
   m_EditorClassIdentifier: 
   playerPrefab: {fileID: 5643282837821384152, guid: 176e6e08322a7db488ca79952b294300, type: 3}
-  hp: 100
+  hp: 173
   maxHp: 200
   healAmount: 3
   autoHealInterval: 10

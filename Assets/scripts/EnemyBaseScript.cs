@@ -9,7 +9,7 @@ public class EnemyBaseScript : MonoBehaviour
     protected float powerUpRatio = 1;
     public int enemyHp = 30;
     protected float invincibleTimer = 0;
-    
+
     public AudioClip attackSound, destroySound;
     void OnTriggerStay2D(Collider2D collider)
     {
@@ -26,17 +26,18 @@ public class EnemyBaseScript : MonoBehaviour
                     damage = PlayerData.main.spearAttack;
                     break;
                 case "bow":
-                    damage= PlayerData.main.bowAttack;
+                    damage = PlayerData.main.bowAttack;
                     break;
                 case "hammer":
                     damage = PlayerData.main.hammerAttack;
-                    GetComponent<Rigidbody2D>().AddForce(new Vector2((transform.position.x - GameManager.player.transform.position.x) > 0 ? 4 : -4, 4),ForceMode2D.Impulse);
+                    KnockBack();
                     break;
                 case "arrow":
                     damage = PlayerData.main.arrowAttack;
                     break;
                 case "skillattack":
                     damage = PlayerData.main.skillAttack;
+                    KnockBack();
                     break;
                 default:
                     break;
@@ -66,4 +67,5 @@ public class EnemyBaseScript : MonoBehaviour
     }
     public virtual void SubStart() { }
     public virtual void SubUpdate() { }
+    public virtual void KnockBack() { }
 }

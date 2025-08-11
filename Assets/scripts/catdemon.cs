@@ -33,7 +33,7 @@ public class catdemon : EnemyBaseScript
     float re_x;
 
     short invincible = 0;
-
+    Coroutine coroutine;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public override void SubStart()
@@ -44,7 +44,7 @@ public class catdemon : EnemyBaseScript
         rbody.constraints = RigidbodyConstraints2D.FreezeRotation; // Prevent rotation
 
         this.animator.SetInteger("color", color);
-        StartCoroutine(CatDemonMovement());
+        coroutine = StartCoroutine(CatDemonMovement());
 
         enemyHp = (int)(enemyHp * powerUpRatio);
         speed *= powerUpRatio;
@@ -249,5 +249,19 @@ public class catdemon : EnemyBaseScript
                     break;
             }
         }
+    }
+    float knockBackTimer = 1f;
+    public override void KnockBack()
+    {
+        StopCoroutine(coroutine);                   
+        rbody.AddForce(new Vector2((transform.position.x - GameManager.player.transform.position.x) > 0 ? 4 : -4, 4), ForceMode2D.Impulse);
+
+        StartCoroutine(KnockBackCoroutine());
+    }
+    IEnumerator KnockBackCoroutine()
+    {
+        yield return new WaitForSeconds(knockBackTimer);
+        StartCoroutine(CatDemonMovement());
+        yield break;
     }
 }

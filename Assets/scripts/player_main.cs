@@ -337,6 +337,8 @@ public class player_main : MonoBehaviour
         animator.SetInteger("behave", this.behavior);
         if(this.skillcooldown > 0)
             this.UI_cooldowndisplay.mask.alphaCutoff = (float)this.skillcooldown / (float)this.SKILLINIT;
+        else
+            this.UI_cooldowndisplay.mask.alphaCutoff = 0f;
     }
 
     /*void grap(GameObject enemy){

@@ -236,6 +236,7 @@ public class catdemon : EnemyBaseScript
                 case 2:
                     for (float elapsedTimer = 0; elapsedTimer < coolEndTime; elapsedTimer += Time.deltaTime)
                     {
+                        rbody.linearVelocity = new Vector2(0, rbody.linearVelocity.y);
                         behavior = (elapsedTimer < animEndTime) ? 1 : 2;
                         this.attackObj.SetActive(elapsedTimer == Mathf.Clamp(elapsedTimer, attStartTime, attEndTime));//経過時間がattStartTimeとattEndTimeの途中である場合
 

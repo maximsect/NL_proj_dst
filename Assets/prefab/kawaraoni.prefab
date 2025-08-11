@@ -181,7 +181,7 @@ MonoBehaviour:
   interval: 2
   firetime: 0.5
   attackoffset: 1
-  LaserPref: {fileID: 5086387744944446968, guid: 421b2787bc59890408d5c72da2ca5df5, type: 3}
+  LaserPref: {fileID: 5086387744944446968, guid: 07ecdc6d5af1fcc4885b3a802d20764b, type: 3}
   anim: {fileID: 1824132526181676250}
 --- !u!95 &1824132526181676250
 Animator:

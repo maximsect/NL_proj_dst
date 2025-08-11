@@ -154,7 +154,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneData: {fileID: 11400000, guid: d002b1dff15460843ae4dcd006954aa3, type: 2}
   stageDecriptionPanel: {fileID: 8722069140523796048, guid: 4979170cf8ee33c4fb30503cf07e784c, type: 3}
-  successSound: {fileID: 0}
+  successSound: {fileID: 8300000, guid: ad85d3bf85ed496459882c0e8a292351, type: 3}
   oniImage: {fileID: 165220918}
   functionRenderObj: {fileID: 1483241103}
   drawFunction: 0

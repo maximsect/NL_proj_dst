@@ -1713,14 +1713,77 @@ MonoBehaviour:
       value: 2
       valueMode: 1
       possibility: 3
-    - SceneName: SurvivorA
+    - SceneName: KillEnemyA
+      difficultyLevel: "\u795E"
+      sceneMode: 3
+      skillSprite: {fileID: 21300000, guid: eae27a57dddb63c438c036a0b85c247d, type: 3}
+      getSkillName: "\u30B9\u30AD\u30EB\u653B\u6483\u529B\u5F37\u5316+30"
+      variableName: skillAttack
+      value: 30
+      valueMode: 1
+      possibility: 3
+    - SceneName: KillEnemyA
+      difficultyLevel: "\u5927\u9B3C"
+      sceneMode: 3
+      skillSprite: {fileID: 21300000, guid: eae27a57dddb63c438c036a0b85c247d, type: 3}
+      getSkillName: "\u30B9\u30AD\u30EB\u653B\u6483\u529B\u5F37\u5316+50"
+      variableName: skillAttack
+      value: 50
+      valueMode: 1
+      possibility: 3
+    - SceneName: KillEnemyA
       difficultyLevel: "\u4ECF"
-      sceneMode: 4
+      sceneMode: 3
       skillSprite: {fileID: 21300000, guid: 805a53075b2998e408cbcf9590c748f9, type: 3}
-      getSkillName: "\u653B\u6483\u529B\u5897\u52A0+2"
-      variableName: AddAttackVal
-      value: 2
-      valueMode: 3
+      getSkillName: "\u653B\u6483\u529B\u5F37\u5316+10"
+      variableName: attackPower
+      value: 10
+      valueMode: 1
+      possibility: 3
+    - SceneName: KillEnemyA
+      difficultyLevel: "\u9B3C"
+      sceneMode: 3
+      skillSprite: {fileID: 21300000, guid: 805a53075b2998e408cbcf9590c748f9, type: 3}
+      getSkillName: "\u653B\u6483\u529B\u5F37\u5316\xD71.2"
+      variableName: attackPower
+      value: 1.2
+      valueMode: 2
+      possibility: 3
+    - SceneName: KillEnemyB
+      difficultyLevel: "\u795E"
+      sceneMode: 3
+      skillSprite: {fileID: 21300000, guid: 805a53075b2998e408cbcf9590c748f9, type: 3}
+      getSkillName: "\u653B\u6483\u529B\u5F37\u5316+15"
+      variableName: attackPower
+      value: 15
+      valueMode: 1
+      possibility: 3
+    - SceneName: KillEnemyB
+      difficultyLevel: "\u9B3C"
+      sceneMode: 3
+      skillSprite: {fileID: 21300000, guid: 805a53075b2998e408cbcf9590c748f9, type: 3}
+      getSkillName: "\u653B\u6483\u529B\u5F37\u5316\xD71.1"
+      variableName: attackPower
+      value: 1.1
+      valueMode: 2
+      possibility: 3
+    - SceneName: KillEnemyB
+      difficultyLevel: "\u4ECF"
+      sceneMode: 3
+      skillSprite: {fileID: 21300000, guid: 805a53075b2998e408cbcf9590c748f9, type: 3}
+      getSkillName: "\u68CD\u68D2\u653B\u6483\u529B\u5F37\u5316+10"
+      variableName: batAttack
+      value: 10
+      valueMode: 1
+      possibility: 3
+    - SceneName: KillEnemyB
+      difficultyLevel: "\u5927\u4ECF"
+      sceneMode: 3
+      skillSprite: {fileID: 21300000, guid: ff53b649bb4bbc64180272f82b9c49b0, type: 3}
+      getSkillName: "\u6700\u5927HP\u5897\u52A0+30"
+      variableName: maxHp
+      value: 30
+      valueMode: 1
       possibility: 3
   - sceneMode: "\u9003\u3052\u5207\u308A"
     imageColor: {r: 1, g: 0.6320754, b: 0.63953483, a: 1}

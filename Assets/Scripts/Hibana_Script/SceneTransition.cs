@@ -17,10 +17,11 @@ public class SceneTransition : MonoBehaviour
     {
         this.LoadSceneByName(name);
     }
-    private void OnEnable()
+    private void Start()
     {
         if(main == null) main = this;
         StartCoroutine(AwaitStageClear());
+        if(PlayerData.main != null)
         StartCoroutine(AwaitGameOver());
         if (SceneManager.GetActiveScene().name == "StartScene") scoreData.ResetValues();
     }

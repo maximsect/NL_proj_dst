@@ -19,8 +19,17 @@ public class AssignmentManager : StageManager
     public LayerMask groundLayer;
     public List<AssignmentTarget> assignments = new List<AssignmentTarget>();
     public float generateInterval = 2;
+    public float appearMaxNum = 10;
+    private List<int> genIndex = new List<int>();
     void Start()
     {
+        for (int i = 0; i < assignments.Count; i++)
+        {
+            for (int j = 0; j < assignments[i].assignmentKillNumber; j++)
+            {
+                genIndex.Add(i);
+            }
+        }
         StartCoroutine(EnemyFactory());
         StartCoroutine(Waiting());
         base.MainStart();
@@ -42,7 +51,9 @@ public class AssignmentManager : StageManager
         while (true)
         {
             yield return new WaitForSeconds(generateInterval);
-            int assignIndex = Random.Range(0, assignments.Count);
+            if (genIndex.Count == 0) yield break;
+            int assignIndex = genIndex[Random.Range(0, genIndex.Count)];
+            genIndex.Remove(assignIndex);
             GameObject target = assignments[assignIndex].killTarget;
             GameObject generated = Instantiate(target);
             generated.transform.position = RandomPos().ToVector3(0);
@@ -56,7 +67,7 @@ public class AssignmentManager : StageManager
                     assign.genList.RemoveAll(item => item == null);
                     counter += assign.genList.Count;
                 }
-                if (counter < 10) break;
+                if (counter < appearMaxNum) break;
                 yield return null;
             }
         }

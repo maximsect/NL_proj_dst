@@ -29,6 +29,7 @@ public class kawaraoni : EnemyBaseScript
         yield return new WaitForSeconds(this.firetime);
         GameObject laserObj = Instantiate(LaserPref, transform.position, Quaternion.identity);
         laserObj.GetComponent<Rigidbody2D>().linearVelocity = new Vector2(-10f * this.transform.localScale.x, 0f);
+        laserObj.transform.localScale = this.transform.localScale;
         yield return new WaitForSeconds(0.2f);
         this.in_interval = 1;
         this.anim.SetBool("fire", false);

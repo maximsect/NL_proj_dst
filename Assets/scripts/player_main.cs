@@ -335,6 +335,8 @@ public class player_main : MonoBehaviour
         if (0 < this.arrowtime) { this.behavior = 5; }
         if (this.isskillusing(2)) { this.skillanimator.SetBool("isskillusing", true); this.behavior = 4; }
         animator.SetInteger("behave", this.behavior);
+        if(this.skillcooldown > 0)
+            this.UI_cooldowndisplay.mask.alphaCutoff = (float)this.skillcooldown / (float)this.SKILLINIT;
     }
 
     /*void grap(GameObject enemy){

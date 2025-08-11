@@ -118,12 +118,12 @@ TextureImporter:
       name: oni_hammer_0
       rect:
         serializedVersion: 2
-        x: 54
+        x: 0
         y: 128
-        width: 66
-        height: 68
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        width: 128
+        height: 128
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -140,12 +140,12 @@ TextureImporter:
       name: oni_hammer_1
       rect:
         serializedVersion: 2
-        x: 186
+        x: 128
         y: 128
-        width: 70
-        height: 65
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        width: 128
+        height: 128
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -162,12 +162,12 @@ TextureImporter:
       name: oni_hammer_2
       rect:
         serializedVersion: 2
-        x: 313
+        x: 256
         y: 128
-        width: 71
-        height: 64
+        width: 128
+        height: 128
       alignment: 9
-      pivot: {x: 0.51580423, y: 0.5701294}
+      pivot: {x: 0.5, y: 0.25}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -184,12 +184,12 @@ TextureImporter:
       name: oni_hammer_3
       rect:
         serializedVersion: 2
-        x: 53
+        x: 0
         y: 0
-        width: 77
-        height: 86
+        width: 128
+        height: 128
       alignment: 9
-      pivot: {x: 0.50364316, y: 0.287981}
+      pivot: {x: 0.5, y: 0.25}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -206,12 +206,12 @@ TextureImporter:
       name: oni_hammer_4
       rect:
         serializedVersion: 2
-        x: 157
+        x: 128
         y: 0
-        width: 96
-        height: 117
+        width: 128
+        height: 128
       alignment: 9
-      pivot: {x: 0.5262993, y: 0.23147003}
+      pivot: {x: 0.5, y: 0.25}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -231,9 +231,9 @@ TextureImporter:
         x: 256
         y: 0
         width: 128
-        height: 82
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        height: 128
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []

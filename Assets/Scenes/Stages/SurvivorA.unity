@@ -2018,6 +2018,7 @@ MonoBehaviour:
   enemyProducts:
   - enemyPrefs:
     - {fileID: 4482937538460693618, guid: e504056476e34b6419533e9c78e06045, type: 3}
+    - {fileID: 8682382182829615398, guid: 93a780fab263bdc49a10edf9d126263d, type: 3}
     genInterval: 3
     maxNum: 3
   groundLayer:

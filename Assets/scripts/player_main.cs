@@ -195,7 +195,7 @@ public class player_main : MonoBehaviour
                 this.UI_cooldowndisplay.mask.alphaCutoff = 1.0f;
             }
 
-            if (Input.GetKey(KeyCode.S) && !this.arrowkeyhold && this.arrowtime <= 0)
+            if (Input.GetKey(KeyCode.X) && !this.arrowkeyhold && this.arrowtime <= 0 && PlayerData.main.weapon == Weapon.Bow)
             {
                 //this.arrowmaker.arrowmaking=true;
                 this.arrowkeyhold = true;
@@ -387,7 +387,7 @@ public class player_main : MonoBehaviour
             this.dashtime = 0;
             if (PlayerData.main.hp <= 0)
             {
-                Debug.Log("dead");
+                Debug.Log("DEAD");
             }
             //this.kbtimer=50;
             //Time.timeScale=0;

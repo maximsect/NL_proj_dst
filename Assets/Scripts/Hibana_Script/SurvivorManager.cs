@@ -7,16 +7,25 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
 
+[System.Serializable]
+public class EnemyProducts
+{
+    public GameObject[] enemyPrefs;
+    public float genInterval;
+    public int maxNum = 3;
+}
 public class SurvivorManager : StageManager
 {
+    public EnemyProducts[] enemyProducts;
     public LayerMask groundLayer;
-    public List<GameObject> enemyPrefs = new List<GameObject>();
-    private List<GameObject> enemyGen = new List<GameObject>();
     public float surviveTime = 30;
     public TMP_Text clock;
     void Start()
     {
-        StartCoroutine(EnemyFactory());
+        foreach (EnemyProducts enemyProduct in enemyProducts)
+        {
+            StartCoroutine(EnemyFactory(enemyProduct));
+        }
         StartCoroutine(Waiting());
         base.MainStart();
     }
@@ -32,21 +41,26 @@ public class SurvivorManager : StageManager
             return pos;
         }
     }
-    IEnumerator EnemyFactory()
+    IEnumerator EnemyFactory(EnemyProducts ene)
     {
+        List<GameObject> genList = new List<GameObject>();
+        int index = 0;
         while (true)
         {
-            yield return new WaitForSeconds(4f);
-            GameObject target = enemyPrefs[Random.Range(0, enemyPrefs.Count)];
-            GameObject generated = Instantiate(target);
-            generated.transform.position = RandomPos().ToVector3(0);
-            enemyGen.Add(generated);
             while (true)
             {
-                enemyGen.RemoveAll(item => item == null);
-                if (enemyGen.Count < 10) break;
+                genList.RemoveAll(item => item == null);
+                if (genList.Count < ene.maxNum) break;
                 yield return null;
             }
+            yield return new WaitForSeconds(ene.genInterval);
+            foreach (GameObject enemy in ene.enemyPrefs)
+            {
+                GameObject generated = Instantiate(enemy);
+                generated.transform.position = RandomPos().ToVector3(0);
+                genList.Add(generated);
+            }
+            
         }
     }
     IEnumerator Waiting()
@@ -63,7 +77,7 @@ public class SurvivorManager : StageManager
 }
 public static class MyExtention
 {
-    public static Vector3 ToVector3(this Vector2 go,float z)
+    public static Vector3 ToVector3(this Vector2 go, float z)
     {
         return new Vector3(go.x, go.y, z);
     }

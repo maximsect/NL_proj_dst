@@ -1785,6 +1785,42 @@ MonoBehaviour:
       value: 30
       valueMode: 1
       possibility: 3
+    - SceneName: KillEnemyC
+      difficultyLevel: "\u9B3C"
+      sceneMode: 3
+      skillSprite: {fileID: 21300000, guid: ff53b649bb4bbc64180272f82b9c49b0, type: 3}
+      getSkillName: "\u6700\u5927HP\u5897\u52A0+30"
+      variableName: maxHp
+      value: 30
+      valueMode: 1
+      possibility: 3
+    - SceneName: KillEnemyC
+      difficultyLevel: "\u5927\u4ECF"
+      sceneMode: 3
+      skillSprite: {fileID: 21300000, guid: ff53b649bb4bbc64180272f82b9c49b0, type: 3}
+      getSkillName: "\u6700\u5927HP\u5897\u52A0+30"
+      variableName: maxHp
+      value: 30
+      valueMode: 1
+      possibility: 3
+    - SceneName: KillEnemyC
+      difficultyLevel: "\u5927\u4ECF"
+      sceneMode: 3
+      skillSprite: {fileID: 21300000, guid: 805a53075b2998e408cbcf9590c748f9, type: 3}
+      getSkillName: "\u5F13\u653B\u6483\u529B\u5F37\u5316+15"
+      variableName: bowAttack
+      value: 15
+      valueMode: 1
+      possibility: 3
+    - SceneName: KillEnemyC
+      difficultyLevel: "\u5927\u9B3C"
+      sceneMode: 3
+      skillSprite: {fileID: 21300000, guid: 805a53075b2998e408cbcf9590c748f9, type: 3}
+      getSkillName: "\u653B\u6483\u529B\u5F37\u5316+40"
+      variableName: attackPower
+      value: 40
+      valueMode: 1
+      possibility: 2
   - sceneMode: "\u9003\u3052\u5207\u308A"
     imageColor: {r: 1, g: 0.6320754, b: 0.63953483, a: 1}
     backGround: {fileID: 174911749}

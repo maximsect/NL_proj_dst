@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d47fd4e41c3906248a195b2ae9e30f25, type: 3}
-  m_Name: SceneData
+  m_Name: SceneData Initialized
   m_EditorClassIdentifier: 
   deviceMode: 1
   currentScene: 0
   majorScene: 5
-  resultScene: 15
+  resultScene: 20
   bossScene: 
   stageLevel: "\u9B3C"
   sceneMode: 0
-  copySource: {fileID: 11400000, guid: 2e7dc39bdc641714e8b7d1703702cae1, type: 2}
+  copySource: {fileID: 11400000}
   ratios:
   - {x: 0.6, y: 0.7}
   - {x: 0.7, y: 0.8}

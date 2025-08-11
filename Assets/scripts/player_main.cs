@@ -25,6 +25,7 @@ public class player_main : MonoBehaviour
     int invincibletime = 0;
     int kb_time = 0;
     int kbtimer = 0;
+    public int xp = 0;
     float last_velocity = 0f;
     bool dashflag = false;
     int behavior = 0;
@@ -34,17 +35,16 @@ public class player_main : MonoBehaviour
     [System.NonSerialized] public int skillcooldown = 0;
 
     private Slider hpSlider;
-    public GameObject batObj,spearObj,hammerObj;
+    public GameObject batObj, spearObj, hammerObj;
     public GameObject skill;
     private arrowmaker arrowProducer;
     public LayerMask ground;
-    public int xp = 0;
     public float grappingSpeed = 25;
     public Animator animator;
     public Animator skillanimator;
-    public BoxCollider2D attackcollider;
     public BoxCollider2D skillcollider;
     private UI_skillcooldown UI_cooldowndisplay;
+    public AudioClip jumpSound, batSound, bowSound, spearSound, hammerSound, skillSound;
 
     readonly float maxspeedX = 5.0f;
     readonly Vector3 hide = new Vector3(0f, 100f, 0f);
@@ -176,12 +176,15 @@ public class player_main : MonoBehaviour
                     {
                         case Weapon.Bat:
                             attacktime = BATINIT;
+                            GameManager.main.PlayOneShot(batSound);
                             break;
                         case Weapon.Spear:
                             attacktime = SPEARINIT;
+                            GameManager.main.PlayOneShot(spearSound);
                             break;
                         case Weapon.Hammer:
                             attacktime = HAMMERINIT;
+                            GameManager.main.PlayOneShot(hammerSound);
                             break;
                         default:
                             break;
@@ -191,12 +194,14 @@ public class player_main : MonoBehaviour
 
             if (Input.GetKey(KeyCode.D) && this.skillcooldown <= 0 && this.arrowtime <= 0)
             {
+                GameManager.main.PlayOneShot(skillSound);
                 this.skillcooldown = this.SKILLINIT;
                 this.UI_cooldowndisplay.mask.alphaCutoff = 1.0f;
             }
 
             if (Input.GetKey(KeyCode.X) && !this.arrowkeyhold && this.arrowtime <= 0 && PlayerData.main.weapon == Weapon.Bow)
             {
+                GameManager.main.PlayOneShot(bowSound);
                 //this.arrowmaker.arrowmaking=true;
                 this.arrowkeyhold = true;
                 this.arrowtime = this.ARROWINIT;
@@ -335,6 +340,10 @@ public class player_main : MonoBehaviour
         if (0 < this.arrowtime) { this.behavior = 5; }
         if (this.isskillusing(2)) { this.skillanimator.SetBool("isskillusing", true); this.behavior = 4; }
         animator.SetInteger("behave", this.behavior);
+        if (this.skillcooldown > 0)
+            this.UI_cooldowndisplay.mask.alphaCutoff = (float)this.skillcooldown / (float)this.SKILLINIT;
+        else
+            this.UI_cooldowndisplay.mask.alphaCutoff = 0f;
     }
 
     /*void grap(GameObject enemy){

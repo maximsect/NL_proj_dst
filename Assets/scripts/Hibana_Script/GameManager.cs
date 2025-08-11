@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-
+using UnityEngine.Audio;
 public class GameManager : MonoBehaviour
 {
     public static GameManager main;
@@ -11,22 +11,30 @@ public class GameManager : MonoBehaviour
     public static List<string> enemyWeaponTag = new List<string>() { "enemyweapon", "damage_factor", "assign_attack" };
     public static List<string> syllabusLevel = new List<string>() { "ê_", "ëÂïß", "ïß", "ãS", "ëÂãS" };
     //public static List<string> stageMode = new List<string>() { "GetFlag", "LessDamage", "KillEnemy", "Survivor", "NoDamage" };
-    public List<GameObject> killEffect = new List<GameObject>();
     // Start is called once before the first execution of Update after the MonoBehaviour is created
+    private AudioSource seSource,bgmSource;
     void OnEnable()
     {
         if (main == null) main = this;
         else Destroy(this.gameObject);
         playerData.OnStartSetting();
         player = GameObject.Find("player");
-        if(player == null)
+        if (player == null)
         {
             player = GameObject.Instantiate(PlayerData.main.playerPrefab, Vector3.zero, Quaternion.identity);
         }
+        GameObject seObj = GameObject.Instantiate(playerData.seObj, GameObject.Find("Main Camera").transform);
+        seSource = seObj.GetComponent<AudioSource>();
         DontDestroyOnLoad(this.gameObject);
+    }
+    public void PlayOneShot(AudioClip sound)
+    {
+        seSource.pitch = UnityEngine.Random.Range(1f, 1.2f);
+        seSource.PlayOneShot(sound);
     }
     public GameObject GetKillEffect()
     {
-        return killEffect[UnityEngine.Random.Range(0, killEffect.Count)];
+        return playerData.killEffect[UnityEngine.Random.Range(0, playerData.killEffect.Count)];
     }
+    
 }

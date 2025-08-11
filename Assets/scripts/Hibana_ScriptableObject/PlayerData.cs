@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Linq;
 using UnityEngine.SceneManagement;
+using UnityEngine.Audio;
 public enum Weapon
 {
     Bat,Spear,Bow,Hammer
@@ -46,10 +47,16 @@ public class PlayerData : ScriptableObject
     public int hammerAttack = 10;
     public int arrowAttack = 10;
     public int skillAttack = 10;
+    [Header("Sound")]
+    public GameObject seObj;
+    public AudioMixer audioMixer;
+
+    [Header("Effect")]
+    public List<GameObject> killEffect = new List<GameObject>();
 
     [Header("Variable")]
     public float invinsibleDuration = 0.3f;
-    public PlayerData copySource,pasteTarget;
+    public PlayerData copySource, pasteTarget;
     public void OnStartSetting()
     {
         main = this;
@@ -182,6 +189,16 @@ public class PlayerData : ScriptableObject
         {
             field.SetValue(pasteTarget, field.GetValue(copySource));
         }
+    }
+
+
+    public void ChangeBGMVolume(float vol)
+    {
+        audioMixer.SetFloat("BGMVolume", vol);
+    }
+    public void ChangeSEVolume(float vol)
+    {
+        audioMixer.SetFloat("SEVolume", vol);
     }
 }
 [CustomEditor(typeof(PlayerData))]

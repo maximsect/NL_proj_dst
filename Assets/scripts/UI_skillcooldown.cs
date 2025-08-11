@@ -5,22 +5,19 @@ public class UI_skillcooldown : MonoBehaviour
 {
     //public SpriteRenderer sprite;
     //public Sprite in_cooldown;
-    //public Sprite ready;
+    //public Sprite ready;-
+    //[System.NonSerialized] public float alphaCutoffDelta;
     [HideInInspector] public SpriteMask mask;
     void Start()
     {
         mask = GameObject.Find("Sprite Mask").GetComponent<SpriteMask>();
+        //this.alphaCutoffDelta = 1.0f / (float)(PlayerData.main.skillinit);
     }
     void FixedUpdate()
-    {/*
-        if(this.player.skillcooldown<=0)
-            this.sprite.sprite=this.ready;
+    {
+        /*if(this.mask.alphaCutoff>0.0f)
+            this.mask.alphaCutoff-=this.alphaCutoffDelta;
         else
-            this.sprite.sprite=this.in_cooldown;*/
-
-        if(player_main.main.skillcooldown>0)
-            this.mask.alphaCutoff-=0.008f;
-        else
-            this.mask.alphaCutoff=0.0f;
+            this.mask.alphaCutoff=0.0f;*/
     }
 }

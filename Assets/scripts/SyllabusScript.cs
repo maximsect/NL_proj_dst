@@ -17,6 +17,7 @@ public enum SceneMode
 public class SceneClass
 {
     public string SceneName;
+    public string sceneNameforDisplay;
     public string difficultyLevel = "Normal";
     public SceneMode sceneMode;
     public Sprite skillSprite;
@@ -32,6 +33,7 @@ public class SyllabusClass
     public string sceneMode;
     public Color imageColor = Color.green;
     public Image backGround;
+    public TextMeshProUGUI sceneNameDisplay;
     public TextMeshProUGUI difficultyDisplay;
     public Image skillIcon;
     public TextMeshProUGUI skillNameDisplay;
@@ -52,6 +54,7 @@ public class SyllabusScript : MonoBehaviour
         SelectRandomThree();
         for (int i = 0; i < 3; i++)
         {
+            syllabusClasses[i].sceneNameDisplay.text = syllabusClasses[i].sceneClasses[getList[i]].sceneNameforDisplay;
             syllabusClasses[i].difficultyDisplay.text = syllabusClasses[i].sceneClasses[getList[i]].difficultyLevel;
             syllabusClasses[i].skillIcon.sprite = syllabusClasses[i].sceneClasses[getList[i]].skillSprite;
             syllabusClasses[i].skillNameDisplay.text = syllabusClasses[i].sceneClasses[getList[i]].getSkillName;
@@ -62,6 +65,7 @@ public class SyllabusScript : MonoBehaviour
         SelectRandomThree();
         for (int i = 0; i < 3; i++)
         {
+            syllabusClasses[i].sceneNameDisplay.text = syllabusClasses[i].sceneClasses[getList[i]].sceneNameforDisplay;
             syllabusClasses[i].difficultyDisplay.text = syllabusClasses[i].sceneClasses[getList[i]].difficultyLevel;
             syllabusClasses[i].skillIcon.sprite = syllabusClasses[i].sceneClasses[getList[i]].skillSprite;
             syllabusClasses[i].backGround.color = syllabusClasses[i].imageColor;

@@ -6,15 +6,16 @@ using UnityEngine.UI;
 using Random = UnityEngine.Random;
 public enum DrawFunctions
 {
-    LinearF,QuadraticF,CubicF,SinWave,TanWave,Exp,Sqrt,PingPong,Log,Abs,InverseX
+    LinearF, QuadraticF, CubicF, SinWave, TanWave, Exp, Sqrt, PingPong, Log, Abs, InverseX
 }
-public class ProfessorMovement : MonoBehaviour
+public class ProfessorMovement : StageManager
 {
-    public GameObject player;
-    public SpriteRenderer mainImage;
+    private float powerUpRatio = 1;
+    private float invincibleTimer = 0;
+    public SpriteRenderer oniImage;
     public GameObject functionRenderObj;
     public DrawFunctions drawFunction;
-    [Range(2,500)]
+    [Range(2, 500)]
     public int numberOfPoints = 10;
     public float xStart = 0, xFinish = 30;
     [Header("health")]
@@ -80,11 +81,15 @@ public class ProfessorMovement : MonoBehaviour
 
     void Start()
     {
+        base.MainStart();
         hpDisplay.minValue = 0;
         hpDisplay.maxValue = hp;
         hpDisplay.value = hp;
         animator = transform.GetChild(0).gameObject.GetComponent<Animator>();
         StartCoroutine(ProfessorAnimation());
+
+        int stageLevel = sceneData.GetStageLevel();
+        powerUpRatio = Random.Range(sceneData.ratios[stageLevel].x, sceneData.ratios[stageLevel].y);
     }
 
     float _count = 0;
@@ -95,44 +100,74 @@ public class ProfessorMovement : MonoBehaviour
         {
             _count += Time.deltaTime;
             color.a = 0.5f + Mathf.Sin(_count * 8) * 0.3f;
-            mainImage.material.color = color;
+            oniImage.material.color = color;
         }
         else
         {
             color.a = 1;
-            mainImage.material.color = color;
+            oniImage.material.color = color;
             selectableMovementIndex.Remove(3);
             selectableMovementIndex.Add(3);
         }
-        Vector3 relativePos = player.transform.position - transform.position;
-        if(Mathf.Abs(relativePos.y) <= 2)
+        Vector3 relativePos = GameManager.player.transform.position - transform.position;
+        if (Mathf.Abs(relativePos.y) <= 2)
         {
             transform.localScale = (relativePos.x > 0) ? new Vector3(-1, 1, 1) : new Vector3(1, 1, 1);
         }
+
+        invincibleTimer -= Time.deltaTime;
+        oniImage.color = (invincibleTimer > 0) ? new Color(1, 0, 0, 1) : new Color(1, 1, 1, 1);
     }
 
-    
+
     void OnTriggerEnter2D(Collider2D other)
     {
-        hpDisplay.value = hp;
-        if (other.gameObject.tag == "attack" || other.gameObject.tag == "skillattack")
+
+        if (GameManager.playerWeaponTag.Contains(other.gameObject.tag) && invincibleTimer < 0)
         {
             bool checker = false;
             if (!isObserved) checker = UnityEngine.Random.Range(0f, 1f) > 0.5;
             else checker = true;
-            if (checker)
+            if (!checker) return;
+            invincibleTimer = 0.1f;
+            int damage = 0;
+            switch (other.gameObject.tag)
             {
-                if (--hp == 0)
-                {
-                    SceneTransition.main.StageClearReciever();
-                    Destroy(this.gameObject);
-                }
+                case "bat":
+                    damage = PlayerData.main.batAttack;
+                    break;
+                case "spear":
+                    damage = PlayerData.main.spearAttack;
+                    break;
+                case "bow":
+                    damage = PlayerData.main.bowAttack;
+                    break;
+                case "hammer":
+                    damage = PlayerData.main.hammerAttack;
+                    break;
+                case "arrow":
+                    damage = PlayerData.main.arrowAttack;
+                    break;
+                case "skillattack":
+                    damage = PlayerData.main.skillAttack;
+                    break;
+                default:
+                    break;
+            }
+            hp -= damage;
+            SceneTransition.main.DamageAmount(damage);
+            hpDisplay.value = hp;
+            if (hp <= 0)
+            {
+                SceneTransition.main.StageClearReciever();
+                SceneTransition.main.GetKill();
+                Destroy(this.gameObject);
             }
         }
     }
     void OnTriggerStay2D(Collider2D other)
     {
-        if(other.gameObject.tag == "observer")
+        if (other.gameObject.tag == "observer")
         {
             isObserved = true;
         }
@@ -149,8 +184,8 @@ public class ProfessorMovement : MonoBehaviour
         while (true)
         {
             Vector2 pos = new Vector2(Random.Range(-3f, 10f), Random.Range(-10f, 10f));
-            if (Physics2D.OverlapCircle(pos, 0.5f,groundLayer)) continue;
-            if (!Physics2D.OverlapCircle(pos - new Vector2(0, 0.1f), 0.5f,groundLayer)) continue;
+            if (Physics2D.OverlapCircle(pos, 0.5f, groundLayer)) continue;
+            if (!Physics2D.OverlapCircle(pos - new Vector2(0, 0.1f), 0.5f, groundLayer)) continue;
             if (Vector3.Distance(transform.position, pos) < 7) continue;
             return pos + new Vector2(0, 0.8f);
         }
@@ -160,7 +195,7 @@ public class ProfessorMovement : MonoBehaviour
     {
         while (true)
         {
-            int rand = selectableMovementIndex[Random.Range(0, selectableMovementIndex.Count - 1)] ;
+            int rand = selectableMovementIndex[Random.Range(0, selectableMovementIndex.Count - 1)];
             selectableMovementIndex.Remove(rand);
             selectableMovementIndex.Add(rand);
             switch (rand)
@@ -194,9 +229,10 @@ public class ProfessorMovement : MonoBehaviour
     }
     IEnumerator FuncAttack(DrawFunctions drawFunc)
     {
-        GameObject sinWave = Instantiate(functionRenderObj, player.transform.position, Quaternion.Euler(0, 0, Random.Range(0f, 360f)));
-        LineRenderer lineRenderer = sinWave.GetComponent<LineRenderer>(); 
+        GameObject sinWave = Instantiate(functionRenderObj, GameManager.player.transform.position, Quaternion.Euler(0, 0, Random.Range(0f, 360f)));
+        LineRenderer lineRenderer = sinWave.GetComponent<LineRenderer>();
         lineRenderer.positionCount = numberOfPoints;
+        EdgeCollider2D edges = sinWave.GetComponent<EdgeCollider2D>();
         List<Vector2> drawPoints = GeneratePoints(drawFunc);
         for (int i = 0; i < drawPoints.Count; i++)
         {
@@ -208,15 +244,16 @@ public class ProfessorMovement : MonoBehaviour
             new GradientAlphaKey[] { new GradientAlphaKey(0.15f, 0.0f) }
             );
         lineRenderer.colorGradient = gradient;
+        edges.enabled = false;
         yield return new WaitForSeconds(0.6f);
         gradient.SetKeys(
             new GradientColorKey[] { new GradientColorKey(Color.red, 0.0f) },
             new GradientAlphaKey[] { new GradientAlphaKey(1f, 0.0f) }
             );
         lineRenderer.colorGradient = gradient;
-        EdgeCollider2D edges = sinWave.GetComponent<EdgeCollider2D>();
+
+        edges.enabled = true;
         edges.SetPoints(drawPoints);
-        sinWave.tag = "Enemy";
         yield return new WaitForSeconds(0.6f);
         Destroy(sinWave);
     }

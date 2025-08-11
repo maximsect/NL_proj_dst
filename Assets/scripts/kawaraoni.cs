@@ -1,9 +1,8 @@
 using UnityEngine;
 using System.Collections;
 
-public class kawaraoni : MonoBehaviour
+public class kawaraoni : EnemyBaseScript
 {
-    public int hp=30;
     public float interval = 2f;
     public float firetime = 0.5f;
     public float attackoffset = 1.0f;
@@ -17,8 +16,8 @@ public class kawaraoni : MonoBehaviour
     void FixedUpdate()
     {
         if(this.in_interval <= 1)
-            this.transform.localScale=new Vector3(GameManager.main.player.transform.position.x - this.transform.position.x < 0f ? 1 : -1, 1, 1);
-        if(Mathf.Abs(GameManager.main.player.transform.position.y - this.transform.position.y) < this.attackoffset && this.in_interval == 0){
+            this.transform.localScale=new Vector3(GameManager.player.transform.position.x - this.transform.position.x < 0f ? 1 : -1, 1, 1);
+        if(Mathf.Abs(GameManager.player.transform.position.y - this.transform.position.y) < this.attackoffset && this.in_interval == 0){
             this.in_interval = 2;
             this.anim.SetBool("fire", true);
             StartCoroutine(Attack());
@@ -30,6 +29,7 @@ public class kawaraoni : MonoBehaviour
         yield return new WaitForSeconds(this.firetime);
         GameObject laserObj = Instantiate(LaserPref, transform.position, Quaternion.identity);
         laserObj.GetComponent<Rigidbody2D>().linearVelocity = new Vector2(-10f * this.transform.localScale.x, 0f);
+        laserObj.transform.localScale = this.transform.localScale;
         yield return new WaitForSeconds(0.2f);
         this.in_interval = 1;
         this.anim.SetBool("fire", false);
@@ -38,7 +38,7 @@ public class kawaraoni : MonoBehaviour
         this.in_interval = 0;
         yield break;
     }
-
+    /*
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (!collision.gameObject.CompareTag("ground"))
@@ -71,5 +71,5 @@ public class kawaraoni : MonoBehaviour
         {
             this.invincible = 0;
         }
-    }
+    }/**/
 }

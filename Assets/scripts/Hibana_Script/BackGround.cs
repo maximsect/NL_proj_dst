@@ -2,8 +2,10 @@ using UnityEngine;
 
 public class BackGround : MonoBehaviour
 {
+
+    public float speeds = 0.3f;
     void Update()
     {
-        transform.position = GameManager.main.camera.transform.position * 0.3f;
+        transform.position = Camera.main.gameObject.transform.position * speeds;
     }
 }

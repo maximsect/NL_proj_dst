@@ -16,8 +16,10 @@ public enum Weapon
 public class PlayerData : ScriptableObject
 {
     public static PlayerData main { get; private set; }
+    public GameObject playerPrefab;
     [Header("Status")]
-    [field: SerializeField] public int hp { get; private set; } = 5;
+    //[field: SerializeField] public int hp { get; private set; } = 5;
+    public int hp = 30;
     public int maxHp = 10;
     public int healAmount = 3;
     public float autoHealInterval = 10f;
@@ -37,16 +39,20 @@ public class PlayerData : ScriptableObject
     public int attackPower = 10;
     public float attackInterval = 0.5f;
     public Weapon weapon;
+    [Header("Weapons")]
+    public int batAttack = 10;
+    public int spearAttack = 10;
+    public int bowAttack = 10;
+    public int hammerAttack = 10;
+    public int arrowAttack = 10;
+    public int skillAttack = 10;
+
     [Header("Variable")]
     public float invinsibleDuration = 0.3f;
-    public PlayerData copySource;
-    public SceneData sceneData;
-    [field: SerializeField] public string LastSceneName { get; private set; } = "Stage1";
-    public string resultText { get; private set; } = "";
-    public float elapsedTime = 0;
-    public void OnStartSetting(PlayerData playerData)
+    public PlayerData copySource,pasteTarget;
+    public void OnStartSetting()
     {
-        main = playerData;
+        main = this;
         hp = maxHp;
         score = 0;
     }
@@ -138,22 +144,60 @@ public class PlayerData : ScriptableObject
         }
         else
         {
-            object[] arguments = new object[] { int.Parse(val) };
+            object[] arguments = new object[] { float.Parse(val) };
             method.Invoke(this, arguments);
         }
     }
     public void ResetValue()
     {
-        OnStartSetting(this);
+        OnStartSetting();
         FieldInfo[] fields = GetType().GetFields();
         foreach (var field in fields)
         {
             field.SetValue(this, field.GetValue(PlayerData.main.copySource));
         }
     }
-    public string GetResultText()
+    public void AddAttackVal(float mul)
     {
-        resultText = "Result\n" + "Score: " + score + "\nTime: " + elapsedTime;
-        return resultText;
+        arrowAttack += (int)mul;
+        batAttack += (int)mul;
+        bowAttack += (int)mul;
+        hammerAttack += (int)mul;
+        skillAttack += (int)mul;
+        spearAttack += (int)mul;
+    }
+    public void MultipleAttackVal(float mul)
+    {
+        arrowAttack = (int)(arrowAttack * mul);
+        batAttack = (int)(batAttack * mul);
+        bowAttack = (int)(bowAttack * mul);
+        hammerAttack = (int)(hammerAttack * mul);
+        skillAttack = (int)(skillAttack * mul);
+        spearAttack = (int)(spearAttack * mul);
+    }
+    public void ResetValues()
+    {
+        FieldInfo[] fields = pasteTarget.GetType().GetFields();
+        foreach (var field in fields)
+        {
+            field.SetValue(pasteTarget, field.GetValue(copySource));
+        }
+    }
+}
+[CustomEditor(typeof(PlayerData))]
+public class PlayerDataEditor : Editor
+{
+    ///<summary>
+    ///Inspector��GUI�X�V
+    ///</summary>
+    public override void OnInspectorGUI()
+    {
+        PlayerData playerData = target as PlayerData;
+        base.OnInspectorGUI();
+        if (GUILayout.Button("ReplaceEveryValue"))
+        {
+            playerData.ResetValues();
+        }
+        EditorGUILayout.HelpBox("AddAttackVal と MultipleAttackVal が使用可能(callを選択してください)", MessageType.Info);
     }
 }

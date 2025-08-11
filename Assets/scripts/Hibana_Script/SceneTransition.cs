@@ -10,6 +10,8 @@ public class SceneTransition : MonoBehaviour
     public ScoreData scoreData;
     public SceneData sceneData;
     [HideInInspector] public bool clearFlag = false;
+    private float startTime = 0, endTime = 0;
+    private SceneScore sceneScore = new SceneScore();
 
     public void E_SceneTransition(string name)
     {
@@ -17,13 +19,18 @@ public class SceneTransition : MonoBehaviour
     }
     private void OnEnable()
     {
-        if (main == null) main = this;
+        if(main == null) main = this;
         StartCoroutine(AwaitStageClear());
+        if (SceneManager.GetActiveScene().name == "StartScene") scoreData.ResetValues();
     }
     private IEnumerator AwaitStageClear()
     {
+        startTime = Time.time;
         yield return new WaitUntil(() => clearFlag);
         clearFlag = false;
+        endTime = Time.time;
+        sceneScore.elapsedTime = endTime - startTime;
+        ScoreCalculation();
         yield return new WaitForSeconds(1f);
         switch (sceneData.StageCheck())
         {
@@ -45,11 +52,52 @@ public class SceneTransition : MonoBehaviour
         Debug.Log("Admitted");
         clearFlag = true;
     }
-    public void ChangeScoreData(int num)
+    public void GetKill()
+    {
+        sceneScore.numberOfKill++;
+    }
+    public void DamageAmount(int delta)
+    {
+        sceneScore.damageAmount += delta;
+    }
+    public void Death()
+    {
+        scoreData.numberOfDeath++;
+    }/*
+    public enum SceneMode
+    {
+        Complete, LessDamage, NoDamage, NumberOfKill, TimeAttack
+    }
+    SceneMode scene;/**/
+    public void ScoreCalculation()
+    {
+        switch (sceneData.sceneMode)
+        {
+            case SceneMode.Complete:
+                sceneScore.sceneScore = 100;
+                break;
+            case SceneMode.LessDamage:
+                sceneScore.sceneScore = 100 * (float)PlayerData.main.hp / PlayerData.main.maxHp;
+                break;
+            case SceneMode.NoDamage:
+                sceneScore.sceneScore = PlayerData.main.hp == PlayerData.main.maxHp ? 100 : 0;
+                break;
+            case SceneMode.NumberOfKill:
+                sceneScore.sceneScore = Mathf.Clamp(50 + sceneScore.numberOfKill * 10, 50, 100);
+                break;
+            case SceneMode.TimeAttack:
+                sceneScore.sceneScore = Mathf.Clamp(120 - (endTime - startTime) * 0.2f,20,100);
+                break;
+            default:
+                break;
+        }
+        scoreData.scoreList.Add(sceneScore);
+    }
+    /*public void ChangeScoreData(int num)
     {
         scoreData.scores.Add(num);
         scoreData.sumScore = scoreData.scores.GetSum();
-    }
+    }/**/
 }
 public static class GameObjectExtention
 {

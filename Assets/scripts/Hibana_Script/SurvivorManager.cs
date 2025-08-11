@@ -7,9 +7,8 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
 
-public class SurvivorManager : MonoBehaviour
+public class SurvivorManager : StageManager
 {
-    public GameObject playerObj;
     public LayerMask groundLayer;
     public List<GameObject> enemyPrefs = new List<GameObject>();
     private List<GameObject> enemyGen = new List<GameObject>();
@@ -19,13 +18,14 @@ public class SurvivorManager : MonoBehaviour
     {
         StartCoroutine(EnemyFactory());
         StartCoroutine(Waiting());
+        base.MainStart();
     }
     Vector2 RandomPos()
     {
         while (true)
         {
             Vector2 pos = new Vector2(Random.Range(-10f, 10f), Random.Range(-3f, 10f));
-            if (Vector3.Distance(pos.ToVector3(), playerObj.transform.position) < 3) continue;
+            if (Vector3.Distance(pos.ToVector3(), GameManager.player.transform.position) < 3) continue;
             if (Physics2D.OverlapCircle(pos, 0.5f, groundLayer)) continue;
             if (!Physics2D.OverlapCircle(pos - new Vector2(0, 0.3f), 0.5f, groundLayer)) continue;
 
@@ -51,6 +51,7 @@ public class SurvivorManager : MonoBehaviour
     }
     IEnumerator Waiting()
     {
+        yield return new WaitForSeconds(0.5f);
         float timer = 0;
         for (; timer < surviveTime; timer += Time.deltaTime)
         {

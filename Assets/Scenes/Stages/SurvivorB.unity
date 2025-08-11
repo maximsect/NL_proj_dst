@@ -687,13 +687,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneData: {fileID: 11400000, guid: d002b1dff15460843ae4dcd006954aa3, type: 2}
   stageDecriptionPanel: {fileID: 8722069140523796048, guid: 4979170cf8ee33c4fb30503cf07e784c, type: 3}
+  enemyProducts:
+  - enemyPrefs:
+    - {fileID: 4482937538460693618, guid: e504056476e34b6419533e9c78e06045, type: 3}
+    genInterval: 3
+    maxNum: 9
+  - enemyPrefs:
+    - {fileID: 4482937538460693618, guid: 6367681ca4323764bb53698e4beb2f16, type: 3}
+    genInterval: 6
+    maxNum: 6
+  - enemyPrefs:
+    - {fileID: 4482937538460693618, guid: 7d86c07cf07b6e34297ebd39b8fcb1a5, type: 3}
+    genInterval: 9
+    maxNum: 3
   groundLayer:
     serializedVersion: 2
     m_Bits: 256
-  enemyPrefs:
-  - {fileID: 4482937538460693618, guid: e504056476e34b6419533e9c78e06045, type: 3}
-  - {fileID: 4482937538460693618, guid: 7d86c07cf07b6e34297ebd39b8fcb1a5, type: 3}
-  - {fileID: 8682382182829615398, guid: 93a780fab263bdc49a10edf9d126263d, type: 3}
   surviveTime: 50
   clock: {fileID: 1375328021}
 --- !u!1 &1089946285

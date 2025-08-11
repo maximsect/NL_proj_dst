@@ -19,10 +19,10 @@ public class SceneTransition : MonoBehaviour
     }
     private void Start()
     {
-        if(main == null) main = this;
+        if (main == null) main = this;
         StartCoroutine(AwaitStageClear());
-        if(PlayerData.main != null)
-        StartCoroutine(AwaitGameOver());
+        if (PlayerData.main != null)
+            StartCoroutine(AwaitGameOver());
         if (SceneManager.GetActiveScene().name == "StartScene") scoreData.ResetValues();
     }
     private IEnumerator AwaitStageClear()
@@ -96,7 +96,7 @@ public class SceneTransition : MonoBehaviour
                 sceneScore.sceneScore = Mathf.Clamp(50 + sceneScore.numberOfKill * 10, 50, 100);
                 break;
             case SceneMode.TimeAttack:
-                sceneScore.sceneScore = Mathf.Clamp(120 - (endTime - startTime) * 0.2f,20,100);
+                sceneScore.sceneScore = Mathf.Clamp(120 - (endTime - startTime) * 0.2f, 20, 100);
                 break;
             default:
                 break;

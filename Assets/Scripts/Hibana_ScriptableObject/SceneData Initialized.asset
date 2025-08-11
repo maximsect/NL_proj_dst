@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   deviceMode: 1
   currentScene: 0
-  majorScene: 5
-  resultScene: 20
-  bossScene: 
+  majorScene: 4
+  resultScene: 8
+  bossScene: 0300000007000000
   stageLevel: "\u9B3C"
   sceneMode: 0
   copySource: {fileID: 11400000}

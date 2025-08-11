@@ -34,7 +34,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_Enabled
-    path: 
+    path: attackRegion
     classID: 61
     script: {fileID: 0}
     flags: 0
@@ -45,14 +45,16 @@ AnimationClip:
       value: {fileID: -316609465007914650, guid: 6443a64386864dd438fb6bdb3a38eb01, type: 3}
     - time: 0.125
       value: {fileID: 1147920677088635079, guid: 6443a64386864dd438fb6bdb3a38eb01, type: 3}
-    - time: 0.5
+    - time: 0.375
       value: {fileID: -3902182116779694387, guid: 6443a64386864dd438fb6bdb3a38eb01, type: 3}
-    - time: 0.625
+    - time: 0.5
       value: {fileID: 8220459301869540621, guid: 6443a64386864dd438fb6bdb3a38eb01, type: 3}
-    - time: 0.75
+    - time: 0.625
       value: {fileID: -2739942681494012637, guid: 6443a64386864dd438fb6bdb3a38eb01, type: 3}
-    - time: 0.875
+    - time: 0.75
       value: {fileID: -3012639320988920221, guid: 6443a64386864dd438fb6bdb3a38eb01, type: 3}
+    - time: 0.875
+      value: {fileID: 0}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -66,7 +68,7 @@ AnimationClip:
   m_ClipBindingConstant:
     genericBindings:
     - serializedVersion: 2
-      path: 0
+      path: 1555733976
       attribute: 3305885265
       script: {fileID: 0}
       typeID: 61
@@ -90,6 +92,7 @@ AnimationClip:
     - {fileID: 8220459301869540621, guid: 6443a64386864dd438fb6bdb3a38eb01, type: 3}
     - {fileID: -2739942681494012637, guid: 6443a64386864dd438fb6bdb3a38eb01, type: 3}
     - {fileID: -3012639320988920221, guid: 6443a64386864dd438fb6bdb3a38eb01, type: 3}
+    - {fileID: 0}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
@@ -128,11 +131,18 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_Enabled
-    path: 
+    path: attackRegion
     classID: 61
     script: {fileID: 0}
     flags: 0
   m_EulerEditorCurves: []
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
-  m_Events: []
+  m_Events:
+  - time: 0.875
+    functionName: Warp
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0

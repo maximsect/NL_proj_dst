@@ -5384,7 +5384,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerData: {fileID: 11400000, guid: dc4bf2af19840754abdc4cf88e72b30e, type: 2}
-  killEffect: []
 --- !u!4 &1217392814
 Transform:
   m_ObjectHideFlags: 0

@@ -12,12 +12,15 @@ public class NekomataMovement : StageManager
     public GameObject nekoOniPref;
     public float interactableZone = 2;
     public float speed = 5, jumppower = 5;
+    public float x_velocity = 0;
+    public bool lookdirectionEnabled = false;
     [Header("health")]
     public int hp = 25;
     public Slider hpDisplay;
     public LayerMask groundLayer;
     private Animator animator;
     public Color color;
+    public float scale = 1.5f;
     private int moveMode = 0;
     Vector3 relativePos = Vector3.zero;
     Rigidbody2D rb2d;
@@ -39,9 +42,10 @@ public class NekomataMovement : StageManager
     {
         hpDisplay.value = hp;
         relativePos = transform.position - GameManager.player.transform.position;
-        if (Mathf.Abs(relativePos.y) <= 2)
+        rb2d.linearVelocity = new Vector3(x_velocity, rb2d.linearVelocity.y);
+        if (Mathf.Abs(relativePos.y) <= 2 && lookdirectionEnabled)
         {
-            transform.localScale = (relativePos.x > 0) ? new Vector3(1, 1, 1) : new Vector3(-1, 1, 1);
+            transform.localScale = ((relativePos.x > 0) ? new Vector3(1, 1, 1) : new Vector3(-1, 1, 1)) * scale;
         }
 
         invincibleTimer -= Time.deltaTime;
@@ -52,7 +56,7 @@ public class NekomataMovement : StageManager
             moveMode = 1;
             if (Mathf.Abs(relativePos.x) < interactableZone) moveMode = 2;
         }
-        else if (Mathf.Abs(relativePos.x) < 5) moveMode = 3;
+        else if (Mathf.Abs(relativePos.x) < 5) moveMode = 0;
         else moveMode = 0;
 
     }
@@ -110,7 +114,9 @@ public class NekomataMovement : StageManager
             return pos + new Vector2(0, 0.8f);
         }
     }
-    List<int> selectableMovementIndex0 = new List<int>() { 0, 1, 2, 3 };
+    List<int> selectableMovementIndex0 = new List<int>() { 0, 0, 0, 1, 1, 1, 2, 3, 4, 5, 6, 7 };
+    List<int> selectableMovementIndex1 = new List<int>() { 0, 0, 0, 1, };
+    int moveIndex = 0;
     IEnumerator NekomataAnimation()
     {
         while (true)
@@ -118,72 +124,58 @@ public class NekomataMovement : StageManager
             switch (moveMode)
             {
                 case 0:
-                    int randomMove = UnityEngine.Random.Range(0, 8);
-                    if (randomMove >= 2) randomMove = UnityEngine.Random.Range(0, 8);
+                    lookdirectionEnabled = false;
+                    int randomMove = selectableMovementIndex0[UnityEngine.Random.Range(0, selectableMovementIndex0.Count - 2)];
+                    selectableMovementIndex0.Remove(randomMove);
+                    selectableMovementIndex0.Add(randomMove);
                     switch (randomMove)
                     {
                         case 0:
-                            for (float elapsedTimer = 0; elapsedTimer < 1; elapsedTimer += Time.deltaTime)
-                            {
-                                AnimeState(1);
-                                rb2d.linearVelocity = new Vector2(speed, rb2d.linearVelocity.y);
-                                yield return null;
-                            }
+                            AnimeState(1);
+                            x_velocity = speed;
+                            transform.localScale = new Vector3(-1, 1, 1) * scale;
+                            yield return new WaitForSeconds(1f);
                             break;
                         case 1:
-                            for (float elapsedTimer = 0; elapsedTimer < 1; elapsedTimer += Time.deltaTime)
-                            {
-                                AnimeState(1);
-                                rb2d.linearVelocity = new Vector2(-speed, rb2d.linearVelocity.y);
-                                yield return null;
-                            }
+                            AnimeState(1);
+                            x_velocity = -speed;
+                            transform.localScale = new Vector3(1, 1, 1) * scale;
+                            yield return new WaitForSeconds(1f);
                             break;
                         case 2:
                             rb2d.AddForce(Vector2.up * jumppower, ForceMode2D.Impulse);
-                            for (float elapsedTimer = 0; elapsedTimer < 1; elapsedTimer += Time.deltaTime)
-                            {
-                                AnimeState(1);
-                                rb2d.linearVelocity = new Vector2(speed, rb2d.linearVelocity.y);
-
-                                yield return null;
-                            }
+                            transform.localScale = new Vector3(-1, 1, 1) * scale;
+                            AnimeState(1);
+                            x_velocity = speed;
+                            yield return new WaitForSeconds(1f);
                             break;
                         case 3:
                             rb2d.AddForce(Vector2.up * jumppower, ForceMode2D.Impulse);
-                            for (float elapsedTimer = 0; elapsedTimer < 1; elapsedTimer += Time.deltaTime)
-                            {
-                                AnimeState(1);
-                                rb2d.linearVelocity = new Vector2(-speed, rb2d.linearVelocity.y);
-
-                                yield return null;
-                            }
+                            transform.localScale = new Vector3(1, 1, 1) * scale;
+                            AnimeState(1);
+                            x_velocity = -speed;
+                            yield return new WaitForSeconds(1f);
                             break;
                         case 4:
                             rb2d.AddForce(Vector2.up * jumppower, ForceMode2D.Impulse);
-                            for (float elapsedTimer = 0; elapsedTimer < 1; elapsedTimer += Time.deltaTime)
-                            {
-                                AnimeState(0);
-                                yield return null;
-                            }
+                            AnimeState(0);
+                            yield return new WaitForSeconds(1f);
                             break;
                         case 5:
-                            for (float elapsedTimer = 0; elapsedTimer < 1; elapsedTimer += Time.deltaTime)
-                            {
-                                AnimeState(0);
-                                yield return null;
-                            }
+                            AnimeState(0);
+                            yield return new WaitForSeconds(0.4f);
                             break;
                         case 6:
                             AnimeState(0);
+                            lookdirectionEnabled = true;
                             yield return SummonNekoOni(Random.Range(2, 6));
                             break;
                         case 7:
+                            x_velocity = 0;
                             AnimeState(3);
-                            yield return new WaitForSeconds(1.0f);
-                            transform.position = RandomPos().ToVector3();
+                            yield return null;
                             AnimeState(4);
-                            yield return new WaitForSeconds(1.0f);
-                            AnimeState(0);
+                            yield return new WaitForSeconds(1f);
                             break;
                         default:
                             yield return null;
@@ -191,37 +183,62 @@ public class NekomataMovement : StageManager
                     }
                     break;
                 case 1:
-                    rb2d.linearVelocity = new Vector2((relativePos.x > 0) ? -speed : speed, rb2d.linearVelocity.y);
-                    //ƒvƒŒƒCƒ„[•ûŒü‚ÉˆÚ“®‚·‚é
+                    lookdirectionEnabled = true;
+                    x_velocity = (relativePos.x > 0) ? -speed : speed;
+                    //
                     AnimeState(1);
                     yield return null;
                     break;
                 case 2:
-                    for (float elapsedTimer = 0; elapsedTimer < 0.4f; elapsedTimer += Time.deltaTime)
+                    switch (selectableMovementIndex1[moveIndex++ % selectableMovementIndex1.Count])
                     {
-                        AnimeState(2);
-                        yield return null;
+                        default:
+                            lookdirectionEnabled = false;
+                            x_velocity = 0;
+                            AnimeState(2);
+                            yield return new WaitForSeconds(1.3f);
+                            break;
+                        case 1:
+                            x_velocity = 0;
+                            yield return SummonNekoOni(Random.Range(2,4));
+                            AnimeState(3);
+                            yield return null;
+                            AnimeState(4);
+                            yield return new WaitForSeconds(1f);
+                            break;
                     }
-                    yield return new WaitForSeconds(0.5f);
+
                     break;
-                case 3:
+                /*case 3:
+                    x_velocity = 0;
                     AnimeState(3);
-                    yield return new WaitForSeconds(1.0f);
-                    transform.position = RandomPos().ToVector3();
+                    yield return null;
                     AnimeState(4);
-                    yield return new WaitForSeconds(1.0f);
-                    AnimeState(0);
-                    break;
+                    yield return new WaitForSeconds(1f);
+                    yield return SummonNekoOni(Random.Range(2, 6));
+                    break;/**/
                 default:
+                    yield return null;
                     break;
             }
         }
     }
+
+    public void Warp()
+    {
+        transform.position = RandomPos().ToVector3(0);
+    }
+    List<GameObject> nekoOni = new List<GameObject>();
     IEnumerator SummonNekoOni(int summonNumber)
     {
         for (int i = 0; i < summonNumber; i++)
         {
-            GameObject generated = Instantiate(nekoOniPref, RandomPos().ToVector3(),Quaternion.identity);
+            nekoOni.RemoveAll(item => item == null);
+            if (nekoOni.Count < summonNumber)
+            {
+                GameObject generated = Instantiate(nekoOniPref, RandomPos().ToVector3(), Quaternion.identity);
+                nekoOni.Add(generated);
+            }
             yield return new WaitForSeconds(0.3f);
         }
     }

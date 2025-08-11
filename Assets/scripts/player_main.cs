@@ -150,6 +150,7 @@ public class player_main : MonoBehaviour
                 this.velcopy_y.y = PlayerData.main.jumpSpeed;
                 this.rigid.linearVelocity = this.velcopy_y;
                 this.keyputting = 1;
+                GameManager.main.PlayOneShot(jumpSound);
             }
 
             if (Input.GetKey(KeyCode.C) && !this.isground && !this.istwicejumpused && this.keyputting % 2 == 0 && this.dashtime <= 8 && !this.isskillusing(2) && this.arrowtime <= 0)
@@ -160,6 +161,7 @@ public class player_main : MonoBehaviour
                 this.rigid.linearVelocity = this.velcopy_y;
                 this.istwicejumpused = true;
                 this.keyputting = 1;
+                GameManager.main.PlayOneShot(jumpSound);
             }
 
             if (Input.GetKey(KeyCode.Z) && this.dashtime <= 0 && !this.dashflag && !this.isskillusing(2) && this.arrowtime <= 0)

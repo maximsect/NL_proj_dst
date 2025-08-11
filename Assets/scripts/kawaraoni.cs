@@ -12,6 +12,7 @@ public class kawaraoni : EnemyBaseScript
     
     short in_interval = 0;
     short invincible=0;
+    public AudioClip fireSound;
 
     void FixedUpdate()
     {
@@ -27,6 +28,7 @@ public class kawaraoni : EnemyBaseScript
     IEnumerator Attack()
     {
         yield return new WaitForSeconds(this.firetime);
+        GameManager.main.PlayOneShot(fireSound);
         GameObject laserObj = Instantiate(LaserPref, transform.position, Quaternion.identity);
         laserObj.GetComponent<Rigidbody2D>().linearVelocity = new Vector2(-10f * this.transform.localScale.x, 0f);
         laserObj.transform.localScale = this.transform.localScale;

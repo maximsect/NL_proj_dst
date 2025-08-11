@@ -234,6 +234,7 @@ public class catdemon : EnemyBaseScript
                     }
                     break;
                 case 2:
+                    GameManager.main.PlayOneShot(attackSound);
                     for (float elapsedTimer = 0; elapsedTimer < coolEndTime; elapsedTimer += Time.deltaTime)
                     {
                         rbody.linearVelocity = new Vector2(0, rbody.linearVelocity.y);

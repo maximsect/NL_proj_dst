@@ -14,10 +14,11 @@ public class EyeObjectRandomMovement : MonoBehaviour
     private bool isEnemy = true;
     public float returnEnemyInterval = 10f;
     private float enemyCounter = 0;
-    public SpriteRenderer outliner,mainSprite;
+    public SpriteRenderer outliner, mainSprite;
     public GameObject observer;
     public Sprite[] eyes;
     private float invincibleTimer = 0;
+    public AudioClip dashSound, fireAttackSound,allySound;
     Coroutine coroutine;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -32,7 +33,7 @@ public class EyeObjectRandomMovement : MonoBehaviour
         {
             outliner.color = Color.green;
             enemyCounter += Time.deltaTime;
-            if(enemyCounter > returnEnemyInterval)
+            if (enemyCounter > returnEnemyInterval)
             {
                 enemyCounter = 0;
                 isEnemy = true;
@@ -41,7 +42,7 @@ public class EyeObjectRandomMovement : MonoBehaviour
                     StopCoroutine(coroutine);
                 }
                 coroutine = StartCoroutine(RandomMovement());
-                outliner.color = Color.red;
+                outliner.color = Color.white;
             }
         }
         observer.SetActive(!isEnemy);
@@ -63,14 +64,14 @@ public class EyeObjectRandomMovement : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSeconds(waitingDuration);
             Vector2 generatedPoint;
             while (true)
             {
                 generatedPoint = RandomPos();
-                if (!Physics2D.OverlapCircle(generatedPoint, 0.5f) && Physics2D.OverlapCircle(generatedPoint - new Vector2(0,1), 0.5f)) break;
+                if (!Physics2D.OverlapCircle(generatedPoint, 0.5f) && Physics2D.OverlapCircle(generatedPoint - new Vector2(0, 1), 0.5f)) break;
             }
-            float distance = (generatedPoint - new Vector2(transform.position.x,transform.position.y)).magnitude;
+            float distance = (generatedPoint - new Vector2(transform.position.x, transform.position.y)).magnitude;
+            GameManager.main.PlayOneShot(dashSound);
             for (float _t = 0; _t < distance / movementSpeed; _t += Time.deltaTime)
             {
                 transform.position = Vector2.Lerp(transform.position, generatedPoint, 0.02f);
@@ -79,13 +80,15 @@ public class EyeObjectRandomMovement : MonoBehaviour
             yield return new WaitForSeconds(1f);
             if (isEnemy)
             {
+                GameManager.main.PlayOneShot(fireAttackSound);
                 GameObject laserObj = Instantiate(LaserPref, transform.position, Quaternion.identity);
                 Vector3 relativePos = GameManager.player.transform.position - transform.position;
                 laserObj.GetComponent<Rigidbody2D>().AddForce(new Vector2(relativePos.x, relativePos.y).normalized * 5f, ForceMode2D.Impulse);
                 Destroy(laserObj, 10f);
             }
+            yield return new WaitForSeconds(waitingDuration);
         }
-        
+
     }
     float someDeg = 0;
     IEnumerator AllyMovement()
@@ -103,7 +106,7 @@ public class EyeObjectRandomMovement : MonoBehaviour
             {
                 someDeg += 0.02f;
             }
-            
+
             observer.transform.rotation = Quaternion.Euler(0, 0, someDeg);
             yield return null;
         }
@@ -117,6 +120,7 @@ public class EyeObjectRandomMovement : MonoBehaviour
             {
                 StopCoroutine(coroutine);
             }
+            GameManager.main.PlayOneShot(allySound);
             coroutine = StartCoroutine(AllyMovement());
             enemyCounter = 0;
         }

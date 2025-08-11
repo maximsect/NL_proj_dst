@@ -9,6 +9,8 @@ public class EnemyBaseScript : MonoBehaviour
     protected float powerUpRatio = 1;
     public int enemyHp = 30;
     protected float invincibleTimer = 0;
+    
+    public AudioClip attackSound, destroySound;
     void OnTriggerStay2D(Collider2D collider)
     {
         if (GameManager.playerWeaponTag.Contains(collider.gameObject.tag) && invincibleTimer < 0)
@@ -43,6 +45,7 @@ public class EnemyBaseScript : MonoBehaviour
             SceneTransition.main.DamageAmount(damage);
             if (enemyHp <= 0)
             {
+                GameManager.main.PlayOneShot(destroySound);
                 SceneTransition.main.GetKill();
                 Destroy(this.gameObject);
             }

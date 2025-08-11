@@ -20,6 +20,7 @@ public class SurvivorManager : StageManager
     public LayerMask groundLayer;
     public float surviveTime = 30;
     public TMP_Text clock;
+    public AudioClip summonSound;
     void Start()
     {
         foreach (EnemyProducts enemyProduct in enemyProducts)
@@ -57,6 +58,7 @@ public class SurvivorManager : StageManager
             foreach (GameObject enemy in ene.enemyPrefs)
             {
                 GameObject generated = Instantiate(enemy);
+                GameManager.main.PlayOneShot(summonSound);
                 generated.transform.position = RandomPos().ToVector3(0);
                 genList.Add(generated);
             }
@@ -72,6 +74,7 @@ public class SurvivorManager : StageManager
             clock.SetText(((int)(surviveTime - timer)).ToString());
             yield return null;
         }
+        GameManager.main.PlayOneShot(successSound);
         SceneTransition.main.StageClearReciever();
     }
 }

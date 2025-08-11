@@ -25,6 +25,8 @@ public class ProfessorMovement : StageManager
     public LayerMask groundLayer;
     private Animator animator;
     public Color color;
+    public AudioClip sinWaveSound, warpSound;
+    public float floatDistance = 0;
 
     List<Vector2> GeneratePoints(DrawFunctions drawFunc)
     {
@@ -85,7 +87,7 @@ public class ProfessorMovement : StageManager
         hpDisplay.minValue = 0;
         hpDisplay.maxValue = hp;
         hpDisplay.value = hp;
-        animator = transform.GetChild(0).gameObject.GetComponent<Animator>();
+        animator = GetComponent<Animator>();
         StartCoroutine(ProfessorAnimation());
 
         int stageLevel = sceneData.GetStageLevel();
@@ -187,10 +189,10 @@ public class ProfessorMovement : StageManager
             if (Physics2D.OverlapCircle(pos, 0.5f, groundLayer)) continue;
             if (!Physics2D.OverlapCircle(pos - new Vector2(0, 0.1f), 0.5f, groundLayer)) continue;
             if (Vector3.Distance(transform.position, pos) < 7) continue;
-            return pos + new Vector2(0, 0.8f);
+            return pos + new Vector2(0,floatDistance);
         }
     }
-    List<int> selectableMovementIndex = new List<int>() { 0, 1, 2, 3 };
+    List<int> selectableMovementIndex = new List<int>() { 0, 0, 0, 1, 2 };
     IEnumerator ProfessorAnimation()
     {
         while (true)
@@ -204,28 +206,28 @@ public class ProfessorMovement : StageManager
                     AnimeState(0);
                     yield return new WaitForSeconds(2f);
                     break;
-                case 1://attack
+                case 1://attackWithSin
                     AnimeState(1);
-                    yield return new WaitForSeconds(0.2f);
-                    break;
-                case 2://attackWithSin
-                    AnimeState(2);
                     StartCoroutine(FuncAttack((DrawFunctions)(Random.Range(0, Enum.GetValues(typeof(DrawFunctions)).Length))));
                     yield return new WaitForSeconds(0.2f);
                     AnimeState(0);
                     yield return new WaitForSeconds(2f);
                     break;
-                case 3:// Warp
-                    AnimeState(3);
+                case 2:// Warp
+                    AnimeState(2);
+                    GameManager.main.PlayOneShot(warpSound);
                     yield return new WaitForSeconds(1.0f);
-                    transform.position = RandomPos().ToVector3();
-                    AnimeState(0);
+                    AnimeState(3);
                     yield return new WaitForSeconds(0.4f);
                     break;
                 default:
                     break;
             }
         }
+    }
+    public void Warp()
+    {
+        transform.position = RandomPos().ToVector3();
     }
     IEnumerator FuncAttack(DrawFunctions drawFunc)
     {
@@ -251,6 +253,7 @@ public class ProfessorMovement : StageManager
             new GradientAlphaKey[] { new GradientAlphaKey(1f, 0.0f) }
             );
         lineRenderer.colorGradient = gradient;
+        GameManager.main.PlayOneShot(sinWaveSound);
 
         edges.enabled = true;
         edges.SetPoints(drawPoints);

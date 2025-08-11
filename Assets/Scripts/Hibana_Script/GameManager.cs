@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
     public static List<string> syllabusLevel = new List<string>() { "ê_", "ëÂïß", "ïß", "ãS", "ëÂãS" };
     //public static List<string> stageMode = new List<string>() { "GetFlag", "LessDamage", "KillEnemy", "Survivor", "NoDamage" };
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    private AudioSource seSource,bgmSource;
+    private AudioSource seSource, bgmSource;
     void OnEnable()
     {
         if (main == null) main = this;
@@ -24,8 +24,8 @@ public class GameManager : MonoBehaviour
             player = GameObject.Instantiate(PlayerData.main.playerPrefab, Vector3.zero, Quaternion.identity);
         }
         GameObject seObj = GameObject.Instantiate(playerData.seObj, GameObject.Find("Main Camera").transform);
+        seObj.transform.localPosition = Vector3.zero;
         seSource = seObj.GetComponent<AudioSource>();
-        DontDestroyOnLoad(this.gameObject);
     }
     public void PlayOneShot(AudioClip sound)
     {
@@ -36,5 +36,5 @@ public class GameManager : MonoBehaviour
     {
         return playerData.killEffect[UnityEngine.Random.Range(0, playerData.killEffect.Count)];
     }
-    
+
 }

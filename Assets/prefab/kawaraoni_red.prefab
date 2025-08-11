@@ -178,11 +178,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneData: {fileID: 11400000, guid: d002b1dff15460843ae4dcd006954aa3, type: 2}
   enemyHp: 100
+  attackSound: {fileID: 0}
+  destroySound: {fileID: 8300000, guid: e26ab799e9a403045801162e7e790cda, type: 3}
   interval: 2
   firetime: 0.5
   attackoffset: 1
   LaserPref: {fileID: 5086387744944446968, guid: 421b2787bc59890408d5c72da2ca5df5, type: 3}
   anim: {fileID: 1824132526181676250}
+  fireSound: {fileID: 8300000, guid: 2c86f2e24605e76408d9727c78f3e015, type: 3}
 --- !u!95 &1824132526181676250
 Animator:
   serializedVersion: 7

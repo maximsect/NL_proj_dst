@@ -16,6 +16,7 @@ public class FlagManager : StageManager
     public Sprite attendFlagImage;
     public LayerMask groundLayer;
     public List<GameObject> generatePoints = new List<GameObject>();
+    public AudioClip flagSound,summonSound;
     void Start()
     {
         StartCoroutine(FlagGenerator());
@@ -60,10 +61,13 @@ public class FlagManager : StageManager
 
             for (int j = 0; j < 3; j++)
             {
-                Instantiate(enemyPref, RandomPos().ToVector3(),transform.rotation);
+                Instantiate(enemyPref, RandomPos().ToVector3(), transform.rotation);
+                GameManager.main.PlayOneShot(summonSound);
             }
             yield return new WaitUntil(() => flagScript.isAttended);
+            GameManager.main.PlayOneShot(flagSound);
         }
+        GameManager.main.PlayOneShot(successSound);
         SceneTransition.main.StageClearReciever();
     }
     public void CreateGeneratePoints()

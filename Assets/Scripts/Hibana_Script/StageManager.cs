@@ -11,6 +11,7 @@ public class StageManager : MonoBehaviour
     private GameObject generatedPanel;
     private TextMeshProUGUI stageDescription;
     private Image blackScreen;
+    public AudioClip successSound;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public void MainStart()
     {

@@ -646,6 +646,9 @@ MonoBehaviour:
   - {fileID: -7866962194647477418, guid: f66d2be82e38b1744ab622967d1dd599, type: 3}
   - {fileID: -2053394916973472229, guid: 8249be48d08e3ce4aa3356ed11fb2840, type: 3}
   - {fileID: -7839056689181992794, guid: fccddc4693db58b46a3c2eb4b1319fe8, type: 3}
+  dashSound: {fileID: 0}
+  fireAttackSound: {fileID: 0}
+  allySound: {fileID: 0}
 --- !u!212 &526896725
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3166,6 +3169,8 @@ GameObject:
   - component: {fileID: 899062518}
   - component: {fileID: 899062516}
   - component: {fileID: 899062515}
+  - component: {fileID: 899062521}
+  - component: {fileID: 899062520}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -3267,6 +3272,111 @@ Transform:
   - {fileID: 214446788}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!81 &899062520
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 899062514}
+  m_Enabled: 1
+--- !u!82 &899062521
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 899062514}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 4831199484016263779, guid: 20bda21ce1d61334e90a137256c810fc, type: 2}
+  m_audioClip: {fileID: 8300000, guid: e80270167144bf44a8adc2e4fea03e6a, type: 3}
+  m_Resource: {fileID: 8300000, guid: e80270167144bf44a8adc2e4fea03e6a, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &945977495
 GameObject:
   m_ObjectHideFlags: 0
@@ -5860,6 +5970,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneData: {fileID: 11400000, guid: d002b1dff15460843ae4dcd006954aa3, type: 2}
   stageDecriptionPanel: {fileID: 8722069140523796048, guid: 4979170cf8ee33c4fb30503cf07e784c, type: 3}
+  successSound: {fileID: 8300000, guid: ad85d3bf85ed496459882c0e8a292351, type: 3}
   nekoImage: {fileID: 1502085016}
   nekoOniPref: {fileID: 4482937538460693618, guid: e504056476e34b6419533e9c78e06045, type: 3}
   interactableZone: 1.2
@@ -5874,6 +5985,10 @@ MonoBehaviour:
     m_Bits: 256
   color: {r: 1, g: 0, b: 0, a: 0}
   scale: 1.2
+  attackSound: {fileID: 8300000, guid: 3a67d44a0e81cfd4bae53d86ad42d3c4, type: 3}
+  destroySound: {fileID: 8300000, guid: a6f8743bc85ce6c429a48191498aac4c, type: 3}
+  summonSound: {fileID: 8300000, guid: c781f8704c1c5254983ba733304d0d4b, type: 3}
+  warpSound: {fileID: 8300000, guid: fbda0299d1127ae43bb8d99423d90d65, type: 3}
 --- !u!50 &1502085013
 Rigidbody2D:
   serializedVersion: 5
@@ -6431,6 +6546,9 @@ MonoBehaviour:
   - {fileID: -7866962194647477418, guid: f66d2be82e38b1744ab622967d1dd599, type: 3}
   - {fileID: -2053394916973472229, guid: 8249be48d08e3ce4aa3356ed11fb2840, type: 3}
   - {fileID: -7839056689181992794, guid: fccddc4693db58b46a3c2eb4b1319fe8, type: 3}
+  dashSound: {fileID: 0}
+  fireAttackSound: {fileID: 0}
+  allySound: {fileID: 0}
 --- !u!212 &1683785307
 SpriteRenderer:
   m_ObjectHideFlags: 0

@@ -21,6 +21,7 @@ public class AssignmentManager : StageManager
     public float generateInterval = 2;
     public float appearMaxNum = 10;
     private List<int> genIndex = new List<int>();
+    public AudioClip summonSound;
     void Start()
     {
         for (int i = 0; i < assignments.Count; i++)
@@ -56,6 +57,7 @@ public class AssignmentManager : StageManager
             genIndex.Remove(assignIndex);
             GameObject target = assignments[assignIndex].killTarget;
             GameObject generated = Instantiate(target);
+            GameManager.main.PlayOneShot(summonSound);
             generated.transform.position = RandomPos().ToVector3(0);
             assignments[assignIndex].genList.Add(generated);
             assignments[assignIndex].generatedNumber++;
@@ -88,6 +90,7 @@ public class AssignmentManager : StageManager
             if (assignmentClear) break;
             yield return null;
         }
+        GameManager.main.PlayOneShot(successSound);
         SceneTransition.main.StageClearReciever();
     }
 }

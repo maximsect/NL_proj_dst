@@ -24,6 +24,7 @@ public class NekomataMovement : StageManager
     private int moveMode = 0;
     Vector3 relativePos = Vector3.zero;
     Rigidbody2D rb2d;
+    public AudioClip attackSound,destroySound,summonSound,warpSound;
     void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
@@ -97,6 +98,8 @@ public class NekomataMovement : StageManager
             hpDisplay.value = hp;
             if (hp <= 0)
             {
+                GameManager.main.PlayOneShot(destroySound);
+                GameManager.main.PlayOneShot(successSound);
                 SceneTransition.main.StageClearReciever();
                 SceneTransition.main.GetKill();
                 Destroy(this.gameObject);
@@ -171,6 +174,7 @@ public class NekomataMovement : StageManager
                             yield return SummonNekoOni(Random.Range(2, 6));
                             break;
                         case 7:
+                            GameManager.main.PlayOneShot(warpSound);
                             x_velocity = 0;
                             AnimeState(3);
                             yield return null;
@@ -196,6 +200,7 @@ public class NekomataMovement : StageManager
                             lookdirectionEnabled = false;
                             x_velocity = 0;
                             AnimeState(2);
+                            GameManager.main.PlayOneShot(attackSound);
                             yield return new WaitForSeconds(1.3f);
                             break;
                         case 1:
@@ -236,6 +241,7 @@ public class NekomataMovement : StageManager
             nekoOni.RemoveAll(item => item == null);
             if (nekoOni.Count < summonNumber)
             {
+                GameManager.main.PlayOneShot(summonSound);
                 GameObject generated = Instantiate(nekoOniPref, RandomPos().ToVector3(), Quaternion.identity);
                 nekoOni.Add(generated);
             }

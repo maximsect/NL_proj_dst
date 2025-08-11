@@ -340,7 +340,7 @@ MonoBehaviour:
   tpPower: 24
   attackObj: {fileID: 3384144711544539316}
   animator: {fileID: 3769205888707289567}
-  color: 1
+  color: 2
 --- !u!95 &3769205888707289567
 Animator:
   serializedVersion: 7

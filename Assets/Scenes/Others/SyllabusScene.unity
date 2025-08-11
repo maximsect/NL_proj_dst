@@ -1713,7 +1713,7 @@ MonoBehaviour:
       value: 2
       valueMode: 1
       possibility: 3
-    - SceneName: Survivor
+    - SceneName: SurvivorA
       difficultyLevel: "\u4ECF"
       sceneMode: 4
       skillSprite: {fileID: 21300000, guid: 805a53075b2998e408cbcf9590c748f9, type: 3}

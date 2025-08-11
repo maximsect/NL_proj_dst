@@ -1909,7 +1909,7 @@ MonoBehaviour:
   playerData: {fileID: 11400000, guid: dc4bf2af19840754abdc4cf88e72b30e, type: 2}
   sceneData: {fileID: 11400000, guid: d002b1dff15460843ae4dcd006954aa3, type: 2}
   syllabusClasses:
-  - sceneMode: "\u51FA\u5E2D"
+  - sceneMode: "3.\u51FA\u5E2D"
     imageColor: {r: 0.7528302, g: 1, b: 0.7528302, a: 1}
     backGround: {fileID: 1257262364}
     sceneNameDisplay: {fileID: 47634544}
@@ -1918,27 +1918,37 @@ MonoBehaviour:
     skillNameDisplay: {fileID: 270909848}
     sceneClasses:
     - SceneName: GetFlagA
-      sceneNameforDisplay: "\u95BB\u9B54\u5927\u61B2\u6CD5(\u795E\u4E0A\uFF09"
-      difficultyLevel: "\u795E"
+      sceneNameforDisplay: "\u5211\u6CD5I(\u4ECF\u5D0E\uFF09"
+      difficultyLevel: "\u4ECF"
       sceneMode: 4
       skillSprite: {fileID: 21300000, guid: 805a53075b2998e408cbcf9590c748f9, type: 3}
-      getSkillName: "\u68CD\u68D2\u653B\u6483\u529B+15"
-      variableName: batAttack
-      value: 15
+      getSkillName: "\u653B\u6483\u529B+5"
+      variableName: attackPower
+      value: 5
       valueMode: 1
-      possibility: 2
+      possibility: 5
     - SceneName: GetFlagA
-      sceneNameforDisplay: "\u4EBA\u9593\u8A9E\u521D\u7D1A(\u4ECF\u5DDD)"
-      difficultyLevel: "\u4ECF"
+      sceneNameforDisplay: "\u5211\u6CD5I(\u9B3C\u6751)"
+      difficultyLevel: "\u9B3C"
       sceneMode: 4
       skillSprite: {fileID: 21300000, guid: ff53b649bb4bbc64180272f82b9c49b0, type: 3}
       getSkillName: "\u6700\u5927HP\u5897\u52A0+20"
       variableName: maxHP
       value: 20
       valueMode: 1
+      possibility: 5
+    - SceneName: GetFlagA
+      sceneNameforDisplay: "\u529B\u5B66(\u795E\u7C50)"
+      difficultyLevel: "\u795E"
+      sceneMode: 4
+      skillSprite: {fileID: 21300000, guid: 805a53075b2998e408cbcf9590c748f9, type: 3}
+      getSkillName: "\u68CD\u68D2\u653B\u6483\u529B\u5F37\u5316+10"
+      variableName: batAttack
+      value: 10
+      valueMode: 1
       possibility: 2
     - SceneName: GetFlagA
-      sceneNameforDisplay: "\u95BB\u9B54\u5927\u61B2\u6CD5(\u5927\u9B3C\u9B54)"
+      sceneNameforDisplay: "\u529B\u5B66(\u5927\u9B3C\u54B2)"
       difficultyLevel: "\u5927\u9B3C"
       sceneMode: 4
       skillSprite: {fileID: 21300000, guid: 805a53075b2998e408cbcf9590c748f9, type: 3}
@@ -1946,16 +1956,6 @@ MonoBehaviour:
       variableName: batAttack
       value: 1.3
       valueMode: 2
-      possibility: 2
-    - SceneName: GetFlagA
-      sceneNameforDisplay: "\u529B\u5B66(\u795E\u7C50)"
-      difficultyLevel: "\u795E"
-      sceneMode: 4
-      skillSprite: {fileID: 21300000, guid: 805a53075b2998e408cbcf9590c748f9, type: 3}
-      getSkillName: "\u68CD\u68D2\u653B\u6483\u529B\u5F37\u5316+15"
-      variableName: batAttack
-      value: 15
-      valueMode: 1
       possibility: 2
     - SceneName: GetFlagB
       sceneNameforDisplay: "\u690D\u7269\u5B66(\u4ECF\u5C71)"
@@ -1966,25 +1966,25 @@ MonoBehaviour:
       variableName: maxHP
       value: 20
       valueMode: 1
-      possibility: 2
+      possibility: 5
     - SceneName: GetFlagB
       sceneNameforDisplay: "\u690D\u7269\u5B66(\u9B3C\u6751)"
       difficultyLevel: "\u9B3C"
       sceneMode: 4
       skillSprite: {fileID: 21300000, guid: 805a53075b2998e408cbcf9590c748f9, type: 3}
-      getSkillName: "\u69CD\u653B\u6483\u529B\u5F37\u5316+5"
+      getSkillName: "\u69CD\u653B\u6483\u529B\u5F37\u5316+10"
       variableName: spearAttack
-      value: 5
+      value: 10
       valueMode: 1
-      possibility: 2
+      possibility: 5
     - SceneName: GetFlagB
       sceneNameforDisplay: "\u89E3\u5256\u5B66(\u795E\u7530)"
       difficultyLevel: "\u795E"
       sceneMode: 4
       skillSprite: {fileID: 21300000, guid: 805a53075b2998e408cbcf9590c748f9, type: 3}
-      getSkillName: "\u5F13\u653B\u6483\u529B\u5F37\u5316+10"
+      getSkillName: "\u5F13\u653B\u6483\u529B\u5F37\u5316+15"
       variableName: arrowAttack
-      value: 10
+      value: 15
       valueMode: 1
       possibility: 2
     - SceneName: GetFlagB
@@ -1997,7 +1997,7 @@ MonoBehaviour:
       value: 80
       valueMode: 1
       possibility: 2
-  - sceneMode: "\u8A0E\u4F10\u8AB2\u984C"
+  - sceneMode: "5.\u8A0E\u4F10\u8AB2\u984C"
     imageColor: {r: 0.94705886, g: 1, b: 0.6999999, a: 1}
     backGround: {fileID: 1846718488}
     sceneNameDisplay: {fileID: 935064336}
@@ -2120,12 +2120,12 @@ MonoBehaviour:
       difficultyLevel: "\u5927\u9B3C"
       sceneMode: 3
       skillSprite: {fileID: 21300000, guid: 805a53075b2998e408cbcf9590c748f9, type: 3}
-      getSkillName: "\u653B\u6483\u529B\u5F37\u5316+40"
+      getSkillName: "\u653B\u6483\u529B\u5F37\u5316+20"
       variableName: attackPower
-      value: 40
+      value: 20
       valueMode: 1
       possibility: 2
-  - sceneMode: "\u9003\u3052\u5207\u308A"
+  - sceneMode: "1.\u751F\u304D\u6B8B\u308B"
     imageColor: {r: 1, g: 0.6320754, b: 0.63953483, a: 1}
     backGround: {fileID: 174911749}
     sceneNameDisplay: {fileID: 1135439174}
@@ -2138,11 +2138,11 @@ MonoBehaviour:
       difficultyLevel: "\u795E"
       sceneMode: 1
       skillSprite: {fileID: 21300000, guid: 805a53075b2998e408cbcf9590c748f9, type: 3}
-      getSkillName: "\u653B\u6483\u529B\u5F37\u5316+20"
+      getSkillName: "\u653B\u6483\u529B\u5F37\u5316+15"
       variableName: attackPower
-      value: 20
+      value: 15
       valueMode: 1
-      possibility: 3
+      possibility: 2
     - SceneName: SurvivorA
       sceneNameforDisplay: "\u95BB\u9B54\u5927\u61B2\u6CD5(\u5927\u9B3C\u9B54)"
       difficultyLevel: "\u5927\u9B3C"
@@ -2152,7 +2152,7 @@ MonoBehaviour:
       variableName: maxHp
       value: 1.5
       valueMode: 2
-      possibility: 3
+      possibility: 2
     - SceneName: SurvivorA
       sceneNameforDisplay: "\u4EBA\u9593\u8A9E\u521D\u7D1A(\u4ECF\u5DDD)"
       difficultyLevel: "\u4ECF"
@@ -2178,9 +2178,9 @@ MonoBehaviour:
       difficultyLevel: "\u4ECF"
       sceneMode: 1
       skillSprite: {fileID: 21300000, guid: 805a53075b2998e408cbcf9590c748f9, type: 3}
-      getSkillName: "\u69CD\u653B\u6483\u529B\u5F37\u5316+5"
+      getSkillName: "\u69CD\u653B\u6483\u529B\u5F37\u5316+10"
       variableName: spearAttack
-      value: 5
+      value: 10
       valueMode: 1
       possibility: 5
     - SceneName: SurvivorB
@@ -2188,9 +2188,9 @@ MonoBehaviour:
       difficultyLevel: "\u9B3C"
       sceneMode: 1
       skillSprite: {fileID: 21300000, guid: 805a53075b2998e408cbcf9590c748f9, type: 3}
-      getSkillName: "\u69CD\u653B\u6483\u529B\u5F37\u5316+10"
+      getSkillName: "\u69CD\u653B\u6483\u529B\u5F37\u5316+15"
       variableName: spearAttack
-      value: 10
+      value: 15
       valueMode: 1
       possibility: 5
     - SceneName: SurvivorB
@@ -2202,17 +2202,17 @@ MonoBehaviour:
       variableName: hammerAttack
       value: 20
       valueMode: 1
-      possibility: 5
+      possibility: 3
     - SceneName: SurvivorB
       sceneNameforDisplay: "\u6BD4\u8F03\u6587\u5316\u8AD6(\u5927\u9B3C\u5965)"
       difficultyLevel: "\u5927\u9B3C"
       sceneMode: 1
       skillSprite: {fileID: 21300000, guid: 805a53075b2998e408cbcf9590c748f9, type: 3}
-      getSkillName: "\u91D1\u69CC\u653B\u6483\u529B\u5F37\u5316+20"
+      getSkillName: "\u91D1\u69CC\u653B\u6483\u529B\u5F37\u5316+40"
       variableName: hammerAttack
-      value: 20
+      value: 40
       valueMode: 1
-      possibility: 5
+      possibility: 2
   - sceneMode: "\u9003\u3052\u5207\u308A"
     imageColor: {r: 1, g: 0.6320754, b: 0.63953483, a: 1}
     backGround: {fileID: 174911749}

@@ -3,6 +3,8 @@ using UnityEngine.SceneManagement;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
+using TMPro;
 
 public class SceneTransition : MonoBehaviour
 {
@@ -12,6 +14,7 @@ public class SceneTransition : MonoBehaviour
     [HideInInspector] public bool clearFlag = false;
     private float startTime = 0, endTime = 0;
     private SceneScore sceneScore = new SceneScore();
+    private GameObject stageClearPanel;
 
     public void E_SceneTransition(string name)
     {
@@ -19,11 +22,12 @@ public class SceneTransition : MonoBehaviour
     }
     private void Start()
     {
-        if(main == null) main = this;
+        if (main == null) main = this;
         StartCoroutine(AwaitStageClear());
-        if(PlayerData.main != null)
-        StartCoroutine(AwaitGameOver());
+        if (PlayerData.main != null)
+            StartCoroutine(AwaitGameOver());
         if (SceneManager.GetActiveScene().name == "StartScene") scoreData.Initialize();
+        stageClearPanel = scoreData.scoreDisplayer;
     }
     private IEnumerator AwaitStageClear()
     {
@@ -33,7 +37,17 @@ public class SceneTransition : MonoBehaviour
         endTime = Time.time;
         sceneScore.elapsedTime = endTime - startTime;
         ScoreCalculation();
-        yield return new WaitForSecondsRealtime(1f);
+        GameObject generatedPanel = Instantiate(stageClearPanel, GameObject.Find("Canvas").transform);
+        TextMeshProUGUI stageDescription = generatedPanel.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>();
+        
+        stageDescription.text =
+            "åoâﬂéûä‘" + sceneScore.elapsedTime +
+            "\nì|ÇµÇΩêî:" + sceneScore.numberOfKill +
+            "\nó^Ç¶ÇΩÉ_ÉÅÅ[ÉW:" + sceneScore.damageAmount +
+            "\nê¨ê—:" + sceneScore.sceneScore + "ì_";
+        yield return StartCoroutine(WaitForClick());
+        yield return new WaitForSecondsRealtime(0.5f);
+        Time.timeScale = 1;
         switch (sceneData.StageCheck())
         {
             case 0:
@@ -79,7 +93,23 @@ public class SceneTransition : MonoBehaviour
     public void Death()
     {
         scoreData.numberOfDeath++;
-    }/*
+    }
+    IEnumerator WaitForClick()
+    {
+        Time.timeScale = 0;
+        while (true)
+        {
+            if (Input.GetMouseButtonDown(0) || Input.anyKey)
+            {
+                Time.timeScale = 1;
+                yield break;
+            }
+            yield return null;
+        }
+        
+    }
+
+    /*
     public enum SceneMode
     {
         Complete, LessDamage, NoDamage, NumberOfKill, TimeAttack
@@ -102,7 +132,7 @@ public class SceneTransition : MonoBehaviour
                 sceneScore.sceneScore = Mathf.Clamp(50 + sceneScore.numberOfKill * 10, 50, 100);
                 break;
             case SceneMode.TimeAttack:
-                sceneScore.sceneScore = Mathf.Clamp(120 - (endTime - startTime) * 0.2f,20,100);
+                sceneScore.sceneScore = Mathf.Clamp(120 - (endTime - startTime) * 0.2f, 20, 100);
                 break;
             default:
                 break;
@@ -137,7 +167,7 @@ public static class GameObjectExtention
         }
         else
         {
-            UnityEngine.Debug.LogError($"ÉVù[Éì '{sceneName}' ÇÕë∂ù›ÇµÇ‹ÇπÇÒ");
+            //UnityEngine.Debug.LogError($"ÉVù[Éì '{sceneName}' ÇÕë∂ù›ÇµÇ‹ÇπÇÒ");
         }
     }
     private static bool SceneExists(string sceneName)

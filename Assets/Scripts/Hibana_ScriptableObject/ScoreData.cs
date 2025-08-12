@@ -21,6 +21,7 @@ public class ScoreData : ScriptableObject
 {
     public List<SceneScore> scoreList = new List<SceneScore>();
     public int numberOfDeath = 0;
+    public GameObject scoreDisplayer;
 
     public void Initialize()
     {

@@ -426,7 +426,7 @@ public class player_main : MonoBehaviour
         if (this.dashtime > 0)
         {
             if (this.dashtime > 8)
-                this.rigid.linearVelocity = this.DASHSPEED * PlayerData.main.direction;
+                this.rigid.linearVelocity = this.DASHSPEED.normalized * PlayerData.main.dashSpeed * PlayerData.main.direction;
             this.dashtime--;
         }
     }

@@ -38,7 +38,7 @@ public class StatusDisplayer : MonoBehaviour
             }
             if(isOn && Input.GetKey(KeyCode.Q))
             {
-
+                Quit();
             }
         }
     }

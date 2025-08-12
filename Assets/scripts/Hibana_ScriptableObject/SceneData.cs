@@ -81,6 +81,10 @@ public class SceneData : ScriptableObject
             field.SetValue(this, field.GetValue(copySource));
         }
     }
+    public void Initialize()
+    {
+        currentScene = 0;
+    }
 }
 [CustomEditor(typeof(SceneData))]
 public class SceneDataEditor : Editor

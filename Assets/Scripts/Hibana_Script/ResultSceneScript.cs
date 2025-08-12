@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using TMPro;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class ResultSceneScript : MonoBehaviour
 {
@@ -14,20 +15,26 @@ public class ResultSceneScript : MonoBehaviour
     private int sumNumberOfKill = 0;
     private int sumDamageAmount = 0;
     private float sumScore = 0;
-    
+
     public void ReturnToTitleScene()
     {
+        scoreData.Initialize();
+        playerData.ResetValue();
+        sceneData.Initialize();
         this.LoadSceneByName("StartScene");
     }
     void Start()
     {
-        ScoreCalculation();
-        resultText.text =
-            "総攻略時間　　：" + sumElapsedTime +
-            "\n討伐数　　　　：" + sumNumberOfKill +
-            "\n総ダメージ　　：" + sumDamageAmount +
-            "\n総スコア　　　：" + sumScore;
-            
+        if (SceneManager.GetActiveScene().name == "ResultScene")
+        {
+            ScoreCalculation();
+            resultText.text =
+                "総攻略時間　　：" + sumElapsedTime +
+                "\n討伐数　　　　：" + sumNumberOfKill +
+                "\n総ダメージ　　：" + sumDamageAmount +
+                "\n総スコア　　　：" + sumScore;
+        }
+
     }
     void ScoreCalculation()
     {
@@ -38,8 +45,5 @@ public class ResultSceneScript : MonoBehaviour
             sumDamageAmount += scoreData.scoreList[i].damageAmount;
             sumScore += scoreData.scoreList[i].sceneScore;
         }
-        scoreData.ResetValues();
-        playerData.ResetValue();
-        sceneData.ResetValue();
     }
 }

@@ -31,6 +31,10 @@ public class ScoreData : ScriptableObject
             field.SetValue(this, field.GetValue(copySource));
         }
     }
+    public void Initialize()
+    {
+        scoreList.Clear();
+    }
 }
 [CustomEditor(typeof(ScoreData))]
 public class ScoreDataEditor : Editor

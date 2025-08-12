@@ -8,6 +8,7 @@ public class StatusDisplayer : MonoBehaviour
 {
     public PlayerData playerData;
     public ScoreData scoreData;
+    public SceneData sceneData;
     public static StatusDisplayer main1;
     public GameObject displayer;
     private TextMeshProUGUI statusText;
@@ -31,7 +32,19 @@ public class StatusDisplayer : MonoBehaviour
                 StatusOpen();
                 yield return new WaitForSecondsRealtime(0.3f);
             }
+            if (isOn && Input.GetKey(KeyCode.H))
+            {
+                ReturnToTitleScene();
+            }
         }
+    }
+    public void ReturnToTitleScene()
+    {
+        Time.timeScale = 1;
+        scoreData.Initialize();
+        playerData.ResetValue();
+        sceneData.Initialize();
+        this.LoadSceneByName("StartScene");
     }
     GameObject generated;
     void StatusOpen()

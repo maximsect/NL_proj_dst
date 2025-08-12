@@ -16227,7 +16227,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: RUN AWAY!
+  m_text: "\u751F\u304D\u6B8B\u308C\uFF01\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c39ce58e6da3c5644abfaaccbc2e1e2f, type: 2}
   m_sharedMaterial: {fileID: -2068851856685193896, guid: c39ce58e6da3c5644abfaaccbc2e1e2f, type: 2}

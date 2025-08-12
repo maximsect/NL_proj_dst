@@ -67,10 +67,12 @@ public class SceneData : ScriptableObject
             else return 0;
         }
 #else
-        ccurrentScene++;
-        if (currentScene == majorScene) return 1;
-        else if (currentScene == resultScene) return 2;
-        else return 0;
+            currentScene++;
+            if (currentScene == majorScene) return 1;
+            else if (currentScene == resultScene) return 2;
+            else if (currentScene == nekomataScene) return 3;
+            else if (currentScene == ProfessorScene) return 4;
+            else return 0;
 #endif
     }
     public void ResetValue()

@@ -205,21 +205,21 @@ public class ProfessorMovement : StageManager
             {
                 case 0://idol
                     AnimeState(0);
-                    yield return new WaitForSeconds(2f);
+                    yield return new WaitForSeconds(1.5f);
                     break;
                 case 1://attackWithSin
                     AnimeState(1);
                     StartCoroutine(FuncAttack((DrawFunctions)(Random.Range(0, Enum.GetValues(typeof(DrawFunctions)).Length))));
-                    yield return new WaitForSeconds(0.2f);
-                    AnimeState(0);
-                    yield return new WaitForSeconds(2f);
+                    yield return new WaitForSeconds(1);
+                    AnimeState(4);
+                    yield return new WaitForSeconds(1f);
                     break;
                 case 2:// Warp
                     AnimeState(2);
                     GameManager.main.PlayOneShot(warpSound);
                     yield return new WaitForSeconds(1.0f);
                     AnimeState(3);
-                    yield return new WaitForSeconds(0.4f);
+                    yield return new WaitForSeconds(1.0f);
                     break;
                 default:
                     break;

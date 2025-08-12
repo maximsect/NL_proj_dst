@@ -172,10 +172,11 @@ public class catdemon : EnemyBaseScript
                 case 1:
                     int randomMove = UnityEngine.Random.Range(0, 6);
                     if (randomMove >= 2) randomMove = UnityEngine.Random.Range(0, 6);
+                    float randomFloat = UnityEngine.Random.Range(0.98f, 1.2f);
                     switch (randomMove)
                     {
                         case 0:
-                            for (float elapsedTimer = 0; elapsedTimer < 1; elapsedTimer += Time.deltaTime)
+                            for (float elapsedTimer = 0; elapsedTimer < randomFloat; elapsedTimer += Time.deltaTime)
                             {
                                 behavior = 0;
                                 this.transform.localScale = new Vector3(-1, 1, 1);
@@ -184,7 +185,7 @@ public class catdemon : EnemyBaseScript
                             }
                             break;
                         case 1:
-                            for (float elapsedTimer = 0; elapsedTimer < 1; elapsedTimer += Time.deltaTime)
+                            for (float elapsedTimer = 0; elapsedTimer < randomFloat; elapsedTimer += Time.deltaTime)
                             {
                                 behavior = 0;
                                 this.transform.localScale = new Vector3(1, 1, 1);
@@ -194,7 +195,7 @@ public class catdemon : EnemyBaseScript
                             break;
                         case 2:
                             rbody.AddForce(Vector2.up * jumppower, ForceMode2D.Impulse);
-                            for (float elapsedTimer = 0; elapsedTimer < 1; elapsedTimer += Time.deltaTime)
+                            for (float elapsedTimer = 0; elapsedTimer < randomFloat; elapsedTimer += Time.deltaTime)
                             {
                                 behavior = 0;
                                 this.transform.localScale = new Vector3(-1, 1, 1);
@@ -205,7 +206,7 @@ public class catdemon : EnemyBaseScript
                             break;
                         case 3:
                             rbody.AddForce(Vector2.up * jumppower, ForceMode2D.Impulse);
-                            for (float elapsedTimer = 0; elapsedTimer < 1; elapsedTimer += Time.deltaTime)
+                            for (float elapsedTimer = 0; elapsedTimer < randomFloat; elapsedTimer += Time.deltaTime)
                             {
                                 behavior = 0;
                                 this.transform.localScale = new Vector3(1, 1, 1);

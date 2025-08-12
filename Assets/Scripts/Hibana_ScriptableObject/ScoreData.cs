@@ -20,35 +20,10 @@ public class SceneScore
 public class ScoreData : ScriptableObject
 {
     public List<SceneScore> scoreList = new List<SceneScore>();
-    public ScoreData copySource;
     public int numberOfDeath = 0;
 
-    public void ResetValues()
-    {
-        FieldInfo[] fields = this.GetType().GetFields();
-        foreach (var field in fields)
-        {
-            field.SetValue(this, field.GetValue(copySource));
-        }
-    }
     public void Initialize()
     {
         scoreList.Clear();
-    }
-}
-[CustomEditor(typeof(ScoreData))]
-public class ScoreDataEditor : Editor
-{
-    ///<summary>
-    ///InspectorÇÃGUIçXêV
-    ///</summary>
-    public override void OnInspectorGUI()
-    {
-        ScoreData scoreData = target as ScoreData;
-        base.OnInspectorGUI();
-        if (GUILayout.Button("ReplaceEveryValue"))
-        {
-            scoreData.ResetValues();
-        }
     }
 }

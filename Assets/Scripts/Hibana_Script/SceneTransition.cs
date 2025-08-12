@@ -23,7 +23,7 @@ public class SceneTransition : MonoBehaviour
         StartCoroutine(AwaitStageClear());
         if(PlayerData.main != null)
         StartCoroutine(AwaitGameOver());
-        if (SceneManager.GetActiveScene().name == "StartScene") scoreData.ResetValues();
+        if (SceneManager.GetActiveScene().name == "StartScene") scoreData.Initialize();
     }
     private IEnumerator AwaitStageClear()
     {

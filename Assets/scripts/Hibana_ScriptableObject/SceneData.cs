@@ -31,7 +31,6 @@ public class SceneData : ScriptableObject
         "神出鬼没。鬼らしさを追及せよ。\n評価法: タイムアタック"
 
     };
-    public SceneData copySource;
     public List<Vector2> ratios = new List<Vector2>()
     {
         new Vector2(0.6f,0.7f),
@@ -75,32 +74,8 @@ public class SceneData : ScriptableObject
             else return 0;
 #endif
     }
-    public void ResetValue()
-    {
-        FieldInfo[] fields = this.GetType().GetFields();
-        foreach (var field in fields)
-        {
-            field.SetValue(this, field.GetValue(copySource));
-        }
-    }
     public void Initialize()
     {
         currentScene = 0;
-    }
-}
-[CustomEditor(typeof(SceneData))]
-public class SceneDataEditor : Editor
-{
-    ///<summary>
-    ///InspectorのGUI更新
-    ///</summary>
-    public override void OnInspectorGUI()
-    {
-        SceneData sceneData = target as SceneData;
-        base.OnInspectorGUI();
-        if (GUILayout.Button("ReplaceEveryValue"))
-        {
-            sceneData.ResetValue();
-        }
     }
 }

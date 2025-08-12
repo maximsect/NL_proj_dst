@@ -45,6 +45,12 @@ public class SceneTransition : MonoBehaviour
             case 2:
                 this.LoadSceneByName("ResultScene");
                 break;
+                case 3:
+                this.LoadSceneByName("NekomataPreparationScene");
+                break;
+                case 4:
+                this.LoadSceneByName("ProfessorPreparationScene");
+                break;
             default:
                 break;
         }
@@ -131,7 +137,7 @@ public static class GameObjectExtention
         }
         else
         {
-            UnityEngine.Debug.LogError($"ÉVÅ[Éì '{sceneName}' ÇÕë∂ç›ÇµÇ‹ÇπÇÒ");
+            UnityEngine.Debug.LogError($"ÉVù[Éì '{sceneName}' ÇÕë∂ù›ÇµÇ‹ÇπÇÒ");
         }
     }
     private static bool SceneExists(string sceneName)

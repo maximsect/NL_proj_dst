@@ -14,6 +14,8 @@ public class SceneData : ScriptableObject
 {
     public bool deviceMode = false;
     public int currentScene = 0;
+    public int ProfessorScene = 7;
+    public int nekomataScene = 8;
     public int majorScene = 10;
     public int resultScene = 15;
     public List<int> bossScene = new List<int>();
@@ -60,6 +62,8 @@ public class SceneData : ScriptableObject
             currentScene++;
             if (currentScene == majorScene) return 1;
             else if (currentScene == resultScene) return 2;
+            else if (currentScene == nekomataScene) return 3;
+            else if (currentScene == ProfessorScene) return 4;
             else return 0;
         }
 #else

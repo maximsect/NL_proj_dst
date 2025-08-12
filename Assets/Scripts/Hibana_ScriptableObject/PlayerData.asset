@@ -13,29 +13,29 @@ MonoBehaviour:
   m_Name: PlayerData
   m_EditorClassIdentifier: 
   playerPrefab: {fileID: 5643282837821384152, guid: 176e6e08322a7db488ca79952b294300, type: 3}
-  hp: 27
-  maxHp: 220
+  hp: 23
+  maxHp: 100
   healAmount: 3
   autoHealInterval: 10
   autoHealAmount: 1
   luck: 0.02
-  moveSpeed: 7
+  moveSpeed: 5
   numberOfDash: 1
   numberOfJump: 1
-  jumpSpeed: 12
+  jumpSpeed: 10
   airJumpSpeed: 10
   Speed: 20
   dashSpeed: 30
-  direction: 1
-  attackPower: 25
+  direction: -1
+  attackPower: 10
   attackInterval: 0.5
   weapon: 2
-  batAttack: 32
-  spearAttack: 32
-  bowAttack: 32
-  hammerAttack: 32
-  arrowAttack: 32
-  skillAttack: 32
+  batAttack: 10
+  spearAttack: 10
+  bowAttack: 25
+  hammerAttack: 10
+  arrowAttack: 10
+  skillAttack: 10
   seObj: {fileID: 8012373686424654018, guid: ecf55807d78d2d047a40bfc66dddaf5f, type: 3}
   audioMixer: {fileID: 24100000, guid: 20bda21ce1d61334e90a137256c810fc, type: 2}
   killEffect: []

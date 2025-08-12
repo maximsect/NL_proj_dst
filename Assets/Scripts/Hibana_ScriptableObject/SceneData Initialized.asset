@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   deviceMode: 1
   currentScene: 0
-  ProfessorScene: 7
-  nekomataScene: 8
-  majorScene: 1
-  resultScene: 20
+  ProfessorScene: 12
+  nekomataScene: 6
+  majorScene: 5
+  resultScene: 13
   bossScene: 
   stageLevel: "\u9B3C"
   sceneMode: 0

@@ -25,7 +25,7 @@ MonoBehaviour:
   jumpSpeed: 10
   airJumpSpeed: 10
   Speed: 20
-  dashSpeed: 30
+  dashSpeed: 10
   direction: 1
   attackPower: 10
   attackInterval: 0.5

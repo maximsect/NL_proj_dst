@@ -15,8 +15,8 @@ MonoBehaviour:
   deviceMode: 1
   currentScene: 0
   ProfessorScene: 12
-  nekomataScene: 6
-  majorScene: 5
+  nekomataScene: 5
+  majorScene: 6
   resultScene: 13
   bossScene: 
   stageLevel: "\u9B3C"

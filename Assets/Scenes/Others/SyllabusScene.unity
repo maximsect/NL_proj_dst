@@ -2212,9 +2212,9 @@ MonoBehaviour:
       sceneMode: 4
       skillSprite: {fileID: 21300000, guid: 805a53075b2998e408cbcf9590c748f9, type: 3}
       getSkillName: "\u653B\u6483\u529B+5"
-      variableName: attackPower
+      variableName: AddAttackVal
       value: 5
-      valueMode: 1
+      valueMode: 3
       possibility: 5
     - SceneName: GetFlagA
       sceneNameforDisplay: "\u5211\u6CD5I(\u9B3C\u6751)"
@@ -2299,7 +2299,7 @@ MonoBehaviour:
       difficultyLevel: "\u795E"
       sceneMode: 3
       skillSprite: {fileID: 21300000, guid: eae27a57dddb63c438c036a0b85c247d, type: 3}
-      getSkillName: "\u30B9\u30AD\u30EB\u653B\u6483\u529B\u5F37\u5316+40"
+      getSkillName: "\u30B9\u30AD\u30EB\u653B\u6483\u529B\u5F37\u5316+30"
       variableName: skillPower
       value: 30
       valueMode: 1
@@ -2320,9 +2320,9 @@ MonoBehaviour:
       sceneMode: 3
       skillSprite: {fileID: 21300000, guid: 805a53075b2998e408cbcf9590c748f9, type: 3}
       getSkillName: "\u653B\u6483\u529B\u5F37\u5316+10"
-      variableName: attackPower
+      variableName: AddAttackVal
       value: 10
-      valueMode: 1
+      valueMode: 3
       possibility: 3
     - SceneName: KillEnemyA
       sceneNameforDisplay: "\u7DDA\u5F62\u4EE3\u6570(\u9B3C\u7C50)"
@@ -2330,9 +2330,9 @@ MonoBehaviour:
       sceneMode: 3
       skillSprite: {fileID: 21300000, guid: 805a53075b2998e408cbcf9590c748f9, type: 3}
       getSkillName: "\u653B\u6483\u529B\u5F37\u5316\xD71.2"
-      variableName: attackPower
+      variableName: AddAttackVal
       value: 1.2
-      valueMode: 2
+      valueMode: 3
       possibility: 3
     - SceneName: KillEnemyB
       sceneNameforDisplay: "\u89E3\u6790\u5B66(\u795E\u6728)"
@@ -2409,10 +2409,10 @@ MonoBehaviour:
       difficultyLevel: "\u5927\u9B3C"
       sceneMode: 3
       skillSprite: {fileID: 21300000, guid: 805a53075b2998e408cbcf9590c748f9, type: 3}
-      getSkillName: "\u653B\u6483\u529B\u5F37\u5316+20"
-      variableName: attackPower
-      value: 20
-      valueMode: 1
+      getSkillName: "\u653B\u6483\u529B\u5F37\u5316+15"
+      variableName: AddAttackVal
+      value: 15
+      valueMode: 3
       possibility: 2
   - sceneMode: "1.\u751F\u304D\u6B8B\u308B"
     imageColor: {r: 0.2981131, g: 0, b: 0.0063427957, a: 1}
@@ -2428,9 +2428,9 @@ MonoBehaviour:
       sceneMode: 1
       skillSprite: {fileID: 21300000, guid: 805a53075b2998e408cbcf9590c748f9, type: 3}
       getSkillName: "\u653B\u6483\u529B\u5F37\u5316+15"
-      variableName: attackPower
+      variableName: AddAttackVal
       value: 15
-      valueMode: 1
+      valueMode: 3
       possibility: 2
     - SceneName: SurvivorA
       sceneNameforDisplay: "\u95BB\u9B54\u5927\u61B2\u6CD5(\u5927\u9B3C\u9B54)"

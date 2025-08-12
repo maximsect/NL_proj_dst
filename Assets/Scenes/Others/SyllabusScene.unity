@@ -2343,7 +2343,7 @@ MonoBehaviour:
       variableName: AddAttackVal
       value: 15
       valueMode: 3
-      possibility: 1
+      possibility: 2
     - SceneName: KillEnemyB
       sceneNameforDisplay: "\u89E3\u6790\u5B66(\u9B3C\u672C)"
       difficultyLevel: "\u9B3C"

@@ -12,6 +12,12 @@ EditorBuildSettings:
     path: Assets/Scenes/Others/StartScene.unity
     guid: 461feab41f95f444697b897e3a8df2e4
   - enabled: 1
+    path: Assets/Scenes/Others/NekomataPreparationScene.unity
+    guid: 19363cb06459e5c44b367e42271f1aeb
+  - enabled: 1
+    path: Assets/Scenes/Others/ProfessorPreparationScene.unity
+    guid: 98d6ae1f352fc4b4b8a4d81e5d3693b7
+  - enabled: 1
     path: Assets/Scenes/Others/SyllabusScene.unity
     guid: 949e9c5e4d734ac45972cf44b86e4569
   - enabled: 1

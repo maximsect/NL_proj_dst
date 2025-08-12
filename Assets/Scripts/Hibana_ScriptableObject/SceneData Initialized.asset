@@ -14,7 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   deviceMode: 1
   currentScene: 0
-  majorScene: 5
+  ProfessorScene: 7
+  nekomataScene: 8
+  majorScene: 1
   resultScene: 20
   bossScene: 
   stageLevel: "\u9B3C"

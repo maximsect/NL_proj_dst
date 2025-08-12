@@ -22,6 +22,9 @@ TagManager:
   - bow
   - hammer
   - enemyweapon
+  - waveattack
+  - kawara_red
+  - kawara_blue
   layers:
   - Default
   - TransparentFX

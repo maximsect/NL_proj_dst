@@ -161,6 +161,7 @@ public class ProfessorMovement : StageManager
             hpDisplay.value = hp;
             if (hp <= 0)
             {
+                GameManager.main.PlayOneShot(successSound);
                 SceneTransition.main.StageClearReciever();
                 SceneTransition.main.GetKill();
                 Destroy(this.gameObject);

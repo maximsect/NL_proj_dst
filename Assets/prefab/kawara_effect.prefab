@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: -6111789301409909437}
   - component: {fileID: -6237037366190070895}
   - component: {fileID: 3773725098028835213}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: kawara_effect
-  m_TagString: enemyweapon
+  m_TagString: kawara_blue
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

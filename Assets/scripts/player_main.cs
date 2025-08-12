@@ -45,6 +45,7 @@ public class player_main : MonoBehaviour
     public BoxCollider2D skillcollider;
     private UI_skillcooldown UI_cooldowndisplay;
     public AudioClip jumpSound, batSound, bowSound, spearSound, hammerSound, skillSound;
+    public int sinwaveDamage = 30, kawara_redDamage = 20, kawara_blueDamage = 10;
 
     readonly float maxspeedX = 5.0f;
     readonly Vector3 hide = new Vector3(0f, 100f, 0f);
@@ -388,8 +389,21 @@ public class player_main : MonoBehaviour
         //if ((collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("damage_factor") || (collision.gameObject.CompareTag("assign_attack") && Random.Range(0, 2) == 0)) && !this.hitflag && this.invincibletime <= 0 && (!collision.otherCollider.gameObject.CompareTag("attack") && !collision.otherCollider.gameObject.CompareTag("skillattack"))) {
         if (GameManager.enemyWeaponTag.Contains(collider.gameObject.tag) && Random.Range(0, 2) == 0 && !this.hitflag && this.invincibletime <= 0)
         {
-            Debug.Log("damage");
-            PlayerData.main.Damage(1);
+            switch (collider.gameObject.tag)
+            {
+                case "waveattack":
+                    PlayerData.main.Damage(sinwaveDamage);
+                    break;
+                case "kawara_redDamage":
+                    PlayerData.main.Damage(kawara_redDamage);
+                    break;
+                case "kawara_blueDamage":
+                    PlayerData.main.Damage(kawara_blueDamage);
+                    break;
+                default:
+                    PlayerData.main.Damage(1);
+                    break;
+            }
             this.hitflag = true;
             this.rigid.linearVelocity = Vector2.zero;
             this.rigid.AddForce(this.transform.position.x <= collider.transform.position.x ? this.KBVEC : Vector2.Reflect(this.KBVEC, Vector2.right), ForceMode2D.Impulse);
@@ -412,7 +426,7 @@ public class player_main : MonoBehaviour
         if (this.dashtime > 0)
         {
             if (this.dashtime > 8)
-                this.rigid.linearVelocity = this.DASHSPEED * PlayerData.main.direction;
+                this.rigid.linearVelocity = this.DASHSPEED.normalized * PlayerData.main.dashSpeed * PlayerData.main.direction;
             this.dashtime--;
         }
     }

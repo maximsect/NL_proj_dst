@@ -161,7 +161,7 @@ MonoBehaviour:
   numberOfPoints: 295
   xStart: -15
   xFinish: 15
-  hp: 240
+  hp: 800
   hpDisplay: {fileID: 186502577}
   isObserved: 0
   groundLayer:
@@ -12544,9 +12544,9 @@ GameObject:
   - component: {fileID: 1483241106}
   - component: {fileID: 1483241105}
   - component: {fileID: 1483241107}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Line
-  m_TagString: enemyweapon
+  m_TagString: waveattack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

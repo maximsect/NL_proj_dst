@@ -2222,7 +2222,7 @@ MonoBehaviour:
       sceneMode: 4
       skillSprite: {fileID: 21300000, guid: ff53b649bb4bbc64180272f82b9c49b0, type: 3}
       getSkillName: "\u6700\u5927HP\u5897\u52A0+20"
-      variableName: maxHP
+      variableName: maxHp
       value: 20
       valueMode: 1
       possibility: 5
@@ -2252,7 +2252,7 @@ MonoBehaviour:
       sceneMode: 1
       skillSprite: {fileID: 21300000, guid: ff53b649bb4bbc64180272f82b9c49b0, type: 3}
       getSkillName: "\u6700\u5927HP\u5897\u52A0+20"
-      variableName: maxHP
+      variableName: maxHp
       value: 20
       valueMode: 1
       possibility: 5
@@ -2281,9 +2281,9 @@ MonoBehaviour:
       difficultyLevel: "\u5927\u9B3C"
       sceneMode: 4
       skillSprite: {fileID: 21300000, guid: ff53b649bb4bbc64180272f82b9c49b0, type: 3}
-      getSkillName: "\u6700\u5927HP\u5897\u52A0+80"
-      variableName: maxHP
-      value: 80
+      getSkillName: "\u6700\u5927HP\u5897\u52A0+40"
+      variableName: maxHp
+      value: 40
       valueMode: 1
       possibility: 2
   - sceneMode: "5.\u8A0E\u4F10\u8AB2\u984C"

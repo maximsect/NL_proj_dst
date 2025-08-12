@@ -41,12 +41,12 @@ public class SceneTransition : MonoBehaviour
         TextMeshProUGUI stageDescription = generatedPanel.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>();
         
         stageDescription.text =
-            "経過時間" + sceneScore.elapsedTime +
-            "\n倒した数:" + sceneScore.numberOfKill +
-            "\n与えたダメージ:" + sceneScore.damageAmount +
+            "経過時間" + (int)sceneScore.elapsedTime + "秒" +
+            "\n倒した数:" + sceneScore.numberOfKill + "体" + 
+            "\n与えたダメージ:" + sceneScore.damageAmount + "ダメージ" +
             "\n成績:" + sceneScore.sceneScore + "点";
+        yield return new WaitForSecondsRealtime(1.5f);
         yield return StartCoroutine(WaitForClick());
-        yield return new WaitForSecondsRealtime(0.5f);
         Time.timeScale = 1;
         switch (sceneData.StageCheck())
         {

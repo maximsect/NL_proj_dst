@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
     public static GameObject player;
     public static List<string> playerWeaponTag = new List<string>() { "bow", "spear", "bat", "hammer", "arrow", "skillattack" };
     public static List<string> enemyWeaponTag = new List<string>() { "enemyweapon", "damage_factor", "assign_attack","waveattack", "kawara_red","kawara_blue"};
-    public static List<string> syllabusLevel = new List<string>() { "_", "‘å•§", "•§", "‹S", "‘å‹S" };
+    public static List<string> syllabusLevel = new List<string>() { "Âç¥", "å¤§ä»", "ä»", "é¬¼", "å¤§é¬¼" };
     //public static List<string> stageMode = new List<string>() { "GetFlag", "LessDamage", "KillEnemy", "Survivor", "NoDamage" };
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private AudioSource seSource, bgmSource;

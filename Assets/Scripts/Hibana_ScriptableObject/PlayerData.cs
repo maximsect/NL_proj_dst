@@ -204,7 +204,7 @@ public class PlayerData : ScriptableObject
         else 
         audioMixer.SetFloat("SEVolume", vol);
     }
-}
+}/*
 [CustomEditor(typeof(PlayerData))]
 public class PlayerDataEditor : Editor
 {
@@ -222,3 +222,4 @@ public class PlayerDataEditor : Editor
         EditorGUILayout.HelpBox("AddAttackVal と MultipleAttackVal が使用可能（callを選択してください)", MessageType.Info);
     }
 }
+/**/

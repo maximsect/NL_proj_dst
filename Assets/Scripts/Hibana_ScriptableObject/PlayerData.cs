@@ -194,10 +194,14 @@ public class PlayerData : ScriptableObject
 
     public void ChangeBGMVolume(float vol)
     {
+        if(vol <= -39) audioMixer.SetFloat("BGMVolume", -80);
+        else
         audioMixer.SetFloat("BGMVolume", vol);
     }
     public void ChangeSEVolume(float vol)
     {
+        if(vol <= - 39) audioMixer.SetFloat("SEVolume", -80);
+        else 
         audioMixer.SetFloat("SEVolume", vol);
     }
 }

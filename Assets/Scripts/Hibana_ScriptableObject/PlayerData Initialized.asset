@@ -13,19 +13,19 @@ MonoBehaviour:
   m_Name: PlayerData Initialized
   m_EditorClassIdentifier: 
   playerPrefab: {fileID: 5643282837821384152, guid: 176e6e08322a7db488ca79952b294300, type: 3}
-  hp: 200
-  maxHp: 200
+  hp: 100
+  maxHp: 100
   healAmount: 3
   autoHealInterval: 10
   autoHealAmount: 1
   luck: 0.02
-  moveSpeed: 7
+  moveSpeed: 5
   numberOfDash: 1
   numberOfJump: 1
-  jumpSpeed: 12
+  jumpSpeed: 10
   airJumpSpeed: 10
   Speed: 20
-  dashSpeed: 30
+  dashSpeed: 15
   direction: 1
   attackPower: 10
   attackInterval: 0.5

@@ -29,10 +29,10 @@ public class ResultSceneScript : MonoBehaviour
         {
             ScoreCalculation();
             resultText.text =
-                "総攻略時間　　：" + sumElapsedTime +
-                "\n討伐数　　　　：" + sumNumberOfKill +
-                "\n総ダメージ　　：" + sumDamageAmount +
-                "\n総スコア　　　：" + sumScore;
+                "総攻略時間　　：" + (int)sumElapsedTime + "秒" +
+                "\n討伐数　　　　：" + sumNumberOfKill + "体" + 
+                "\n総ダメージ　　：" + sumDamageAmount + "ダメージ" + 
+                "\n総スコア　　　：" + (int)sumScore + "点";
         }
 
     }

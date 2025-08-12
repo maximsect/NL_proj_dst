@@ -36,7 +36,19 @@ public class StatusDisplayer : MonoBehaviour
             {
                 ReturnToTitleScene();
             }
+            if(isOn && Input.GetKey(KeyCode.Q))
+            {
+
+            }
         }
+    }
+    public void Quit()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#elif UNITY_STANDALONE
+      UnityEngine.Application.Quit();
+#endif
     }
     public void ReturnToTitleScene()
     {

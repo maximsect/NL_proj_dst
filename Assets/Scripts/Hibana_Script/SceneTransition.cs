@@ -44,7 +44,7 @@ public class SceneTransition : MonoBehaviour
             "経過時間" + (int)sceneScore.elapsedTime + "秒" +
             "\n倒した数:" + sceneScore.numberOfKill + "体" + 
             "\n与えたダメージ:" + sceneScore.damageAmount + "ダメージ" +
-            "\n成績:" + sceneScore.sceneScore + "点";
+            "\n成績:" + (int)sceneScore.sceneScore + "点";
         yield return new WaitForSecondsRealtime(1.5f);
         yield return StartCoroutine(WaitForClick());
         Time.timeScale = 1;

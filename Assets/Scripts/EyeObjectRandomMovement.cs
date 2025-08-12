@@ -81,7 +81,8 @@ public class EyeObjectRandomMovement : MonoBehaviour
             if (isEnemy)
             {
                 GameManager.main.PlayOneShot(fireAttackSound);
-                GameObject laserObj = Instantiate(LaserPref, transform.position, Quaternion.identity);
+                GameObject laserObj = Instantiate(LaserPref, ((Vector2)transform.position).ToVector3(2), Quaternion.identity);
+                
                 Vector3 relativePos = GameManager.player.transform.position - transform.position;
                 laserObj.GetComponent<Rigidbody2D>().AddForce(new Vector2(relativePos.x, relativePos.y).normalized * 5f, ForceMode2D.Impulse);
                 Destroy(laserObj, 10f);

@@ -523,7 +523,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u30E1\u30F3\u30D0\u30FC\n\u3000\u3055\u3055\u304D\u3000\u304A\u304F\u3089\u3000Maximsect\n\u30B5\u30A4\u30D5\u30A7\u30EB\u30CE\u3000Hibana"
+  m_text: "\u30E1\u30F3\u30D0\u30FC\n\u3000\u3055\u3055\u304D\u3000\u304A\u304F\u3089\u3000\u307E\u304D\u3057\u866B\n\u30B5\u30A4\u30D5\u30A7\u30EB\u30CE\u3000Hibana"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c39ce58e6da3c5644abfaaccbc2e1e2f, type: 2}
   m_sharedMaterial: {fileID: -2068851856685193896, guid: c39ce58e6da3c5644abfaaccbc2e1e2f, type: 2}
@@ -1876,6 +1876,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerData: {fileID: 11400000, guid: dc4bf2af19840754abdc4cf88e72b30e, type: 2}
   scoreData: {fileID: 11400000, guid: 99a9b7dacf343a2409ca5f03f6f6cb5d, type: 2}
+  sceneData: {fileID: 0}
   displayer: {fileID: 7335027370470647530, guid: 5b3a0afde01fa8a4e8ef14d1992ac96d, type: 3}
 --- !u!4 &823698270
 Transform:

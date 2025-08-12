@@ -394,14 +394,14 @@ public class player_main : MonoBehaviour
                 case "waveattack":
                     PlayerData.main.Damage(sinwaveDamage);
                     break;
-                case "kawara_redDamage":
+                case "kawara_red":
                     PlayerData.main.Damage(kawara_redDamage);
                     break;
-                case "kawara_blueDamage":
+                case "kawara_blue":
                     PlayerData.main.Damage(kawara_blueDamage);
                     break;
                 default:
-                    PlayerData.main.Damage(1);
+                    PlayerData.main.Damage(5);
                     break;
             }
             this.hitflag = true;

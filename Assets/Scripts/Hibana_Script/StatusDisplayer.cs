@@ -41,6 +41,8 @@ public class StatusDisplayer : MonoBehaviour
         {
             generated = Instantiate(displayer) as GameObject;
             generated.transform.parent = GameObject.Find("Canvas").transform;
+            generated.transform.localScale = Vector3.one;
+            generated.transform.localPosition = Vector3.zero;
             statusText = generated.transform.GetChild(generated.transform.childCount - 1).GetComponent<TextMeshProUGUI>();
             Time.timeScale = 0;
             statusText.text = "MAX HP：" + playerData.maxHp
@@ -61,3 +63,8 @@ public class StatusDisplayer : MonoBehaviour
         }
     }
 }
+
+
+
+
+

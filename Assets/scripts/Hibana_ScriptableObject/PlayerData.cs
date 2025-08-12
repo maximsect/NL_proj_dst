@@ -223,3 +223,83 @@ public class PlayerDataEditor : Editor
     }
 }
 /**/
+
+public static class GizmosUtility //SceneView‚¾‚¯‚Å•`‰æ‚³‚ê‚é‚â‚Â@–³‹‚Å‚¢‚¢
+{
+    private static int _circleVertexCount = 64;
+
+    /// <summary>
+    /// ‰~‚ğ•`‚­(2D)
+    /// </summary>
+    /// <param name="center">’†SˆÊ’u</param>
+    /// <param name="radius">”¼Œa</param>
+    public static void DrawWireCircle(Vector3 center, float radius)
+    {
+        DrawWireRegularPolygon(_circleVertexCount, center, Quaternion.identity, radius);
+    }
+
+    /// <summary>
+    /// ³‘½ŠpŒ`‚ğ•`‚­(2D)
+    /// </summary>
+    /// <param name="vertexCount">Šp‚Ì”</param>
+    /// <param name="center">’†SˆÊ’u</param>
+    /// <param name="radius">”¼Œa</param>
+    public static void DrawWireRegularPolygon(int vertexCount, Vector3 center, float radius)
+    {
+        DrawWireRegularPolygon(vertexCount, center, Quaternion.identity, radius);
+    }
+
+    /// <summary>
+    /// ‰~‚ğ•`‚­(3D)
+    /// </summary>
+    /// <param name="center">’†SˆÊ’u</param>
+    /// <param name="rotation">‰ñ“]</param>
+    /// <param name="radius">”¼Œa</param>
+    public static void DrawWireCircle(Vector3 center, Quaternion rotation, float radius)
+    {
+        DrawWireRegularPolygon(_circleVertexCount, center, rotation, radius);
+    }
+
+    /// <summary>
+    /// ³‘½ŠpŒ`‚ğ•`‚­(3D)
+    /// </summary>
+    /// <param name="vertexCount">Šp‚Ì”</param>
+    /// <param name="center">’†SˆÊ’u</param>
+    /// <param name="rotation">‰ñ“]</param>
+    /// <param name="radius">”¼Œa</param>
+    public static void DrawWireRegularPolygon(int vertexCount, Vector3 center, Quaternion rotation, float radius)
+    {
+        if (vertexCount < 3)
+        {
+            return;
+        }
+
+        Vector3 previousPosition = Vector3.zero;
+
+        // ü‚ğˆø‚­1ƒXƒeƒbƒv‚ÌŠp“x
+        float step = 2f * Mathf.PI / vertexCount;
+        // ü‚ğˆø‚­ŠJnŠp“x(‹ô”‚È‚ç”¼ƒXƒeƒbƒv‚¸‚ç‚·)
+        float offset = Mathf.PI * 0.5f + ((vertexCount % 2 == 0) ? step * 0.5f : 0f);
+
+        for (int i = 0; i <= vertexCount; i++)
+        {
+            float theta = step * i + offset;
+
+            float x = radius * Mathf.Cos(theta);
+            float y = radius * Mathf.Sin(theta);
+
+            Vector3 nextPosition = center + rotation * new Vector3(x, y, 0f);
+
+            if (i == 0)
+            {
+                previousPosition = nextPosition;
+            }
+            else
+            {
+                Gizmos.DrawLine(previousPosition, nextPosition);
+            }
+
+            previousPosition = nextPosition;
+        }
+    }
+}

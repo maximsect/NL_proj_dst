@@ -12,10 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10677f6ed6929174896070099b4940dd, type: 3}
   m_Name: ScoreData
   m_EditorClassIdentifier: 
-  scoreList:
-  - elapsedTime: 20.577604
-    numberOfKill: 0
-    damageAmount: 30
-    sceneScore: 100
-  copySource: {fileID: 11400000, guid: 71bb2983ba91a5447878f1a9b2d6d6c0, type: 2}
+  scoreList: []
   numberOfDeath: 0
+  scoreDisplayer: {fileID: 8722069140523796048, guid: 4979170cf8ee33c4fb30503cf07e784c, type: 3}
